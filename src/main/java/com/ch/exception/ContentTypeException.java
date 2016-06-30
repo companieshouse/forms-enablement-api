@@ -7,15 +7,15 @@ import javax.ws.rs.WebApplicationException;
  */
 public class ContentTypeException extends WebApplicationException {
 
-  private final String message;
+    private final String message;
 
-  public ContentTypeException(String message) {
-    this.message = message;
-  }
+    public ContentTypeException(String message) {
+        this.message = message;
+    }
 
-  @Override
-  public String getMessage() {
-    return String.format("Incorrect content type specified. Should be text/plain or application/json. Sent: %s",
-        message);
-  }
+    @Override
+    public String getMessage() {
+        return String.format("Incorrect content type specified. Should be text/plain or application/json. Sent: %s",
+            message);
+    }
 }

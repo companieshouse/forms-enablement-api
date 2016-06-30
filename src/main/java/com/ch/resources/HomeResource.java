@@ -15,14 +15,14 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class HomeResource {
 
-  @GET
-  public String getHome() {
-    return "Hello World";
-  }
+    @GET
+    public String getHome() {
+        return "Hello World";
+    }
 
-  @Path("auth")
-  @GET
-  public String getAuth(@Auth FormsApiUser user) {
-    return "Hello Authorised World";
-  }
+    @Path("auth")
+    @GET
+    public String getAuth(@Auth FormsApiUser user) {
+        return "Hello Authorised World";
+    }
 }

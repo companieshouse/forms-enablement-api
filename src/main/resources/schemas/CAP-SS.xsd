@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:include schemaLocation="CORE.xsd"/>
+
     <xs:annotation>
-        <xs:documentation>For type=SH16, type id=5479, template id=5035</xs:documentation>
+        <xs:documentation>For type=CAP-SS, type id=4504, template id=4504</xs:documentation>
     </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">

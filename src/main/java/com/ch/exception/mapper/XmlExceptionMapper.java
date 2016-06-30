@@ -16,17 +16,17 @@ import javax.ws.rs.ext.ExceptionMapper;
  */
 public class XmlExceptionMapper implements ExceptionMapper<XmlException> {
 
-  /**
-   * Returns an HTTP response containing the appropriate error message.
-   *
-   * @param exception - the XmlException that was thrown
-   * @return an appropriate HTTP error response
-   */
-  public Response toResponse(XmlException exception) {
-    LoggingService.log(tag, ERROR, exception.getMessage(), XmlException.class);
-    String error = ExceptionHelper.getInstance().getJsonError(exception);
-    return Response.status(Response.Status.BAD_REQUEST)
-        .entity(error)
-        .build();
-  }
+    /**
+     * Returns an HTTP response containing the appropriate error message.
+     *
+     * @param exception - the XmlException that was thrown
+     * @return an appropriate HTTP error response
+     */
+    public Response toResponse(XmlException exception) {
+        LoggingService.log(tag, ERROR, exception.getMessage(), XmlException.class);
+        String error = ExceptionHelper.getInstance().getJsonError(exception);
+        return Response.status(Response.Status.BAD_REQUEST)
+            .entity(error)
+            .build();
+    }
 }

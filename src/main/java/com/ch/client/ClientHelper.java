@@ -10,21 +10,21 @@ import javax.ws.rs.core.Response;
  */
 public final class ClientHelper {
 
-  private final Client client;
+    private final Client client;
 
-  public ClientHelper(Client client) {
-    this.client = client;
-  }
+    public ClientHelper(Client client) {
+        this.client = client;
+    }
 
-  /**
-   * Send json to the desired url.
-   *
-   * @param url  destination
-   * @param json json to send
-   * @return response from url
-   */
-  public Response postJson(String url, String json) {
-    final WebTarget target = client.target(url);
-    return target.request().post(Entity.json(json));
-  }
+    /**
+     * Send json to the desired url.
+     *
+     * @param url  destination
+     * @param json json to send
+     * @return response from url
+     */
+    public Response postJson(String url, String json) {
+        final WebTarget target = client.target(url);
+        return target.request().post(Entity.json(json));
+    }
 }

@@ -16,17 +16,17 @@ import javax.ws.rs.ext.ExceptionMapper;
  */
 public class ConnectionExceptionMapper implements ExceptionMapper<ConnectionException> {
 
-  /**
-   * Returns an HTTP response containing the appropriate error message.
-   *
-   * @param exception - the ConnectionException that was thrown
-   * @return an appropriate HTTP error response
-   */
-  public Response toResponse(ConnectionException exception) {
-    LoggingService.log(tag, ERROR, exception.getMessage(), ConnectionException.class);
-    String error = ExceptionHelper.getInstance().getJsonError(exception);
-    return Response.status(Response.Status.NOT_FOUND)
-        .entity(error)
-        .build();
-  }
+    /**
+     * Returns an HTTP response containing the appropriate error message.
+     *
+     * @param exception - the ConnectionException that was thrown
+     * @return an appropriate HTTP error response
+     */
+    public Response toResponse(ConnectionException exception) {
+        LoggingService.log(tag, ERROR, exception.getMessage(), ConnectionException.class);
+        String error = ExceptionHelper.getInstance().getJsonError(exception);
+        return Response.status(Response.Status.NOT_FOUND)
+            .entity(error)
+            .build();
+    }
 }

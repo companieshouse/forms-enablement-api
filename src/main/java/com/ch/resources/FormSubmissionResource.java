@@ -26,45 +26,45 @@ import javax.ws.rs.core.Response;
  */
 @Path("/submission")
 public class FormSubmissionResource {
-  private static final Timer timer = FormsServiceApplication.registry.timer("FormSubmissionResource");
+    private static final Timer timer = FormsServiceApplication.registry.timer("FormSubmissionResource");
 
-  private final ClientHelper client;
-  private final CompaniesHouseConfiguration configuration;
+    private final ClientHelper client;
+    private final CompaniesHouseConfiguration configuration;
 
-  public FormSubmissionResource(ClientHelper client, CompaniesHouseConfiguration configuration) {
-    this.client = client;
-    this.configuration = configuration;
-  }
-
-  /**
-   * Resource to post forms from Salesforce to CHIPS.
-   *
-   * @return json with response from CHIPS
-   */
-  @POST
-  @Consumes(MediaType.MULTIPART_FORM_DATA)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response postForms(@Auth
-                                FormDataMultiPart multi) {
-    final Timer.Context context = timer.time();
-    try {
-      // convert input to json
-      ITransformConfig config = new TransformConfig();
-      JsonBuilder builder = new JsonBuilder(config, multi);
-      String forms = builder.getJson();
-      LoggingService.log(tag, INFO, "Transformation output: " + forms,
-          FormSubmissionResource.class);
-
-      // post to CHIPS
-      Response response = client.postJson(configuration.getApiUrl(), forms);
-      LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
-          FormSubmissionResource.class);
-
-      // return response from CHIPS
-      return response;
-
-    } finally {
-      context.stop();
+    public FormSubmissionResource(ClientHelper client, CompaniesHouseConfiguration configuration) {
+        this.client = client;
+        this.configuration = configuration;
     }
-  }
+
+    /**
+     * Resource to post forms from Salesforce to CHIPS.
+     *
+     * @return json with response from CHIPS
+     */
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response postForms(@Auth
+                              FormDataMultiPart multi) {
+        final Timer.Context context = timer.time();
+        try {
+            // convert input to json
+            ITransformConfig config = new TransformConfig();
+            JsonBuilder builder = new JsonBuilder(config, multi);
+            String forms = builder.getJson();
+            LoggingService.log(tag, INFO, "Transformation output: " + forms,
+                FormSubmissionResource.class);
+
+            // post to CHIPS
+            Response response = client.postJson(configuration.getApiUrl(), forms);
+            LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
+                FormSubmissionResource.class);
+
+            // return response from CHIPS
+            return response;
+
+        } finally {
+            context.stop();
+        }
+    }
 }

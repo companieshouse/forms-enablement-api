@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	
-	<xs:annotation>
-		<xs:documentation>For type=SH02, type id=5602, template id=5038</xs:documentation>
-	</xs:annotation>
-	
-	<xs:redefine schemaLocation="CORE.xsd">
-		<xs:complexType name="corporateBodyType">
-			<xs:complexContent>
-				<xs:extension base="corporateBodyType">
-					<xs:choice maxOccurs="unbounded">
-						<xs:element name="incorporationNumber" type="xs:string" />
-						<xs:element name="corporateBodyName" type="xs:string" />
-						<xs:element ref="statementOfCapital" minOccurs="1" />
-						<xs:element ref="shares" minOccurs="1" />
-						<xs:element ref="consolidatedClasses" minOccurs="0" />
-						<xs:element ref="subdividedClasses" minOccurs="0" />
-						<xs:element ref="redeemedClasses" minOccurs="0" />
-						<xs:element ref="reconvertedClasses" minOccurs="0" />
-					</xs:choice>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:redefine>
 
-	<xs:element name="statementOfCapital">
-		<xs:complexType>
-			<xs:all>
-				<xs:element ref="shareValues" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="shareClasses" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="latestSOCInd" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="grandTotals" minOccurs="1" maxOccurs="1" />
-			</xs:all>
-		</xs:complexType>
-	</xs:element>
+    <xs:annotation>
+        <xs:documentation>For type=SH02, type id=5602, template id=5038</xs:documentation>
+    </xs:annotation>
+
+    <xs:redefine schemaLocation="CORE.xsd">
+        <xs:complexType name="corporateBodyType">
+            <xs:complexContent>
+                <xs:extension base="corporateBodyType">
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="incorporationNumber" type="xs:string"/>
+                        <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="statementOfCapital" minOccurs="1"/>
+                        <xs:element ref="shares" minOccurs="1"/>
+                        <xs:element ref="consolidatedClasses" minOccurs="0"/>
+                        <xs:element ref="subdividedClasses" minOccurs="0"/>
+                        <xs:element ref="redeemedClasses" minOccurs="0"/>
+                        <xs:element ref="reconvertedClasses" minOccurs="0"/>
+                    </xs:choice>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+
+    <xs:element name="statementOfCapital">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="shareValues" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="shareClasses" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="latestSOCInd" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="grandTotals" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="shares">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="redemptionSelected" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="subDivision" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="consolidation" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="reconversion" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="redemptionSelected" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="subDivision" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="consolidation" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="reconversion" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -49,38 +49,38 @@
     <xs:element name="shareValues">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="shareValue" minOccurs="1" maxOccurs="unbounded" />
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    
-    <xs:element name="shareClasses">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="shareClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="shareValue" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-	<xs:element name="shareClass">
-		<xs:complexType>
-			<xs:all>
-				<xs:element ref="currencyCode" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="suppliedClass" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="description" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="number" minOccurs="1" maxOccurs="1" />
-				<xs:element ref="value" minOccurs="1" maxOccurs="1" />
-			</xs:all>
-		</xs:complexType>
-	</xs:element>
-	
+    <xs:element name="shareClasses">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="shareClass" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="shareClass">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="suppliedClass" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="description" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="shareValue">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="totalNumberOfShares" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="totalAmountUnpaid" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="totalNumberOfShares" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="totalAmountUnpaid" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -88,23 +88,23 @@
     <xs:element name="consolidatedClasses">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="consolidatedClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="consolidatedClass" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="subdividedClasses">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="subdividedClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="subdividedClass" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="redeemedClasses">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="redeemedClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="redeemedClass" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -112,17 +112,17 @@
     <xs:element name="reconvertedClasses">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="reconvertedClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="reconvertedClass" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-            
+
     <xs:element name="consolidatedClass">
         <xs:complexType>
             <xs:all>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1" />
+                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -131,36 +131,36 @@
         <xs:complexType>
             <xs:all>
                 <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
-        
+
     <xs:element name="previousStructure">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="newStructure">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
-     
+
     <xs:element name="redeemedClass">
         <xs:complexType>
             <xs:all>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="number" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -168,10 +168,10 @@
     <xs:element name="reconvertedClass">
         <xs:complexType>
             <xs:all>
-                <xs:element name="stockValue" type="xs:decimal" minOccurs="1" maxOccurs="1" />
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="number" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element name="stockValue" type="xs:decimal" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -179,8 +179,8 @@
     <xs:element name="grandTotals">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="shareValueGrandTotals" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="shareNumberGrandTotal" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="shareValueGrandTotals" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="shareNumberGrandTotal" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -188,213 +188,213 @@
     <xs:element name="shareValueGrandTotals">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="shareValueGrandTotal" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="shareValueGrandTotal" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="shareValueGrandTotal">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="totalAmountUnpaid" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="value" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="totalAmountUnpaid" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
-                     
+
     <xs:element name="currencyCode">
         <xs:simpleType>
             <xs:restriction base="xs:string">
-                <xs:enumeration value="GBP" />
-                <xs:enumeration value="EUR" />
-                <xs:enumeration value="USD" />
-                <xs:enumeration value="JPY" />
-                <xs:enumeration value="CHF" />
-                <xs:enumeration value="CAD" />
-                <xs:enumeration value="AUD" />
-                <xs:enumeration value="NZD" />
-                <xs:enumeration value="RUB" />
-                <xs:enumeration value="HKD" />
-                <xs:enumeration value="SGD" />
-                <xs:enumeration value="AED" />
-                <xs:enumeration value="AFN" />
-                <xs:enumeration value="ALL" />
-                <xs:enumeration value="AMD" />
-                <xs:enumeration value="ANG" />
-                <xs:enumeration value="AOA" />
-                <xs:enumeration value="AON" />
-                <xs:enumeration value="ARS" />
-                <xs:enumeration value="AWG" />
-                <xs:enumeration value="AZN" />
-                <xs:enumeration value="BAM" />
-                <xs:enumeration value="BBD" />
-                <xs:enumeration value="BDT" />
-                <xs:enumeration value="BEF" />
-                <xs:enumeration value="BGN" />
-                <xs:enumeration value="BHD" />
-                <xs:enumeration value="BIF" />
-                <xs:enumeration value="BMD" />
-                <xs:enumeration value="BND" />
-                <xs:enumeration value="BOV" />
-                <xs:enumeration value="BOB" />
-                <xs:enumeration value="BRL" />
-                <xs:enumeration value="BSD" />
-                <xs:enumeration value="BTN" />
-                <xs:enumeration value="BWP" />
-                <xs:enumeration value="BYB" />
-                <xs:enumeration value="BZD" />
-                <xs:enumeration value="CDF" />
-                <xs:enumeration value="CHE" />
-                <xs:enumeration value="CHW" />
-                <xs:enumeration value="CLF" />
-                <xs:enumeration value="CLP" />
-                <xs:enumeration value="CNY" />
-                <xs:enumeration value="COP" />
-                <xs:enumeration value="COU" />
-                <xs:enumeration value="CRC" />
-                <xs:enumeration value="CSD" />
-                <xs:enumeration value="CUP" />
-                <xs:enumeration value="CVE" />
-                <xs:enumeration value="CYP" />
-                <xs:enumeration value="CZK" />
-                <xs:enumeration value="DJF" />
-                <xs:enumeration value="DKK" />
-                <xs:enumeration value="DOP" />
-                <xs:enumeration value="DZD" />
-                <xs:enumeration value="EEK" />
-                <xs:enumeration value="EGP" />
-                <xs:enumeration value="ERN" />
-                <xs:enumeration value="ETB" />
-                <xs:enumeration value="FJD" />
-                <xs:enumeration value="FKP" />
-                <xs:enumeration value="GEL" />
-                <xs:enumeration value="GHS" />
-                <xs:enumeration value="GIP" />
-                <xs:enumeration value="GMD" />
-                <xs:enumeration value="GNF" />
-                <xs:enumeration value="GTQ" />
-                <xs:enumeration value="GWP" />
-                <xs:enumeration value="GYD" />
-                <xs:enumeration value="HNL" />
-                <xs:enumeration value="HRK" />
-                <xs:enumeration value="HTG" />
-                <xs:enumeration value="HUF" />
-                <xs:enumeration value="IDR" />
-                <xs:enumeration value="ILS" />
-                <xs:enumeration value="INR" />
-                <xs:enumeration value="IQD" />
-                <xs:enumeration value="IRR" />
-                <xs:enumeration value="ISK" />
-                <xs:enumeration value="JMD" />
-                <xs:enumeration value="JOD" />
-                <xs:enumeration value="KES" />
-                <xs:enumeration value="KGS" />
-                <xs:enumeration value="KHR" />
-                <xs:enumeration value="KMF" />
-                <xs:enumeration value="KPW" />
-                <xs:enumeration value="KRW" />
-                <xs:enumeration value="KWD" />
-                <xs:enumeration value="KYD" />
-                <xs:enumeration value="KZT" />
-                <xs:enumeration value="LAK" />
-                <xs:enumeration value="LBP" />
-                <xs:enumeration value="LKR" />
-                <xs:enumeration value="LRD" />
-                <xs:enumeration value="LSL" />
-                <xs:enumeration value="LTL" />
-                <xs:enumeration value="LVL" />
-                <xs:enumeration value="LYD" />
-                <xs:enumeration value="MAD" />
-                <xs:enumeration value="MDL" />
-                <xs:enumeration value="MGA" />
-                <xs:enumeration value="MKD" />
-                <xs:enumeration value="MMK" />
-                <xs:enumeration value="MNT" />
-                <xs:enumeration value="MOP" />
-                <xs:enumeration value="MRO" />
-                <xs:enumeration value="MTL" />
-                <xs:enumeration value="MUR" />
-                <xs:enumeration value="MVR" />
-                <xs:enumeration value="MWK" />
-                <xs:enumeration value="MXN" />
-                <xs:enumeration value="MXV" />
-                <xs:enumeration value="MYR" />
-                <xs:enumeration value="MZM" />
-                <xs:enumeration value="NAD" />
-                <xs:enumeration value="NGN" />
-                <xs:enumeration value="NIO" />
-                <xs:enumeration value="NOK" />
-                <xs:enumeration value="NPR" />
-                <xs:enumeration value="OMR" />
-                <xs:enumeration value="PAB" />
-                <xs:enumeration value="PEN" />
-                <xs:enumeration value="PGK" />
-                <xs:enumeration value="PHP" />
-                <xs:enumeration value="PKR" />
-                <xs:enumeration value="PLN" />
-                <xs:enumeration value="PYG" />
-                <xs:enumeration value="QAR" />
-                <xs:enumeration value="RON" />
-                <xs:enumeration value="RWF" />
-                <xs:enumeration value="SAR" />
-                <xs:enumeration value="SBD" />
-                <xs:enumeration value="SCR" />
-                <xs:enumeration value="SDD" />
-                <xs:enumeration value="SEK" />
-                <xs:enumeration value="SHP" />
-                <xs:enumeration value="SIT" />
-                <xs:enumeration value="SKK" />
-                <xs:enumeration value="SLL" />
-                <xs:enumeration value="SOS" />
-                <xs:enumeration value="SRD" />
-                <xs:enumeration value="STD" />
-                <xs:enumeration value="SVC" />
-                <xs:enumeration value="SYP" />
-                <xs:enumeration value="SZL" />
-                <xs:enumeration value="THB" />
-                <xs:enumeration value="TJS" />
-                <xs:enumeration value="TMM" />
-                <xs:enumeration value="TND" />
-                <xs:enumeration value="TOP" />
-                <xs:enumeration value="TRY" />
-                <xs:enumeration value="TTD" />
-                <xs:enumeration value="TWD" />
-                <xs:enumeration value="TZS" />
-                <xs:enumeration value="UAH" />
-                <xs:enumeration value="UGX" />
-                <xs:enumeration value="UYU" />
-                <xs:enumeration value="UZS" />
-                <xs:enumeration value="VEB" />
-                <xs:enumeration value="VND" />
-                <xs:enumeration value="VUV" />
-                <xs:enumeration value="WST" />
-                <xs:enumeration value="XAF" />
-                <xs:enumeration value="XCD" />
-                <xs:enumeration value="XDR" />
-                <xs:enumeration value="XOF" />
-                <xs:enumeration value="XPF" />
-                <xs:enumeration value="YER" />
-                <xs:enumeration value="ZAR" />
-                <xs:enumeration value="ZMK" />
-                <xs:enumeration value="ZWD" />
-                <xs:enumeration value="UKH" />
+                <xs:enumeration value="GBP"/>
+                <xs:enumeration value="EUR"/>
+                <xs:enumeration value="USD"/>
+                <xs:enumeration value="JPY"/>
+                <xs:enumeration value="CHF"/>
+                <xs:enumeration value="CAD"/>
+                <xs:enumeration value="AUD"/>
+                <xs:enumeration value="NZD"/>
+                <xs:enumeration value="RUB"/>
+                <xs:enumeration value="HKD"/>
+                <xs:enumeration value="SGD"/>
+                <xs:enumeration value="AED"/>
+                <xs:enumeration value="AFN"/>
+                <xs:enumeration value="ALL"/>
+                <xs:enumeration value="AMD"/>
+                <xs:enumeration value="ANG"/>
+                <xs:enumeration value="AOA"/>
+                <xs:enumeration value="AON"/>
+                <xs:enumeration value="ARS"/>
+                <xs:enumeration value="AWG"/>
+                <xs:enumeration value="AZN"/>
+                <xs:enumeration value="BAM"/>
+                <xs:enumeration value="BBD"/>
+                <xs:enumeration value="BDT"/>
+                <xs:enumeration value="BEF"/>
+                <xs:enumeration value="BGN"/>
+                <xs:enumeration value="BHD"/>
+                <xs:enumeration value="BIF"/>
+                <xs:enumeration value="BMD"/>
+                <xs:enumeration value="BND"/>
+                <xs:enumeration value="BOV"/>
+                <xs:enumeration value="BOB"/>
+                <xs:enumeration value="BRL"/>
+                <xs:enumeration value="BSD"/>
+                <xs:enumeration value="BTN"/>
+                <xs:enumeration value="BWP"/>
+                <xs:enumeration value="BYB"/>
+                <xs:enumeration value="BZD"/>
+                <xs:enumeration value="CDF"/>
+                <xs:enumeration value="CHE"/>
+                <xs:enumeration value="CHW"/>
+                <xs:enumeration value="CLF"/>
+                <xs:enumeration value="CLP"/>
+                <xs:enumeration value="CNY"/>
+                <xs:enumeration value="COP"/>
+                <xs:enumeration value="COU"/>
+                <xs:enumeration value="CRC"/>
+                <xs:enumeration value="CSD"/>
+                <xs:enumeration value="CUP"/>
+                <xs:enumeration value="CVE"/>
+                <xs:enumeration value="CYP"/>
+                <xs:enumeration value="CZK"/>
+                <xs:enumeration value="DJF"/>
+                <xs:enumeration value="DKK"/>
+                <xs:enumeration value="DOP"/>
+                <xs:enumeration value="DZD"/>
+                <xs:enumeration value="EEK"/>
+                <xs:enumeration value="EGP"/>
+                <xs:enumeration value="ERN"/>
+                <xs:enumeration value="ETB"/>
+                <xs:enumeration value="FJD"/>
+                <xs:enumeration value="FKP"/>
+                <xs:enumeration value="GEL"/>
+                <xs:enumeration value="GHS"/>
+                <xs:enumeration value="GIP"/>
+                <xs:enumeration value="GMD"/>
+                <xs:enumeration value="GNF"/>
+                <xs:enumeration value="GTQ"/>
+                <xs:enumeration value="GWP"/>
+                <xs:enumeration value="GYD"/>
+                <xs:enumeration value="HNL"/>
+                <xs:enumeration value="HRK"/>
+                <xs:enumeration value="HTG"/>
+                <xs:enumeration value="HUF"/>
+                <xs:enumeration value="IDR"/>
+                <xs:enumeration value="ILS"/>
+                <xs:enumeration value="INR"/>
+                <xs:enumeration value="IQD"/>
+                <xs:enumeration value="IRR"/>
+                <xs:enumeration value="ISK"/>
+                <xs:enumeration value="JMD"/>
+                <xs:enumeration value="JOD"/>
+                <xs:enumeration value="KES"/>
+                <xs:enumeration value="KGS"/>
+                <xs:enumeration value="KHR"/>
+                <xs:enumeration value="KMF"/>
+                <xs:enumeration value="KPW"/>
+                <xs:enumeration value="KRW"/>
+                <xs:enumeration value="KWD"/>
+                <xs:enumeration value="KYD"/>
+                <xs:enumeration value="KZT"/>
+                <xs:enumeration value="LAK"/>
+                <xs:enumeration value="LBP"/>
+                <xs:enumeration value="LKR"/>
+                <xs:enumeration value="LRD"/>
+                <xs:enumeration value="LSL"/>
+                <xs:enumeration value="LTL"/>
+                <xs:enumeration value="LVL"/>
+                <xs:enumeration value="LYD"/>
+                <xs:enumeration value="MAD"/>
+                <xs:enumeration value="MDL"/>
+                <xs:enumeration value="MGA"/>
+                <xs:enumeration value="MKD"/>
+                <xs:enumeration value="MMK"/>
+                <xs:enumeration value="MNT"/>
+                <xs:enumeration value="MOP"/>
+                <xs:enumeration value="MRO"/>
+                <xs:enumeration value="MTL"/>
+                <xs:enumeration value="MUR"/>
+                <xs:enumeration value="MVR"/>
+                <xs:enumeration value="MWK"/>
+                <xs:enumeration value="MXN"/>
+                <xs:enumeration value="MXV"/>
+                <xs:enumeration value="MYR"/>
+                <xs:enumeration value="MZM"/>
+                <xs:enumeration value="NAD"/>
+                <xs:enumeration value="NGN"/>
+                <xs:enumeration value="NIO"/>
+                <xs:enumeration value="NOK"/>
+                <xs:enumeration value="NPR"/>
+                <xs:enumeration value="OMR"/>
+                <xs:enumeration value="PAB"/>
+                <xs:enumeration value="PEN"/>
+                <xs:enumeration value="PGK"/>
+                <xs:enumeration value="PHP"/>
+                <xs:enumeration value="PKR"/>
+                <xs:enumeration value="PLN"/>
+                <xs:enumeration value="PYG"/>
+                <xs:enumeration value="QAR"/>
+                <xs:enumeration value="RON"/>
+                <xs:enumeration value="RWF"/>
+                <xs:enumeration value="SAR"/>
+                <xs:enumeration value="SBD"/>
+                <xs:enumeration value="SCR"/>
+                <xs:enumeration value="SDD"/>
+                <xs:enumeration value="SEK"/>
+                <xs:enumeration value="SHP"/>
+                <xs:enumeration value="SIT"/>
+                <xs:enumeration value="SKK"/>
+                <xs:enumeration value="SLL"/>
+                <xs:enumeration value="SOS"/>
+                <xs:enumeration value="SRD"/>
+                <xs:enumeration value="STD"/>
+                <xs:enumeration value="SVC"/>
+                <xs:enumeration value="SYP"/>
+                <xs:enumeration value="SZL"/>
+                <xs:enumeration value="THB"/>
+                <xs:enumeration value="TJS"/>
+                <xs:enumeration value="TMM"/>
+                <xs:enumeration value="TND"/>
+                <xs:enumeration value="TOP"/>
+                <xs:enumeration value="TRY"/>
+                <xs:enumeration value="TTD"/>
+                <xs:enumeration value="TWD"/>
+                <xs:enumeration value="TZS"/>
+                <xs:enumeration value="UAH"/>
+                <xs:enumeration value="UGX"/>
+                <xs:enumeration value="UYU"/>
+                <xs:enumeration value="UZS"/>
+                <xs:enumeration value="VEB"/>
+                <xs:enumeration value="VND"/>
+                <xs:enumeration value="VUV"/>
+                <xs:enumeration value="WST"/>
+                <xs:enumeration value="XAF"/>
+                <xs:enumeration value="XCD"/>
+                <xs:enumeration value="XDR"/>
+                <xs:enumeration value="XOF"/>
+                <xs:enumeration value="XPF"/>
+                <xs:enumeration value="YER"/>
+                <xs:enumeration value="ZAR"/>
+                <xs:enumeration value="ZMK"/>
+                <xs:enumeration value="ZWD"/>
+                <xs:enumeration value="UKH"/>
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
-    <xs:element name="suppliedClass" type="xs:string" />
-    <xs:element name="description" type="xs:string" />
-    <xs:element name="number" type="xs:decimal" />
-    <xs:element name="totalNumberOfShares" type="xs:decimal" />
-    <xs:element name="totalAmountUnpaid" type="xs:decimal" />
-    <xs:element name="shareNumberGrandTotal" type="xs:decimal" />
-    <xs:element name="value" type="xs:decimal" />
-    <xs:element name="redemptionSelected" type="xs:string" />
-    <xs:element name="subDivision" type="xs:string" />
-    <xs:element name="consolidation" type="xs:string" />
-    <xs:element name="reconversion" type="xs:string" />
-    <xs:element name="latestSOCInd" type="xs:string" />
-	
-	<xs:element name="form" type="coreForm" />
+    <xs:element name="suppliedClass" type="xs:string"/>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="number" type="xs:decimal"/>
+    <xs:element name="totalNumberOfShares" type="xs:decimal"/>
+    <xs:element name="totalAmountUnpaid" type="xs:decimal"/>
+    <xs:element name="shareNumberGrandTotal" type="xs:decimal"/>
+    <xs:element name="value" type="xs:decimal"/>
+    <xs:element name="redemptionSelected" type="xs:string"/>
+    <xs:element name="subDivision" type="xs:string"/>
+    <xs:element name="consolidation" type="xs:string"/>
+    <xs:element name="reconversion" type="xs:string"/>
+    <xs:element name="latestSOCInd" type="xs:string"/>
+
+    <xs:element name="form" type="coreForm"/>
 
 </xs:schema>

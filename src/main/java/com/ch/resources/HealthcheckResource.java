@@ -10,9 +10,9 @@ import javax.ws.rs.core.Response;
 @Path("/healthcheck")
 public class HealthcheckResource {
 
-  @GET
-  public Response returnSuccess() {
-    return Response.ok().build();
-  }
+    @GET
+    public Response returnSuccess() {
+        return Response.ok().build();
+    }
 }
 

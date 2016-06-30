@@ -48,91 +48,91 @@ import javax.ws.rs.client.Client;
 @SuppressWarnings("PMD")
 public class FormsServiceApplication extends Application<FormsServiceConfiguration> {
 
-  public static final String NAME = "Forms API Service";
-  public static final MetricRegistry registry = new MetricRegistry();
+    public static final String NAME = "Forms API Service";
+    public static final MetricRegistry registry = new MetricRegistry();
 
-  public static void main(String[] args) throws Exception {
-    new FormsServiceApplication().run(args);
-  }
-
-  @Override
-  public String getName() {
-    return NAME;
-  }
-
-  @Override
-  public void initialize(Bootstrap<FormsServiceConfiguration> bootstrap) {
-    bootstrap.addBundle(new TemplateConfigBundle());
-    bootstrap.addBundle(new MultiPartBundle());
-  }
-
-  @Override
-  public void run(FormsServiceConfiguration configuration, Environment environment) {
-    // Logging
-    if (configuration.getFluentLoggingConfiguration().isFluentLoggingOn()) {
-      LoggingService.setFluentLogging(configuration.getFluentLoggingConfiguration());
+    public static void main(String[] args) throws Exception {
+        new FormsServiceApplication().run(args);
     }
-    LoggingService.log(tag, INFO, "Starting up Forms API Service...", FormsServiceApplication.class);
 
-    // Authentication Filter for resources
-    BasicCredentialAuthFilter authFilter = new BasicCredentialAuthFilter.Builder<FormsApiUser>()
-        .setAuthenticator(new FormsApiAuthenticator(configuration))
-        .setRealm(getName())
-        .buildAuthFilter();
+    @Override
+    public String getName() {
+        return NAME;
+    }
 
-    AuthDynamicFeature feature = new AuthDynamicFeature(authFilter);
-    environment.jersey().register(feature);
+    @Override
+    public void initialize(Bootstrap<FormsServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new TemplateConfigBundle());
+        bootstrap.addBundle(new MultiPartBundle());
+    }
 
-    // Jersey Client
-    final Client client = new JerseyClientBuilder(environment)
-        .using(configuration.getJerseyClientConfiguration())
-        .withProvider(MultiPartFeature.class)
-        .build(getName());
+    @Override
+    public void run(FormsServiceConfiguration configuration, Environment environment) {
+        // Logging
+        if (configuration.getFluentLoggingConfiguration().isFluentLoggingOn()) {
+            LoggingService.setFluentLogging(configuration.getFluentLoggingConfiguration());
+        }
+        LoggingService.log(tag, INFO, "Starting up Forms API Service...", FormsServiceApplication.class);
 
-    final ClientHelper clientHelper = new ClientHelper(client);
+        // Authentication Filter for resources
+        BasicCredentialAuthFilter authFilter = new BasicCredentialAuthFilter.Builder<FormsApiUser>()
+            .setAuthenticator(new FormsApiAuthenticator(configuration))
+            .setRealm(getName())
+            .buildAuthFilter();
 
-    // Resources
-    environment.jersey().register(new FormSubmissionResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
-    environment.jersey().register(new FormResponseResource(clientHelper, configuration.getSalesforceConfiguration()));
-    environment.jersey().register(new HomeResource());
-    environment.jersey().register(new HealthcheckResource());
-    environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
-    environment.jersey().register(new TestResource());
+        AuthDynamicFeature feature = new AuthDynamicFeature(authFilter);
+        environment.jersey().register(feature);
 
-    // Health Checks
-    final AppHealthCheck healthCheck =
-        new AppHealthCheck();
-    environment.healthChecks().register("AppHealthCheck", healthCheck);
+        // Jersey Client
+        final Client client = new JerseyClientBuilder(environment)
+            .using(configuration.getJerseyClientConfiguration())
+            .withProvider(MultiPartFeature.class)
+            .build(getName());
 
-    // Exception Mappers
-    environment.jersey().register(new ConnectionExceptionMapper());
-    environment.jersey().register(new ContentTypeExceptionMapper());
-    environment.jersey().register(new MissingRequiredDataExceptionMapper());
-    environment.jersey().register(new XmlExceptionMapper());
-    environment.jersey().register(new XsdValidationExceptionMapper());
+        final ClientHelper clientHelper = new ClientHelper(client);
 
-    // Logging filter for input and output
-    environment.jersey().register(new LoggingFilter(
-        Logger.getLogger(LoggingFilter.class.getName()),
-        true)
-    );
+        // Resources
+        environment.jersey().register(new FormSubmissionResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
+        environment.jersey().register(new FormResponseResource(clientHelper, configuration.getSalesforceConfiguration()));
+        environment.jersey().register(new HomeResource());
+        environment.jersey().register(new HealthcheckResource());
+        environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
+        environment.jersey().register(new TestResource());
 
-    //Filters
-    environment.servlets().addFilter("RateLimitFilter", new RateLimitFilter(configuration.getRateLimit()))
-        .addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        // Health Checks
+        final AppHealthCheck healthCheck =
+            new AppHealthCheck();
+        environment.healthChecks().register("AppHealthCheck", healthCheck);
 
-    // Metrics
-    startReporting(configuration);
-  }
+        // Exception Mappers
+        environment.jersey().register(new ConnectionExceptionMapper());
+        environment.jersey().register(new ContentTypeExceptionMapper());
+        environment.jersey().register(new MissingRequiredDataExceptionMapper());
+        environment.jersey().register(new XmlExceptionMapper());
+        environment.jersey().register(new XsdValidationExceptionMapper());
 
-  private void startReporting(FormsServiceConfiguration configuration) {
-    Slf4jReporter reporter = Slf4jReporter.forRegistry(registry)
-        .outputTo(LoggerFactory.getLogger(FormsServiceApplication.class))
-        .convertRatesTo(TimeUnit.SECONDS)
-        .convertDurationsTo(TimeUnit.MILLISECONDS)
-        .build();
-    // report metrics to log every hour
-    reporter.start(configuration.getLog4jConfiguration().getFrequency(), TimeUnit.valueOf(configuration.getLog4jConfiguration()
-        .getTimeUnit().toUpperCase()));
-  }
+        // Logging filter for input and output
+        environment.jersey().register(new LoggingFilter(
+            Logger.getLogger(LoggingFilter.class.getName()),
+            true)
+        );
+
+        //Filters
+        environment.servlets().addFilter("RateLimitFilter", new RateLimitFilter(configuration.getRateLimit()))
+            .addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+
+        // Metrics
+        startReporting(configuration);
+    }
+
+    private void startReporting(FormsServiceConfiguration configuration) {
+        Slf4jReporter reporter = Slf4jReporter.forRegistry(registry)
+            .outputTo(LoggerFactory.getLogger(FormsServiceApplication.class))
+            .convertRatesTo(TimeUnit.SECONDS)
+            .convertDurationsTo(TimeUnit.MILLISECONDS)
+            .build();
+        // report metrics to log every hour
+        reporter.start(configuration.getLog4jConfiguration().getFrequency(), TimeUnit.valueOf(configuration.getLog4jConfiguration()
+            .getTimeUnit().toUpperCase()));
+    }
 }

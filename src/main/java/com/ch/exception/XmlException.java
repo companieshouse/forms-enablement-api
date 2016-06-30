@@ -7,20 +7,20 @@ import javax.ws.rs.WebApplicationException;
  */
 public class XmlException extends WebApplicationException {
 
-  private final String message;
+    private final String message;
 
-  public XmlException(String message) {
-    this.message = message;
-  }
+    public XmlException(String message) {
+        this.message = message;
+    }
 
-  public XmlException(Exception exception, String message) {
-    super(exception);
-    this.message = message;
-  }
+    public XmlException(Exception exception, String message) {
+        super(exception);
+        this.message = message;
+    }
 
-  @Override
-  public String getMessage() {
-    return String.format("Error handling xml. %s",
-        message);
-  }
+    @Override
+    public String getMessage() {
+        return String.format("Error handling xml. %s",
+            message);
+    }
 }

@@ -1,8 +1,8 @@
-<form type="SH02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schemas/SH02.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SH02" xsi:noNamespaceSchemaLocation="../schemas/SH02.xsd">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
-        <contactDetails />
+        <contactDetails/>
         <signDate>2013-04-04</signDate>
         <receiptDate>2013-04-10</receiptDate>
         <presenterDocumentReference>DS0009</presenterDocumentReference>
@@ -15,7 +15,7 @@
             <presenterAccountNumber>12345678901</presenterAccountNumber>
             <presenterEmailIn>sbowen@companieshouse.gov.uk</presenterEmailIn>
             <presenterEmailOut>sbowen@companieshouse.gov.uk</presenterEmailOut>
-          </presenterDetails>
+        </presenterDetails>
         <payment>
             <paymentMethod>account</paymentMethod>
             <accountNumber>00599998000</accountNumber>
@@ -27,21 +27,21 @@
         <statementOfCapital>
             <grandTotals>
                 <shareValueGrandTotals>
-	                <shareValueGrandTotal>
-	                    <currencyCode>GBP</currencyCode>
-	                    <value>103519.2620</value>
-	                    <totalAmountUnpaid>0</totalAmountUnpaid>
-	                </shareValueGrandTotal>
-	                <shareValueGrandTotal>
-	                    <currencyCode>JOD</currencyCode>
-	                    <value>5.9</value>
-	                    <totalAmountUnpaid>0</totalAmountUnpaid>
-	                </shareValueGrandTotal>
-	                <shareValueGrandTotal>
-	                    <currencyCode>USD</currencyCode>
-	                    <value>53</value>
-	                    <totalAmountUnpaid>0</totalAmountUnpaid>
-	                </shareValueGrandTotal>
+                    <shareValueGrandTotal>
+                        <currencyCode>GBP</currencyCode>
+                        <value>103519.2620</value>
+                        <totalAmountUnpaid>0</totalAmountUnpaid>
+                    </shareValueGrandTotal>
+                    <shareValueGrandTotal>
+                        <currencyCode>JOD</currencyCode>
+                        <value>5.9</value>
+                        <totalAmountUnpaid>0</totalAmountUnpaid>
+                    </shareValueGrandTotal>
+                    <shareValueGrandTotal>
+                        <currencyCode>USD</currencyCode>
+                        <value>53</value>
+                        <totalAmountUnpaid>0</totalAmountUnpaid>
+                    </shareValueGrandTotal>
                 </shareValueGrandTotals>
                 <shareNumberGrandTotal>51822</shareNumberGrandTotal>
             </grandTotals>
@@ -63,34 +63,41 @@
                     <value>53</value>
                     <totalNumberOfShares>53</totalNumberOfShares>
                     <totalAmountUnpaid>0</totalAmountUnpaid>
-                </shareValue>                                
+                </shareValue>
             </shareValues>
             <shareClasses>
                 <shareClass>
                     <currencyCode>JOD</currencyCode>
                     <suppliedClass>ORDINARY</suppliedClass>
-                    <description>ONE VOTE PER SHARE ON A POLL ONE VOTE PER ORDINARY SHAREHOLDER PRESENT AND VOTING AS A SHOW OF HANDS RIGHT TO PARTICIPATE IN A DISTRIBUTION AS RESPECTS DIVIDENDS RIGHTS TO PARTICIPATE IN A DISTRIBUTION ON A WINDING UP OR EXIT IN PRIORITY TO ALL OTHER CLASSES OF ORDINARY SHARES</description>
+                    <description>ONE VOTE PER SHARE ON A POLL ONE VOTE PER ORDINARY SHAREHOLDER PRESENT AND VOTING AS A SHOW OF
+                        HANDS RIGHT TO PARTICIPATE IN A DISTRIBUTION AS RESPECTS DIVIDENDS RIGHTS TO PARTICIPATE IN A DISTRIBUTION
+                        ON A WINDING UP OR EXIT IN PRIORITY TO ALL OTHER CLASSES OF ORDINARY SHARES
+                    </description>
                     <number>10</number>
                     <value>5.9</value>
                 </shareClass>
                 <shareClass>
                     <currencyCode>USD</currencyCode>
                     <suppliedClass>GS1</suppliedClass>
-                    <description>NO VOTING RIGHTS NO RIGHTS TO PARTICIPATE IN A DISTRIBTUION AS RESPECTS DIVIDENDS RIGHTS TO PARTICIPATE IN A DISTRIBUTION ON A WINDING UP OR EXIT, WHERE SURPLUS ASSETS EXCEED A CERTAIN AMOUNT</description>
+                    <description>NO VOTING RIGHTS NO RIGHTS TO PARTICIPATE IN A DISTRIBTUION AS RESPECTS DIVIDENDS RIGHTS TO
+                        PARTICIPATE IN A DISTRIBUTION ON A WINDING UP OR EXIT, WHERE SURPLUS ASSETS EXCEED A CERTAIN AMOUNT
+                    </description>
                     <number>53</number>
                     <value>53</value>
                 </shareClass>
                 <shareClass>
                     <currencyCode>GBP</currencyCode>
                     <suppliedClass>GS2</suppliedClass>
-                    <description>NO VOTING RIGHTS NO RIGHTS TO PARTICIPATE IN A DISTRIBUTION AS RESPECTS DIVIDENDS RIGHTS TO PARTICIPATE IN A DISTRIBUTION ON A WINDING UP OR EXIT, WHERE SURPLUS ASSETS EXCEED A CERTAIN AMOUNT</description>
+                    <description>NO VOTING RIGHTS NO RIGHTS TO PARTICIPATE IN A DISTRIBUTION AS RESPECTS DIVIDENDS RIGHTS TO
+                        PARTICIPATE IN A DISTRIBUTION ON A WINDING UP OR EXIT, WHERE SURPLUS ASSETS EXCEED A CERTAIN AMOUNT
+                    </description>
                     <number>51759</number>
                     <value>103519.2620</value>
                 </shareClass>
             </shareClasses>
             <latestSOCInd>true</latestSOCInd>
         </statementOfCapital>
-        <shares> 
+        <shares>
             <consolidation>true</consolidation>
             <subDivision>true</subDivision>
             <redemptionSelected>true</redemptionSelected>
@@ -139,6 +146,6 @@
         </reconvertedClasses>
     </corporateBody>
     <general>
-    	<resolutionDate>2016-01-01</resolutionDate>
+        <resolutionDate>2016-01-01</resolutionDate>
     </general>
 </form>

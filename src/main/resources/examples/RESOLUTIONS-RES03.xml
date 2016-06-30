@@ -1,15 +1,18 @@
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SH12" xsi:noNamespaceSchemaLocation="../schemas/SH12.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:/mapforce/mappings/chips_schemas/DS01schema.xsd" type="${FORMTYPE}" id="
+-1">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
-        <contactDetails/>
+        <authentication>
+            <code>222222</code>
+            <status>authenticated</status>
+        </authentication>
+        <eFileValidated>false</eFileValidated>
+        <contactDetails />
         <signDate>2013-04-04</signDate>
-        <receiptDate>2013-04-10</receiptDate>
+        <receiptDate>2016-04-10</receiptDate>
         <presenterDocumentReference>DS0009</presenterDocumentReference>
-        <submissionReference>8c199ac6-369a-462d-8cfc-0f4b6d13fa7a</submissionReference>
         <barcode>J53W9DA1</barcode>
-        <packageIdentifier>12345</packageIdentifier>
-        <packageCount>1</packageCount>
         <presenterDetails>
             <presenterName>Steve Bowen</presenterName>
             <presenterAccountNumber>12345678901</presenterAccountNumber>
@@ -24,11 +27,13 @@
     <corporateBody>
         <incorporationNumber>02667726</incorporationNumber>
         <corporateBodyName>SOLDATA LIMITED</corporateBodyName>
-        <detailsOfVariationOfRights>SPECIAL MEMBERS SHALL VOTE AT GENERAL MEETINGS, ORDINARY MEMBERS SHALL NOT VOTE AT GENERAL
-            MEETINGS
-        </detailsOfVariationOfRights>
+        <resolutions>
+            <resolutionType>
+                <resolutionFormType>3</resolutionFormType>
+            </resolutionType>
+        </resolutions>
     </corporateBody>
     <general>
-        <effectiveDate>2016-05-04</effectiveDate>
+        <resolutionDate>2016-01-01</resolutionDate>
     </general>
 </form>

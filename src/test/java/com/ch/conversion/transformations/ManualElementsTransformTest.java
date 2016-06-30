@@ -13,23 +13,23 @@ import org.junit.Test;
  */
 public class ManualElementsTransformTest extends TestHelper {
 
-  ITransformConfig config;
+    ITransformConfig config;
 
-  @Before
-  public void setUp() {
-    config = new TransformConfig();
-  }
+    @Before
+    public void setUp() {
+        config = new TransformConfig();
+    }
 
-  @Test
-  public void addManualElementsToXml() throws Exception {
-    // xml
-    String xml = getStringFromFile(CONVERTED_FORM_XML_PATH);
+    @Test
+    public void addManualElementsToXml() throws Exception {
+        // xml
+        String xml = getStringFromFile(CONVERTED_FORM_XML_PATH);
 
-    // transform
-    ManualElementsTransform transform = new ManualElementsTransform(config, xml);
-    String output = transform.getXml();
+        // transform
+        ManualElementsTransform transform = new ManualElementsTransform(config, xml);
+        String output = transform.getXml();
 
-    Assert.assertThat(output, CoreMatchers.containsString("<method>enablement</method>"));
-  }
+        Assert.assertThat(output, CoreMatchers.containsString("<method>enablement</method>"));
+    }
 
 }

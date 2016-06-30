@@ -5,50 +5,50 @@ package com.ch.conversion.config;
  */
 public interface ITransformConfig {
 
-  String getPackageMultiPartName();
+    String getPackageMultiPartName();
 
-  String getMetaPropertyNameIn();
+    String getMetaPropertyNameIn();
 
-  String getFormPropertyNameIn();
+    String getFormPropertyNameIn();
 
-  // output json
-  String getAttachmentsPropertyNameIn();
+    // output json
+    String getAttachmentsPropertyNameIn();
 
-  String getAttachmentsPropertyNameOut();
+    String getAttachmentsPropertyNameOut();
 
-  String getBarcodePropertyNameIn();
+    String getBarcodePropertyNameIn();
 
-  String getBarcodePropertyNameOut();
+    String getBarcodePropertyNameOut();
 
-  String getXmlPropertyNameOut();
+    String getXmlPropertyNameOut();
 
-  String getFormsPropertyNameOut();
+    String getFormsPropertyNameOut();
 
-  // filing details
-  String getFilingDetailsPropertyNameIn();
+    // filing details
+    String getFilingDetailsPropertyNameIn();
 
-  String getSubmissionReferencePropertyNameIn();
+    String getSubmissionReferencePropertyNameIn();
 
-  String getSubmissionReferenceElementNameOut();
+    String getSubmissionReferenceElementNameOut();
 
-  String getPackageCountPropertyNameIn();
+    String getPackageCountPropertyNameIn();
 
-  String getPackageCountElementNameOut();
+    String getPackageCountElementNameOut();
 
-  String getPackageIdentifierPropertyNameIn();
+    String getPackageIdentifierPropertyNameIn();
 
-  String getPackageIdentifierElementNameOut();
+    String getPackageIdentifierElementNameOut();
 
-  // meta data
-  String getRootElementNameOut();
+    // meta data
+    String getRootElementNameOut();
 
-  String getFormTypePropertyNameIn();
+    String getFormTypePropertyNameIn();
 
-  String getFormTypeAttributeNameOut();
+    String getFormTypeAttributeNameOut();
 
-  String getFormVersionPropertyNameIn();
+    String getFormVersionPropertyNameIn();
 
-  String getFormVersionAttributeNameOut();
+    String getFormVersionAttributeNameOut();
 
-  String getSchemasLocation();
+    String getSchemasLocation();
 }

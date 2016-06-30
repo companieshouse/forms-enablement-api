@@ -19,62 +19,62 @@ import javax.ws.rs.core.Response;
  */
 public class FormsApiAuthenticatorTest {
 
-  @ClassRule
-  public static final DropwizardAppRule<FormsServiceConfiguration> RULE =
-      new DropwizardAppRule<>(FormsServiceApplication.class, ResourceHelpers.resourceFilePath("test-configuration.yml"));
+    @ClassRule
+    public static final DropwizardAppRule<FormsServiceConfiguration> RULE =
+        new DropwizardAppRule<>(FormsServiceApplication.class, ResourceHelpers.resourceFilePath("test-configuration.yml"));
 
-  public void responseIs401WhenWeDontSendAnAuthHeader() {
-    Client client = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 1");
+    public void responseIs401WhenWeDontSendAnAuthHeader() {
+        Client client = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 1");
 
-    final Response response = client.target(
-        String.format("http://localhost:%d/auth", RULE.getLocalPort()))
-        .request()
-        .get();
+        final Response response = client.target(
+            String.format("http://localhost:%d/auth", RULE.getLocalPort()))
+            .request()
+            .get();
 
-    Assert.assertEquals("Wrong HTTP status code.", 401, response.getStatus());
-  }
+        Assert.assertEquals("Wrong HTTP status code.", 401, response.getStatus());
+    }
 
-  public void responseIs401WhenWeSendTheWrongAuthHeader() {
-    Client client2 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 2");
+    public void responseIs401WhenWeSendTheWrongAuthHeader() {
+        Client client2 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 2");
 
-    final Response response = client2.target(
-        String.format("http://localhost:%d/auth", RULE.getLocalPort()))
-        .request()
-        .header("Authorization", "Basic WRONG")
-        .get();
+        final Response response = client2.target(
+            String.format("http://localhost:%d/auth", RULE.getLocalPort()))
+            .request()
+            .header("Authorization", "Basic WRONG")
+            .get();
 
-    Assert.assertEquals("Wrong HTTP status code.", 401, response.getStatus());
-  }
+        Assert.assertEquals("Wrong HTTP status code.", 401, response.getStatus());
+    }
 
-  public void responseIs200WhenWeSendTheRightAuthHeaderForSalesforce() {
-    Client client3 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 3");
+    public void responseIs200WhenWeSendTheRightAuthHeaderForSalesforce() {
+        Client client3 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 3");
 
-    String encode = Base64.encodeAsString(RULE.getConfiguration().getSalesforceConfiguration().getName()
-        + ":" + RULE.getConfiguration().getSalesforceConfiguration().getSecret());
+        String encode = Base64.encodeAsString(RULE.getConfiguration().getSalesforceConfiguration().getName()
+            + ":" + RULE.getConfiguration().getSalesforceConfiguration().getSecret());
 
-    final Response response = client3.target(
-        String.format("http://localhost:%d/auth", RULE.getLocalPort()))
-        .request()
-        .header("Authorization", "Basic " + encode)
-        .get();
+        final Response response = client3.target(
+            String.format("http://localhost:%d/auth", RULE.getLocalPort()))
+            .request()
+            .header("Authorization", "Basic " + encode)
+            .get();
 
-    Assert.assertEquals("Correct HTTP status code.", 200, response.getStatus());
-  }
+        Assert.assertEquals("Correct HTTP status code.", 200, response.getStatus());
+    }
 
-  public void responseIs200WhenWeSendTheRightAuthHeaderForCompaniesHouse() {
-    Client client4 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 4");
+    public void responseIs200WhenWeSendTheRightAuthHeaderForCompaniesHouse() {
+        Client client4 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 4");
 
-    String encode = Base64.encodeAsString(RULE.getConfiguration().getCompaniesHouseConfiguration().getName()
-        + ":" + RULE.getConfiguration().getCompaniesHouseConfiguration().getSecret());
+        String encode = Base64.encodeAsString(RULE.getConfiguration().getCompaniesHouseConfiguration().getName()
+            + ":" + RULE.getConfiguration().getCompaniesHouseConfiguration().getSecret());
 
-    final Response response = client4.target(
-        String.format("http://localhost:%d/auth", RULE.getLocalPort()))
-        .request()
-        .header("Authorization", "Basic " + encode)
-        .get();
+        final Response response = client4.target(
+            String.format("http://localhost:%d/auth", RULE.getLocalPort()))
+            .request()
+            .header("Authorization", "Basic " + encode)
+            .get();
 
-    Assert.assertEquals("Correct HTTP status code.", 200, response.getStatus());
-  }
+        Assert.assertEquals("Correct HTTP status code.", 200, response.getStatus());
+    }
 
 }
 

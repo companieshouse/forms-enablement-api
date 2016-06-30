@@ -7,14 +7,14 @@ import javax.ws.rs.WebApplicationException;
  */
 public class ConnectionException extends WebApplicationException {
 
-  private final String message;
+    private final String message;
 
-  public ConnectionException(String message) {
-    this.message = message;
-  }
+    public ConnectionException(String message) {
+        this.message = message;
+    }
 
-  @Override
-  public String getMessage() {
-    return String.format("Unable to connect to: %s", message);
-  }
+    @Override
+    public String getMessage() {
+        return String.format("Unable to connect to: %s", message);
+    }
 }

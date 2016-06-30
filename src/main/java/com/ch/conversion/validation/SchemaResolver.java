@@ -7,40 +7,41 @@ import java.io.InputStream;
 
 public class SchemaResolver implements LSResourceResolver {
 
-  private String prefix;
+    private String prefix;
 
-  /**
-   * Resolve a resource.
-   * 
-   */
-  public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+    /**
+     * Resolve a resource.
+     */
+    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 
-    String prefixedSystemId = prefix + "/" + systemId;
-    InputStream stream = getClass().getClassLoader().getResourceAsStream(prefixedSystemId);
+        String prefixedSystemId = prefix + "/" + systemId;
+        InputStream stream = getClass().getClassLoader().getResourceAsStream(prefixedSystemId);
 
-    LSInput input = new CustomLSInput(publicId, prefixedSystemId);
+        LSInput input = new CustomLSInput(publicId, prefixedSystemId);
 
-    input.setPublicId(publicId);
-    input.setBaseURI(baseURI);
-    input.setByteStream(stream);
-    
-    return input;
-  }
+        input.setPublicId(publicId);
+        input.setBaseURI(baseURI);
+        input.setByteStream(stream);
 
-  /**
-   * Get the prefix.
-   * @return the prefix
-   */
-  public String getPrefix() {
-    return prefix;
-  }
+        return input;
+    }
 
-  /**
-   * Set the prefix.
-   * @param prefix the prefix to set
-   */
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
-  }
+    /**
+     * Get the prefix.
+     *
+     * @return the prefix
+     */
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * Set the prefix.
+     *
+     * @param prefix the prefix to set
+     */
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
 }

@@ -7,10 +7,10 @@ import io.dropwizard.auth.PrincipalImpl;
  */
 public class FormsApiUser extends PrincipalImpl {
 
-  // Nothing much here. This is a marker class implementation of Principal. We don't care much about FormsApiUser
-  // instances, we just need to support HTTP basic auth.
-  public FormsApiUser(String name) {
-    super(name);
-  }
+    // Nothing much here. This is a marker class implementation of Principal. We don't care much about FormsApiUser
+    // instances, we just need to support HTTP basic auth.
+    public FormsApiUser(String name) {
+        super(name);
+    }
 
 }
