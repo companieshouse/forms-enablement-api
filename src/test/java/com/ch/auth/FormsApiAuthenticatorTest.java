@@ -50,7 +50,7 @@ public class FormsApiAuthenticatorTest {
     Client client3 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 3");
 
     String encode = Base64.encodeAsString(RULE.getConfiguration().getSalesforceConfiguration().getName()
-        + ":" + RULE.getConfiguration().getSalesforceConfiguration().getSecret());
+        + ":" + RULE.getConfiguration().getSalesforceConfiguration().getApiKey());
 
     final Response response = client3.target(
         String.format("http://localhost:%d/auth", RULE.getLocalPort()))
@@ -65,7 +65,7 @@ public class FormsApiAuthenticatorTest {
     Client client4 = new JerseyClientBuilder(RULE.getEnvironment()).build("auth client 4");
 
     String encode = Base64.encodeAsString(RULE.getConfiguration().getCompaniesHouseConfiguration().getName()
-        + ":" + RULE.getConfiguration().getCompaniesHouseConfiguration().getSecret());
+        + ":" + RULE.getConfiguration().getCompaniesHouseConfiguration().getApiKey());
 
     final Response response = client4.target(
         String.format("http://localhost:%d/auth", RULE.getLocalPort()))

@@ -8,13 +8,19 @@ server:
 
 salesforceConfiguration:
   name: Salesforce
-  secret: ${env.SALESFORCE_API_KEY}
-  apiUrl: ${env.SALESFORCE_API_URL}
+  apiKey: ${env.SALESFORCE_API_KEY}
+  authUrl: ${env.SALESFORCE_AUTH_URL}
+  authGrantType: ${env.SALESFORCE_AUTH_TYPE}
+  authUsername: ${env.SALESFORCE_AUTH_USERNAME}
+  authPassword: ${env.SALESFORCE_AUTH_PASSWORD}
+  authId: ${env.SALESFORCE_AUTH_ID}
+  authSecret: ${env.SALESFORCE_AUTH_SECRET}
+  clientUrl: ${env.SALESFORCE_CLIENT_URL}
 
 companiesHouseConfiguration:
   name: CHIPS
-  secret: ${env.CHIPS_API_KEY}
-  apiUrl: ${env.CHIPS_API_URL}
+  apiKey: ${env.CHIPS_API_KEY}
+  chipsApiUrl: ${env.CHIPS_API_URL}
   barcodeServiceUrl: ${env.CHIPS_BARCODE_SERVICE_URL}
 
 jerseyClient:

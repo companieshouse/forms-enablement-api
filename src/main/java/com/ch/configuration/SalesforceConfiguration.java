@@ -9,7 +9,36 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class SalesforceConfiguration {
   @JsonProperty
   @NotEmpty
-  private String secret;
+  private String name;
+
+  @JsonProperty
+  @NotEmpty
+  private String authId;
+
+  @JsonProperty
+  @NotEmpty
+  private String authUsername;
+
+  @JsonProperty
+  @NotEmpty
+  private String authPassword;
+
+  @JsonProperty
+  @NotEmpty
+  private String authSecret;
+
+  @JsonProperty
+  @NotEmpty
+  private String authUrl;
+
+
+  @JsonProperty
+  @NotEmpty
+  private String authGrantType;
+
+  @JsonProperty
+  @NotEmpty
+  private String clientUrl;
 
   @JsonProperty
   @NotEmpty
@@ -17,17 +46,46 @@ public class SalesforceConfiguration {
 
   @JsonProperty
   @NotEmpty
-  private String name;
+  private String apiKey;
 
-  public String getSecret() {
-    return secret;
+  public String getName() {
+    return name;
+  }
+
+
+  public String getAuthUsername() {
+    return authUsername;
+  }
+
+  public String getAuthPassword() {
+    return authPassword;
+  }
+
+  public String getAuthSecret() {
+    return authSecret;
+  }
+
+  public String getAuthUrl() {
+    return authUrl;
+  }
+
+  public String getAuthGrantType() {
+    return authGrantType;
+  }
+
+  public String getClientUrl() {
+    return clientUrl;
   }
 
   public String getApiUrl() {
     return apiUrl;
   }
 
-  public String getName() {
-    return name;
+  public String getApiKey() {
+    return apiKey;
+  }
+
+  public String getAuthId() {
+    return authId;
   }
 }

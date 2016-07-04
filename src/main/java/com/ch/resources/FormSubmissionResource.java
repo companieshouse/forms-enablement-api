@@ -56,7 +56,7 @@ public class FormSubmissionResource {
           FormSubmissionResource.class);
 
       // post to CHIPS
-      Response response = client.postJson(configuration.getApiUrl(), forms);
+      Response response = client.postJson(configuration.getChipsApiUrl(), forms);
       LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
           FormSubmissionResource.class);
 

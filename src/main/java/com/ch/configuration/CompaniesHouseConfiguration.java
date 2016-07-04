@@ -9,11 +9,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CompaniesHouseConfiguration {
   @JsonProperty
   @NotEmpty
-  private String secret;
+  private String apiKey;
 
   @JsonProperty
   @NotEmpty
-  private String apiUrl;
+  private String chipsApiUrl;
 
   @JsonProperty
   @NotEmpty
@@ -23,19 +23,19 @@ public class CompaniesHouseConfiguration {
   @NotEmpty
   private String barcodeServiceUrl;
 
-  public String getSecret() {
-    return secret;
-  }
-
-  public String getApiUrl() {
-    return apiUrl;
-  }
-
   public String getName() {
     return name;
   }
 
   public String getBarcodeServiceUrl() {
     return barcodeServiceUrl;
+  }
+
+  public String getApiKey() {
+    return apiKey;
+  }
+
+  public String getChipsApiUrl() {
+    return chipsApiUrl;
   }
 }

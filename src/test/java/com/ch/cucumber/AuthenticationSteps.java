@@ -48,7 +48,7 @@ public class AuthenticationSteps extends TestHelper {
         .build("auth steps client 2");
 
     CompaniesHouseConfiguration config = rule.getConfiguration().getCompaniesHouseConfiguration();
-    String encode = Base64.encodeAsString(config.getName() + ":" + config.getSecret());
+    String encode = Base64.encodeAsString(config.getName() + ":" + config.getApiKey());
     String url = String.format("http://localhost:%d/auth", rule.getLocalPort());
     validResponse = client.target(url)
         .request()

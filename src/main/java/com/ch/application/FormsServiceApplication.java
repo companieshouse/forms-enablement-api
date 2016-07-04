@@ -5,6 +5,7 @@ import static com.ch.service.LoggingService.tag;
 
 import com.ch.auth.FormsApiAuthenticator;
 import com.ch.client.ClientHelper;
+import com.ch.client.SalesforceClientHelper;
 import com.ch.configuration.FormsServiceConfiguration;
 import com.ch.exception.mapper.ConnectionExceptionMapper;
 import com.ch.exception.mapper.ContentTypeExceptionMapper;
@@ -90,10 +91,11 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
         .build(getName());
 
     final ClientHelper clientHelper = new ClientHelper(client);
+    final SalesforceClientHelper salesforceClientHelper = new SalesforceClientHelper(client);
 
     // Resources
     environment.jersey().register(new FormSubmissionResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
-    environment.jersey().register(new FormResponseResource(clientHelper, configuration.getSalesforceConfiguration()));
+    environment.jersey().register(new FormResponseResource(salesforceClientHelper, configuration.getSalesforceConfiguration()));
     environment.jersey().register(new HomeResource());
     environment.jersey().register(new HealthcheckResource());
     environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));

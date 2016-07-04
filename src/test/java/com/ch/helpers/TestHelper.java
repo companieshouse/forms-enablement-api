@@ -34,6 +34,8 @@ public class TestHelper {
   protected static final String BLANK_FORM_XML_PATH = "xml/blank_form.xml";
   protected static final String NO_SCHEMA_XML_PATH = "xml/no_schema_form.xml";
 
+  protected static final String SALESFORCE_ACCESS_TOKEN = "Bearer abcdefghijklmnopqrstuvwxyz";
+
   public String getStringFromFile(String filename) throws IOException {
     String fileAsString;
     try {
