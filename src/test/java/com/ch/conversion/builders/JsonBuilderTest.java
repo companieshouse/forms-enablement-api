@@ -4,6 +4,7 @@ import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.config.TransformConfig;
 import com.ch.exception.MissingRequiredDataException;
 import com.ch.helpers.TestHelper;
+import com.ch.model.FormsPackage;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.json.JSONException;
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class JsonBuilderTest extends TestHelper {
             invalid_forms.add(invalid);
         }
         JsonBuilder builder = new JsonBuilder(config, invalid, invalid_forms);
-        builder.getJson();
+        builder.getTransformedPackage();
     }
 
     // TODO: is this the desired behaviour?
@@ -48,30 +49,30 @@ public class JsonBuilderTest extends TestHelper {
             valid_json_forms.add(valid);
         }
         JsonBuilder builder = new JsonBuilder(config, valid, valid_json_forms);
-        builder.getJson();
+        builder.getTransformedPackage();
     }
 
     // TODO: what to assert?
     @Test
     public void createStringForValidJson() throws Exception {
         JsonBuilder builder = getValidJsonBuilder();
-        String json = builder.getJson();
-        Assert.assertNotNull(json);
+        FormsPackage transformedPackage = builder.getTransformedPackage();
+        Assert.assertNotNull(transformedPackage);
     }
 
     @Test(expected = Exception.class)
     public void throwsExceptionWithEmptyMultiPart() throws Exception {
         FormDataMultiPart multi = new FormDataMultiPart();
         JsonBuilder builder = new JsonBuilder(config, multi);
-        builder.getJson();
+        builder.getTransformedPackage();
     }
 
     @Test
     public void createStringForValidMultiPart() throws Exception {
         FormDataMultiPart multi = getValidMultiPart();
         JsonBuilder builder = new JsonBuilder(config, multi);
-        String json = builder.getJson();
-        Assert.assertNotNull(json);
+        FormsPackage transformedPackage = builder.getTransformedPackage();
+        Assert.assertNotNull(transformedPackage);
     }
 
     private JsonBuilder getValidJsonBuilder() throws Exception {

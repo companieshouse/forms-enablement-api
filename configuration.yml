@@ -51,3 +51,9 @@ fluentLogging:
 
 # limit the submission of requests to x per second
 rateLimit: ${env.RATE_LIMIT!1}
+
+# mongodb
+mongoDbUri: ${env.MONGODB_URI!"mongodb://localhost:27017"}
+mongoDbName: ${env.MONGODB_NAME!"enablement"}
+mongoDbPackagesCollectionName: ${env.MONGODB_PACKAGES_COLLECTION_NAME!"packages"}
+mongoDbFormsCollectionName: ${env.MONGODB_FORMS_COLLECTION_NAME!"forms"}

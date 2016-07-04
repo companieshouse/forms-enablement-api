@@ -1,15 +1,11 @@
 package com.ch.resources;
 
-import static com.ch.service.LoggingService.LoggingLevel.INFO;
-import static com.ch.service.LoggingService.tag;
-
 import com.ch.application.FormsServiceApplication;
-import com.ch.client.ClientHelper;
-import com.ch.configuration.CompaniesHouseConfiguration;
 import com.ch.conversion.builders.JsonBuilder;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.config.TransformConfig;
-import com.ch.service.LoggingService;
+import com.ch.helpers.MongoHelper;
+import com.ch.model.FormsPackage;
 import com.codahale.metrics.Timer;
 import io.dropwizard.auth.Auth;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -28,12 +24,10 @@ import javax.ws.rs.core.Response;
 public class FormSubmissionResource {
     private static final Timer timer = FormsServiceApplication.registry.timer("FormSubmissionResource");
 
-    private final ClientHelper client;
-    private final CompaniesHouseConfiguration configuration;
+    private final MongoHelper mongoHelper;
 
-    public FormSubmissionResource(ClientHelper client, CompaniesHouseConfiguration configuration) {
-        this.client = client;
-        this.configuration = configuration;
+    public FormSubmissionResource(MongoHelper mongoHelper) {
+        this.mongoHelper = mongoHelper;
     }
 
     /**
@@ -51,17 +45,13 @@ public class FormSubmissionResource {
             // convert input to json
             ITransformConfig config = new TransformConfig();
             JsonBuilder builder = new JsonBuilder(config, multi);
-            String forms = builder.getJson();
-            LoggingService.log(tag, INFO, "Transformation output: " + forms,
-                FormSubmissionResource.class);
+            FormsPackage transformedPackage = builder.getTransformedPackage();
 
-            // post to CHIPS
-            Response response = client.postJson(configuration.getApiUrl(), forms);
-            LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
-                FormSubmissionResource.class);
+            // insert into mongodb
+            mongoHelper.storeFormsPackage(transformedPackage);
 
-            // return response from CHIPS
-            return response;
+            // return 200
+            return Response.ok().build();
 
         } finally {
             context.stop();

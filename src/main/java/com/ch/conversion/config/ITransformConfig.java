@@ -24,6 +24,10 @@ public interface ITransformConfig {
 
     String getFormsPropertyNameOut();
 
+    String getFormStatusPropertyNameOut();
+
+    String getPackageDatePropertyNameOut();
+
     // filing details
     String getFilingDetailsPropertyNameIn();
 

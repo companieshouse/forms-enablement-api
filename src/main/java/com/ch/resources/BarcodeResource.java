@@ -4,8 +4,8 @@ import static com.ch.service.LoggingService.LoggingLevel.INFO;
 import static com.ch.service.LoggingService.tag;
 
 import com.ch.application.FormsServiceApplication;
-import com.ch.client.ClientHelper;
 import com.ch.configuration.CompaniesHouseConfiguration;
+import com.ch.helpers.ClientHelper;
 import com.ch.service.LoggingService;
 import com.codahale.metrics.Timer;
 import io.dropwizard.auth.Auth;

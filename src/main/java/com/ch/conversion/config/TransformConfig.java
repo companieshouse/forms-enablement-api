@@ -41,6 +41,14 @@ public class TransformConfig implements ITransformConfig {
         return "forms";
     }
 
+    public String getFormStatusPropertyNameOut() {
+        return "status";
+    }
+
+    public String getPackageDatePropertyNameOut() {
+        return "date";
+    }
+
     public String getFilingDetailsPropertyNameIn() {
         return "filingDetails";
     }
@@ -62,7 +70,7 @@ public class TransformConfig implements ITransformConfig {
     }
 
     public String getPackageIdentifierPropertyNameIn() {
-        return "id";
+        return "packageIdentifier";
     }
 
     public String getPackageIdentifierElementNameOut() {

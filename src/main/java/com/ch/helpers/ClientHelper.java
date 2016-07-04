@@ -1,4 +1,4 @@
-package com.ch.client;
+package com.ch.helpers;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;

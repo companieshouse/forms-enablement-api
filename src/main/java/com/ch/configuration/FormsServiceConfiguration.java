@@ -33,6 +33,22 @@ public class FormsServiceConfiguration extends Configuration {
     @JsonProperty
     private Log4jConfiguration log4jConfiguration;
 
+    @NotNull
+    @JsonProperty
+    private String mongoDbUri;
+
+    @NotNull
+    @JsonProperty
+    private String mongoDbName;
+
+    @NotNull
+    @JsonProperty
+    private String mongoDbPackagesCollectionName;
+
+    @NotNull
+    @JsonProperty
+    private String mongoDbFormsCollectionName;
+
     public int getRateLimit() {
         return rateLimit;
     }
@@ -56,5 +72,21 @@ public class FormsServiceConfiguration extends Configuration {
 
     public Log4jConfiguration getLog4jConfiguration() {
         return log4jConfiguration;
+    }
+
+    public String getMongoDbUri() {
+        return mongoDbUri;
+    }
+
+    public String getMongoDbName() {
+        return mongoDbName;
+    }
+
+    public String getMongoDbPackagesCollectionName() {
+        return mongoDbPackagesCollectionName;
+    }
+
+    public String getMongoDbFormsCollectionName() {
+        return mongoDbFormsCollectionName;
     }
 }

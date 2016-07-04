@@ -33,6 +33,8 @@ public class TestHelper {
     protected static final String INVALID_FORM_XML_PATH = "xml/invalid_form.xml";
     protected static final String BLANK_FORM_XML_PATH = "xml/blank_form.xml";
     protected static final String NO_SCHEMA_XML_PATH = "xml/no_schema_form.xml";
+    public static final String FORM_SERVICE_TEST_YML = "FORM_SERVICE_TEST_YML";
+
 
     public String getStringFromFile(String filename) throws IOException {
         String fileAsString;
