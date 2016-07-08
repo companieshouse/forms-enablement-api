@@ -10,10 +10,19 @@ public class CustomLSInput implements LSInput {
   private String publicId;
 
   private String systemId;
-  
+
   private String baseURI;
-  
+
   private InputStream byteStream;
+
+  /**
+   * Constructor.
+   */
+  public CustomLSInput(String publicId, String sysId) {
+    this.publicId = publicId;
+    this.systemId = sysId;
+
+  }
 
   public String getPublicId() {
     return publicId;
@@ -27,44 +36,44 @@ public class CustomLSInput implements LSInput {
     return baseURI;
   }
 
-  public InputStream getByteStream() {
-    return byteStream;
-  }
-
-  public boolean getCertifiedText() {
-    return false;
-  }
-
-  public Reader getCharacterStream() {
-    return null;
-  }
-
-  public String getEncoding() {
-    return "UTF-8";
-  }
-
-  public String getStringData() {
-    return null;
-  }
-
   public void setBaseURI(String baseURI) {
     this.baseURI = baseURI;
+  }
+
+  public InputStream getByteStream() {
+    return byteStream;
   }
 
   public void setByteStream(InputStream byteStream) {
     this.byteStream = byteStream;
   }
 
+  public boolean getCertifiedText() {
+    return false;
+  }
+
   public void setCertifiedText(boolean certifiedText) {
     //Not implemented
+  }
+
+  public Reader getCharacterStream() {
+    return null;
   }
 
   public void setCharacterStream(Reader characterStream) {
     //Not implemented
   }
 
+  public String getEncoding() {
+    return "UTF-8";
+  }
+
   public void setEncoding(String encoding) {
     //Not implemented
+  }
+
+  public String getStringData() {
+    return null;
   }
 
   public void setStringData(String stringData) {
@@ -77,15 +86,5 @@ public class CustomLSInput implements LSInput {
 
   public void setSystemId(String systemId) {
     this.systemId = systemId;
-  }
-
-  /**
-   * Constructor.
-   * 
-   */
-  public CustomLSInput(String publicId, String sysId) {
-    this.publicId = publicId;
-    this.systemId = sysId;
-
   }
 }

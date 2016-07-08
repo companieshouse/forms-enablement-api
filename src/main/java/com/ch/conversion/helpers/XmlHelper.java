@@ -65,9 +65,10 @@ public final class XmlHelper {
    * @throws XmlException                 error parsing xml
    * @throws MissingRequiredDataException error getting property from json
    */
-  public void addJsonValueAsElementToXml(Document xml, JSONObject json, String xmlLocation, String parentName, String propertyName,
+  public void addJsonValueAsElementToXml(Document xml, JSONObject json, String xmlLocation, String parentName,
+                                         String propertyName,
                                          String
-                                             elementName) throws XmlException, MissingRequiredDataException {
+                                           elementName) throws XmlException, MissingRequiredDataException {
     try {
       // get where to add element
       NodeList nodes = xml.getElementsByTagName(xmlLocation);
@@ -155,10 +156,10 @@ public final class XmlHelper {
     // if value is null: attributeName=''
     StringBuilder builder = new StringBuilder();
     builder
-        .append(" ")
-        .append(attributeName)
-        .append("=")
-        .append("'");
+      .append(" ")
+      .append(attributeName)
+      .append("=")
+      .append("'");
 
     if (attributeValue != null && !attributeValue.toString().equals("null")) {
       builder.append(attributeValue);
@@ -208,7 +209,7 @@ public final class XmlHelper {
     Node attribute = nodeList.item(0).getAttributes().getNamedItem(attributeName);
     if (attribute == null) {
       throw new XmlException(String.format("Attribute '%s', not present in Element '%s' in the xml document.", attributeName,
-          elementName));
+        elementName));
     }
     return attribute.getNodeValue();
   }

@@ -1,8 +1,8 @@
-<form type="SH16" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schemas/SH16.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SH16" xsi:noNamespaceSchemaLocation="../schemas/SH16.xsd">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
-        <contactDetails />
+        <contactDetails/>
         <signDate>2013-04-04</signDate>
         <receiptDate>2013-04-10</receiptDate>
         <presenterDocumentReference>DS0009</presenterDocumentReference>
@@ -15,7 +15,7 @@
             <presenterAccountNumber>12345678901</presenterAccountNumber>
             <presenterEmailIn>sbowen@companieshouse.gov.uk</presenterEmailIn>
             <presenterEmailOut>sbowen@companieshouse.gov.uk</presenterEmailOut>
-          </presenterDetails>
+        </presenterDetails>
         <payment>
             <paymentMethod>account</paymentMethod>
             <accountNumber>00599998000</accountNumber>
@@ -26,6 +26,6 @@
         <corporateBodyName>SOLDATA LIMITED</corporateBodyName>
     </corporateBody>
     <general>
-    	<effectiveDate>2016-05-04</effectiveDate>
+        <effectiveDate>2016-05-04</effectiveDate>
     </general>
 </form>

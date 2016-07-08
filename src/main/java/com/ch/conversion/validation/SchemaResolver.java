@@ -11,7 +11,6 @@ public class SchemaResolver implements LSResourceResolver {
 
   /**
    * Resolve a resource.
-   * 
    */
   public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 
@@ -23,12 +22,13 @@ public class SchemaResolver implements LSResourceResolver {
     input.setPublicId(publicId);
     input.setBaseURI(baseURI);
     input.setByteStream(stream);
-    
+
     return input;
   }
 
   /**
    * Get the prefix.
+   *
    * @return the prefix
    */
   public String getPrefix() {
@@ -37,6 +37,7 @@ public class SchemaResolver implements LSResourceResolver {
 
   /**
    * Set the prefix.
+   *
    * @param prefix the prefix to set
    */
   public void setPrefix(String prefix) {

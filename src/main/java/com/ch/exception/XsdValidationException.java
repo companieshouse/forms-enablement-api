@@ -26,6 +26,6 @@ public class XsdValidationException extends WebApplicationException {
   @Override
   public String getMessage() {
     return String.format("XML for form type %s, could not be validated against schema %s. %s",
-        formType, schema, getCause().getMessage());
+      formType, schema, getCause().getMessage());
   }
 }

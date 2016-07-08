@@ -4,15 +4,10 @@ package com.ch.conversion.validation;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.helpers.XmlHelper;
 import com.ch.exception.XsdValidationException;
-
 import org.w3c.dom.Document;
 
-import java.io.File;
 import java.io.InputStream;
-import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.Array;
-import java.net.URL;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
@@ -51,13 +46,13 @@ public class XmlValidator {
       SchemaResolver resolver = new SchemaResolver();
       resolver.setPrefix(config.getSchemasLocation());
       factory.setResourceResolver(resolver);
-     
+
       InputStream is = getClass().getClassLoader().getResourceAsStream(schemaPath);
 
       Source schemaFile = new StreamSource(is);
-        
+
       Schema schema = factory.newSchema(schemaFile);
-      
+
       Validator validator = schema.newValidator();
       // create a source from xml string
       Source source = new StreamSource(new StringReader(xml));

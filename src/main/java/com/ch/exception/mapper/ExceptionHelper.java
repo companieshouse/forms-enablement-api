@@ -17,6 +17,7 @@ public final class ExceptionHelper {
 
   /**
    * Helper method to return an exception message as a json string.
+   *
    * @param exception exception
    * @return error json string
    */

@@ -5,6 +5,7 @@ import static com.ch.service.LoggingService.tag;
 
 import com.ch.auth.FormsApiAuthenticator;
 import com.ch.client.ClientHelper;
+import com.ch.client.SalesforceClientHelper;
 import com.ch.configuration.FormsServiceConfiguration;
 import com.ch.exception.mapper.ConnectionExceptionMapper;
 import com.ch.exception.mapper.ContentTypeExceptionMapper;
@@ -72,28 +73,30 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
     if (configuration.getFluentLoggingConfiguration().isFluentLoggingOn()) {
       LoggingService.setFluentLogging(configuration.getFluentLoggingConfiguration());
     }
+
     LoggingService.log(tag, INFO, "Starting up Forms API Service...", FormsServiceApplication.class);
 
     // Authentication Filter for resources
     BasicCredentialAuthFilter authFilter = new BasicCredentialAuthFilter.Builder<FormsApiUser>()
-        .setAuthenticator(new FormsApiAuthenticator(configuration))
-        .setRealm(getName())
-        .buildAuthFilter();
+      .setAuthenticator(new FormsApiAuthenticator(configuration))
+      .setRealm(getName())
+      .buildAuthFilter();
 
     AuthDynamicFeature feature = new AuthDynamicFeature(authFilter);
     environment.jersey().register(feature);
 
     // Jersey Client
     final Client client = new JerseyClientBuilder(environment)
-        .using(configuration.getJerseyClientConfiguration())
-        .withProvider(MultiPartFeature.class)
-        .build(getName());
+      .using(configuration.getJerseyClientConfiguration())
+      .withProvider(MultiPartFeature.class)
+      .build(getName());
 
     final ClientHelper clientHelper = new ClientHelper(client);
+    final SalesforceClientHelper salesforceClientHelper = new SalesforceClientHelper(client);
 
     // Resources
     environment.jersey().register(new FormSubmissionResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
-    environment.jersey().register(new FormResponseResource(clientHelper, configuration.getSalesforceConfiguration()));
+    environment.jersey().register(new FormResponseResource(salesforceClientHelper, configuration.getSalesforceConfiguration()));
     environment.jersey().register(new HomeResource());
     environment.jersey().register(new HealthcheckResource());
     environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
@@ -101,7 +104,7 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
     // Health Checks
     final AppHealthCheck healthCheck =
-        new AppHealthCheck();
+      new AppHealthCheck();
     environment.healthChecks().register("AppHealthCheck", healthCheck);
 
     // Exception Mappers
@@ -113,13 +116,13 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
     // Logging filter for input and output
     environment.jersey().register(new LoggingFilter(
-        Logger.getLogger(LoggingFilter.class.getName()),
-        true)
+      Logger.getLogger(LoggingFilter.class.getName()),
+      true)
     );
 
     //Filters
     environment.servlets().addFilter("RateLimitFilter", new RateLimitFilter(configuration.getRateLimit()))
-        .addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+      .addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
     // Metrics
     startReporting(configuration);
@@ -127,12 +130,12 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
   private void startReporting(FormsServiceConfiguration configuration) {
     Slf4jReporter reporter = Slf4jReporter.forRegistry(registry)
-        .outputTo(LoggerFactory.getLogger(FormsServiceApplication.class))
-        .convertRatesTo(TimeUnit.SECONDS)
-        .convertDurationsTo(TimeUnit.MILLISECONDS)
-        .build();
+      .outputTo(LoggerFactory.getLogger(FormsServiceApplication.class))
+      .convertRatesTo(TimeUnit.SECONDS)
+      .convertDurationsTo(TimeUnit.MILLISECONDS)
+      .build();
     // report metrics to log every hour
     reporter.start(configuration.getLog4jConfiguration().getFrequency(), TimeUnit.valueOf(configuration.getLog4jConfiguration()
-        .getTimeUnit().toUpperCase()));
+      .getTimeUnit().toUpperCase()));
   }
 }

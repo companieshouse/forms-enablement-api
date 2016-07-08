@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="CORE.xsd"/>
+    <xs:annotation>
+        <xs:documentation>For type=RESOLUTIONS, type id=970, template id=0441</xs:documentation>
+    </xs:annotation>
+
+    <xs:redefine schemaLocation="CORE.xsd">
+        <xs:complexType name="corporateBodyType">
+            <xs:complexContent>
+                <xs:extension base="corporateBodyType">
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="incorporationNumber" type="xs:string"/>
+                        <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="resolutions" minOccurs="0"/>
+                    </xs:choice>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+
+
+    <xs:element name="form" type="coreForm"/>
+
+    <xs:element name="resolutions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="resolutionType" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="resolutionType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="resolutionFormType" minOccurs="1"/>
+                <xs:element ref="freeFormatText" minOccurs="0"/>
+                <xs:element ref="memorandumArticleType" minOccurs="0"/>
+                <xs:element ref="memorandumActionType" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="resolutionFormType">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="0"/>
+                <xs:maxLength value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="freeFormatText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="0"/>
+                <xs:maxLength value="20"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="memorandumArticleType">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:enumeration value="1" />
+                <xs:enumeration value="2" />
+                <xs:enumeration value="3" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="memorandumActionType">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:enumeration value="1" />
+                <xs:enumeration value="2" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+</xs:schema>
+

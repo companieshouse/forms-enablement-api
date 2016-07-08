@@ -23,7 +23,7 @@ public class LoggingService {
   public static void setFluentLogging(FluentLoggingConfiguration configuration) {
     isFluentLoggingOn = true;
     fluentLogger = FluentLogger.getLogger(null, configuration.getFluentHost(),
-        configuration.getFluentPort());
+      configuration.getFluentPort());
     tag = configuration.getTag();
   }
 

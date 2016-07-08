@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:include schemaLocation="CORE.xsd" />
-	<xs:annotation>
-		<xs:documentation>For type=SH17, type id=5480, template id=5036</xs:documentation>
-	</xs:annotation>
+    <xs:include schemaLocation="CORE.xsd"/>
+    <xs:annotation>
+        <xs:documentation>For type=SH17, type id=5480, template id=5036</xs:documentation>
+    </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">
         <xs:complexType name="corporateBodyType">
@@ -17,7 +17,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:redefine>
-    		
-	<xs:element name="form" type="coreForm" />
+
+    <xs:element name="form" type="coreForm"/>
 
 </xs:schema>

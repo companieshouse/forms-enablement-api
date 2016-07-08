@@ -8,13 +8,19 @@ server:
 
 salesforceConfiguration:
   name: Salesforce
-  secret: "password"
-  apiUrl: "http://localhost:8000/test/response"
+  apiKey: "password"
+  authUrl: "http://localhost:8000/test/salesforce/auth"
+  authGrantType: "test_grant"
+  authUsername: "test_username"
+  authPassword: "test_password"
+  authId: "test_id"
+  authSecret: "test_secret"
+  clientUrl: "http://localhost:8000/test/salesforce/client"
 
 companiesHouseConfiguration:
   name: CHIPS
-  secret: "password"
-  apiUrl: "http://localhost:8000/test/submission"
+  apiKey: "password"
+  chipsApiUrl: "http://localhost:8000/test/submission"
   barcodeServiceUrl: "http://localhost:8000/test/barcode"
 
 jerseyClient:

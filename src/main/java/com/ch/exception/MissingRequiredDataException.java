@@ -37,6 +37,6 @@ public class MissingRequiredDataException extends WebApplicationException {
   @Override
   public String getMessage() {
     return String.format("Missing required data for transformation to occur. Missing: %s in %s",
-        property, parent);
+      property, parent);
   }
 }

@@ -23,22 +23,22 @@
     <xs:element name="memberClasses">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="memberClass" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="memberClass" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="memberClass">
         <xs:complexType>
             <xs:all>
-                <xs:element ref="existingClass" minOccurs="1" maxOccurs="1" />
-                <xs:element ref="newNameOrDesignation" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="existingClass" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="newNameOrDesignation" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
- 
-    <xs:element name="existingClass" type="xs:string" />
-    <xs:element name="newNameOrDesignation" type="xs:string" />
+
+    <xs:element name="existingClass" type="xs:string"/>
+    <xs:element name="newNameOrDesignation" type="xs:string"/>
 
     <xs:element name="form" type="coreForm"/>
 

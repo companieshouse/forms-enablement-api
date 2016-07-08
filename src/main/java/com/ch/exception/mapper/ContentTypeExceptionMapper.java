@@ -26,7 +26,7 @@ public class ContentTypeExceptionMapper implements ExceptionMapper<ContentTypeEx
     LoggingService.log(tag, ERROR, exception.getMessage(), ContentTypeException.class);
     String error = ExceptionHelper.getInstance().getJsonError(exception);
     return Response.status(Response.Status.BAD_REQUEST)
-        .entity(error)
-        .build();
+      .entity(error)
+      .build();
   }
 }

@@ -35,7 +35,8 @@ public class FormJsonBuilder {
 
     this.meta = helper.getObjectFromJson(form, "parent json object (form body part)", config.getMetaPropertyNameIn());
     this.form = helper.getObjectFromJson(form, "parent json object (form body part)", config.getFormPropertyNameIn());
-    this.attachments = helper.getArrayFromJson(form, "parent json object (form body part)", config.getAttachmentsPropertyNameIn());
+    this.attachments = helper.getArrayFromJson(form, "parent json object (form body part)",
+      config.getAttachmentsPropertyNameIn());
   }
 
   /**
@@ -61,7 +62,8 @@ public class FormJsonBuilder {
   }
 
   private Object getFormBarcode() {
-    JSONObject details = helper.getObjectFromJson(form, config.getFormPropertyNameIn(), config.getFilingDetailsPropertyNameIn());
+    JSONObject details = helper.getObjectFromJson(form, config.getFormPropertyNameIn(),
+      config.getFilingDetailsPropertyNameIn());
     return helper.getValueFromJson(details, config.getFilingDetailsPropertyNameIn(), config.getBarcodePropertyNameIn());
   }
 

@@ -26,7 +26,7 @@ public class ConnectionExceptionMapper implements ExceptionMapper<ConnectionExce
     LoggingService.log(tag, ERROR, exception.getMessage(), ConnectionException.class);
     String error = ExceptionHelper.getInstance().getJsonError(exception);
     return Response.status(Response.Status.NOT_FOUND)
-        .entity(error)
-        .build();
+      .entity(error)
+      .build();
   }
 }

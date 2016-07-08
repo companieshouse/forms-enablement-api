@@ -14,25 +14,25 @@ import java.io.IOException;
  */
 public class UpperCaseTransformTest extends TestHelper {
 
-  UpperCaseTransform transform;
+    UpperCaseTransform transform;
 
-  @Before
-  public void setUp() {
-    transform = UpperCaseTransform.getInstance();
-  }
+    @Before
+    public void setUp() {
+        transform = UpperCaseTransform.getInstance();
+    }
 
-  @Test
-  public void convertToUpperCase() throws IOException {
-    String input = getStringFromFile(LOWERCASE_JSON_PATH);
+    @Test
+    public void convertToUpperCase() throws IOException {
+        String input = getStringFromFile(LOWERCASE_JSON_PATH);
 
-    JSONObject json = new JSONObject(input);
-    transform.parentUpperCase(json);
-    String result = json.toString();
+        JSONObject json = new JSONObject(input);
+        transform.parentUpperCase(json);
+        String result = json.toString();
 
-    Assert.assertThat(result, CoreMatchers.containsString("HELLO"));
-    Assert.assertThat(result, CoreMatchers.containsString("HELLO NESTED"));
-    Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY STRING"));
-    Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY NESTED 1"));
-    Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY NESTED 2"));
-  }
+        Assert.assertThat(result, CoreMatchers.containsString("HELLO"));
+        Assert.assertThat(result, CoreMatchers.containsString("HELLO NESTED"));
+        Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY STRING"));
+        Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY NESTED 1"));
+        Assert.assertThat(result, CoreMatchers.containsString("HELLO ARRAY NESTED 2"));
+    }
 }

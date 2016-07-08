@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.internal.util.Base64;
+import org.json.simple.JSONObject;
 import org.junit.Assert;
 
 import javax.ws.rs.client.Client;
@@ -30,8 +31,9 @@ public class FormResponseSteps extends TestHelper {
         .build("response client 1");
 
     SalesforceConfiguration config = rule.getConfiguration().getSalesforceConfiguration();
-    String encode = Base64.encodeAsString(config.getName() + ":" + config.getSecret());
+    String encode = Base64.encodeAsString(config.getName() + ":" + config.getApiKey());
     String url = String.format("http://localhost:%d/response", rule.getLocalPort());
+
 
     String response = getStringFromFile(RESPONSE_JSON_PATH);
     responseOne = client1.target(url)
@@ -43,6 +45,9 @@ public class FormResponseSteps extends TestHelper {
   @Then("^I should receive a response from Salesforce$")
   public void i_should_receive_a_response_from_Salesforce() throws Throwable {
     Assert.assertEquals("Correct HTTP status code.", 202, responseOne.getStatus());
+    JSONObject accessTokenJson = responseOne.readEntity(JSONObject.class);
+    String accessToken = (String) accessTokenJson.get("access_token");
+    Assert.assertEquals(SALESFORCE_ACCESS_TOKEN, accessToken);
   }
 
   @Given("^I submit an invalid media type to the response forms API using the correct credentials$")
@@ -52,8 +57,9 @@ public class FormResponseSteps extends TestHelper {
         .build("response client 2");
 
     SalesforceConfiguration config = rule.getConfiguration().getSalesforceConfiguration();
-    String encode = Base64.encodeAsString(config.getName() + ":" + config.getSecret());
+    String encode = Base64.encodeAsString(config.getName() + ":" + config.getApiKey());
     String url = String.format("http://localhost:%d/response", rule.getLocalPort());
+
 
     String response = getStringFromFile(RESPONSE_JSON_PATH);
     // wrong media type

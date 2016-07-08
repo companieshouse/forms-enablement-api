@@ -42,16 +42,16 @@ public class BarcodeResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response getBarcode(@Auth
-                                 String dateReceived) {
+                             String dateReceived) {
     final Timer.Context context = timer.time();
     try {
       LoggingService.log(tag, INFO, "Barcode request from Salesforce: " + dateReceived,
-          BarcodeResource.class);
+        BarcodeResource.class);
 
       // POST to Barcode Service
       Response response = client.postJson(configuration.getBarcodeServiceUrl(), dateReceived);
       LoggingService.log(tag, INFO, "Response from Barcode Service " + response,
-          BarcodeResource.class);
+        BarcodeResource.class);
       return response;
 
     } finally {

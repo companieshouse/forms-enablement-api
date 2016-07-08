@@ -41,7 +41,7 @@ public class RateLimitFilter implements Filter {
    * @throws ServletException general exception a servlet can throw when it encounters difficulty
    */
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
-      throws IOException, ServletException {
+    throws IOException, ServletException {
     // limiting the submission of requests to x per second
     RateLimiter limiter = RateLimiter.create(rateLimit);
 

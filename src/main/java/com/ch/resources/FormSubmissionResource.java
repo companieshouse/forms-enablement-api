@@ -45,7 +45,7 @@ public class FormSubmissionResource {
   @Consumes(MediaType.MULTIPART_FORM_DATA)
   @Produces(MediaType.APPLICATION_JSON)
   public Response postForms(@Auth
-                                FormDataMultiPart multi) {
+                            FormDataMultiPart multi) {
     final Timer.Context context = timer.time();
     try {
       // convert input to json
@@ -53,12 +53,12 @@ public class FormSubmissionResource {
       JsonBuilder builder = new JsonBuilder(config, multi);
       String forms = builder.getJson();
       LoggingService.log(tag, INFO, "Transformation output: " + forms,
-          FormSubmissionResource.class);
+        FormSubmissionResource.class);
 
       // post to CHIPS
-      Response response = client.postJson(configuration.getApiUrl(), forms);
+      Response response = client.postJson(configuration.getChipsApiUrl(), forms);
       LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
-          FormSubmissionResource.class);
+        FormSubmissionResource.class);
 
       // return response from CHIPS
       return response;

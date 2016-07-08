@@ -38,28 +38,28 @@ public class MetaDataTransform {
   public String getXml() {
     StringBuilder builder = new StringBuilder();
     builder
-        .append("<?xml version='1.0'?>")
-        .append(getOpenTag())
-        .append(xml)
-        .append(getCloseTag());
+      .append("<?xml version='1.0'?>")
+      .append(getOpenTag())
+      .append(xml)
+      .append(getCloseTag());
     return builder.toString();
   }
 
   private String getOpenTag() {
     StringBuilder builder = new StringBuilder();
     builder
-        .append("<" + config.getRootElementNameOut())
-        // form type
-        .append(helper.createAttributeFromJson(meta,
-            config.getMetaPropertyNameIn(),
-            config.getFormTypePropertyNameIn(),
-            config.getFormTypeAttributeNameOut()))
-        // form version
-        .append(helper.createAttributeFromJson(meta,
-            config.getMetaPropertyNameIn(),
-            config.getFormVersionPropertyNameIn(),
-            config.getFormVersionAttributeNameOut()))
-        .append(">");
+      .append("<" + config.getRootElementNameOut())
+      // form type
+      .append(helper.createAttributeFromJson(meta,
+        config.getMetaPropertyNameIn(),
+        config.getFormTypePropertyNameIn(),
+        config.getFormTypeAttributeNameOut()))
+      // form version
+      .append(helper.createAttributeFromJson(meta,
+        config.getMetaPropertyNameIn(),
+        config.getFormVersionPropertyNameIn(),
+        config.getFormVersionAttributeNameOut()))
+      .append(">");
     return builder.toString();
   }
 

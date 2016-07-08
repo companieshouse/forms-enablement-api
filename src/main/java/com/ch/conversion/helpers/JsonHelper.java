@@ -43,7 +43,8 @@ public final class JsonHelper {
    * @return json object
    * @throws MissingRequiredDataException property not in json object
    */
-  public JSONObject getObjectFromJson(JSONObject json, String parentName, String propertyName) throws MissingRequiredDataException {
+  public JSONObject getObjectFromJson(JSONObject json, String parentName, String propertyName)
+    throws MissingRequiredDataException {
     try {
       return json.getJSONObject(propertyName);
 

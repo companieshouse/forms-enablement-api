@@ -48,21 +48,21 @@ public class FilingDetailsTransform {
   public String getXml() {
     // 1. submission number
     helper.addJsonValueAsElementToXml(xml, meta, xmlLocation,
-        config.getMetaPropertyNameIn(),
-        config.getSubmissionReferencePropertyNameIn(),
-        config.getSubmissionReferenceElementNameOut());
+      config.getMetaPropertyNameIn(),
+      config.getSubmissionReferencePropertyNameIn(),
+      config.getSubmissionReferenceElementNameOut());
 
     // 2. package identifier
     helper.addJsonValueAsElementToXml(xml, pack, xmlLocation,
-        config.getPackageMultiPartName(),
-        config.getPackageIdentifierPropertyNameIn(),
-        config.getPackageIdentifierElementNameOut());
+      config.getPackageMultiPartName(),
+      config.getPackageIdentifierPropertyNameIn(),
+      config.getPackageIdentifierElementNameOut());
 
     // 3. package count
     helper.addJsonValueAsElementToXml(xml, pack, xmlLocation,
-        config.getPackageMultiPartName(),
-        config.getPackageCountPropertyNameIn(),
-        config.getPackageCountElementNameOut());
+      config.getPackageMultiPartName(),
+      config.getPackageCountPropertyNameIn(),
+      config.getPackageCountElementNameOut());
 
     return helper.getStringFromDocument(xml);
   }

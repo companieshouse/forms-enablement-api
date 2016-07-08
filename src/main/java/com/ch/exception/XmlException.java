@@ -21,6 +21,6 @@ public class XmlException extends WebApplicationException {
   @Override
   public String getMessage() {
     return String.format("Error handling xml. %s",
-        message);
+      message);
   }
 }
