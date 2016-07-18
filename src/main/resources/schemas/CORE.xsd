@@ -278,9 +278,13 @@
     </xs:element>
     <xs:element name="birthDate" type="xs:date"/>
     <xs:element name="signDate" type="xs:date"/>
+    <xs:element name="actionDate" type="xs:date" />
+    <xs:element name="corporateOfficer" type="xs:boolean" />
     <xs:element name="officer">
         <xs:complexType>
             <xs:all>
+                <xs:element ref="actionDate" minOccurs="0"/>
+                <xs:element ref="corporateOfficer" minOccurs="0"/>
                 <xs:element ref="personName" minOccurs="0"/>
                 <xs:element ref="birthDate" minOccurs="0"/>
                 <xs:element ref="signDate" minOccurs="0"/>
@@ -302,4 +306,33 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="serviceAddress">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="address" minOccurs="0" />
+                <xs:element ref="isServiceAddressROA" minOccurs="0" />
+                <xs:element ref="foreignAddressIndicator" minOccurs="0" />
+                <xs:element ref="noChangeToUra" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="residentialAddress">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="address" minOccurs="0" />
+                <xs:element ref="foreignAddressIndicator" minOccurs="0" />
+                <xs:element ref="isResidentialAddressSA" minOccurs="0" />
+             </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="isServiceAddressROA" type="xs:boolean" />
+    <xs:element name="isResidentialAddressSA" type="xs:boolean" />
+    <xs:element name="noChangeToUra" type="xs:boolean" />
+    <xs:element name="foreignAddressIndicator" type="xs:boolean" />
+
+
 </xs:schema>

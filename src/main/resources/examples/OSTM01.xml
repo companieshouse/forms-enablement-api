@@ -1,0 +1,48 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="OSTM01" id="-1"
+      xsi:noNamespaceSchemaLocation="../schemas/OSTM01.xsd">
+    <filingDetails>
+        <method>enablement</method>
+        <authoriser>director</authoriser>
+        <contactDetails/>
+        <signDate>2013-04-04</signDate>
+        <receiptDate>2013-04-10</receiptDate>
+        <presenterDocumentReference>DS0009</presenterDocumentReference>
+        <submissionReference>8c199ac6-369a-462d-8cfc-0f4b6d13fa7a</submissionReference>
+        <barcode>J53W9DA1</barcode>
+        <packageIdentifier>12345</packageIdentifier>
+        <packageCount>1</packageCount>
+          <payment>
+            <paymentMethod>account</paymentMethod>
+            <accountNumber>00599998000</accountNumber>
+        </payment>
+        <presenterDetails>
+            <presenterAccountNumber>12345678901</presenterAccountNumber>
+            <presenterEmailIn>sbowen@companieshouse.gov.uk</presenterEmailIn>
+            <presenterEmailOut>sbowen@companieshouse.gov.uk</presenterEmailOut>
+            <presenterName>Steve Bowen</presenterName>
+            <presenterAddressLine1>Companies House</presenterAddressLine1>
+            <presenterAddressLine2>Crown Way</presenterAddressLine2>
+            <presenterAddressPostTown>Cardiff</presenterAddressPostTown>
+            <presenterAddressCounty />
+            <presenterAddressCountry>Wales</presenterAddressCountry>
+            <presenterAddressPostCode>CF3 4UZ</presenterAddressPostCode>
+        </presenterDetails>
+    </filingDetails>
+    <corporateBody>
+         <corporateBodyName>THE GIRLS' DAY SCHOOL TRUST</corporateBodyName>
+        <incorporationNumber>00006400</incorporationNumber>
+        <resignations>
+            <officers>
+                <officer>
+                    <actionDate>2009-03-03</actionDate>
+                    <corporateOfficer>false</corporateOfficer>
+                    <personName>
+                        <surname>WHEARE</surname>
+                        <forename>THOMAS</forename>
+                    </personName>
+                    <birthDate>1944-10-11</birthDate>
+                </officer>
+            </officers>
+        </resignations>
+    </corporateBody>
+</form>

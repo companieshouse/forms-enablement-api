@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:annotation>
+        <xs:documentation>For type=OSTM01, type id=5606, template id=5595</xs:documentation>
+    </xs:annotation>
+
+    <xs:redefine schemaLocation="CORE.xsd">
+        <xs:complexType name="corporateBodyType">
+            <xs:complexContent>
+                <xs:extension base="corporateBodyType">
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="incorporationNumber" type="xs:string"/>
+                        <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="resignations" minOccurs="0"/>
+                    </xs:choice>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+
+    <xs:element name="form" type="coreForm"/>
+
+    <xs:element name="resignations">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="officers" minOccurs="0" />
+                <xs:element ref="personsAuthorised" minOccurs="0" />
+                <xs:element ref="terminateOfficerIdentity" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="personsAuthorised">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="personAuthorised" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="dateOfAppointment" type="xs:date" />
+    <xs:element name="dateOfChange" type="xs:date" />
+    <xs:element name="personAuthorised">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="dateOfChange" minOccurs="0" />
+                <xs:element ref="dateOfAppointment" minOccurs="0" />
+                <xs:element ref="forename" minOccurs="0" />
+                <xs:element ref="surname" minOccurs="0" />
+                <xs:element ref="appointmentType" minOccurs="0" />
+                <xs:element ref="suppliedAppointmentType" minOccurs="0" />
+                <xs:element ref="personAuthorisedPosition" minOccurs="0" />
+                <xs:element ref="serviceAddressIndicator" minOccurs="0" />
+                <xs:element ref="secureIndicator" minOccurs="0" />
+                <xs:element name="resigned" type="xs:boolean" minOccurs="0" />
+                <xs:element name="appointed" type="xs:boolean" minOccurs="0" />
+                <xs:element name="particulars" type="xs:boolean"
+                            minOccurs="0" />
+                <xs:element ref="serviceAddress" minOccurs="0" />
+                <xs:element ref="residentialAddress" minOccurs="0" />
+                <xs:element ref="address" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="serviceAddressIndicator" type="xs:boolean" />
+    <xs:element name="secureIndicator" type="xs:boolean" />
+
+    <xs:element name="personAuthorisedPosition" type="xs:string" />
+    <xs:element name="appointmentType" type="xs:string" />
+    <xs:element name="suppliedAppointmentType" type="xs:string" />
+
+
+    <xs:element name="terminateOfficerIdentity" type="xs:string" />
+
+</xs:schema>
