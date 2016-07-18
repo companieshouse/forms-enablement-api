@@ -1,4 +1,4 @@
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="RESOLUTIONS" xsi:noNamespaceSchemaLocation="../schemas/RESOLUTIONS.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CC04" xsi:noNamespaceSchemaLocation="../schemas/CC04.xsd">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
@@ -24,14 +24,10 @@
     <corporateBody>
         <incorporationNumber>02667726</incorporationNumber>
         <corporateBodyName>SOLDATA LIMITED</corporateBodyName>
-        <resolutions>
-            <resolutionType>
-                <resolutionFormType>13</resolutionFormType>
-                <freeFormatText>FREE TEXT</freeFormatText>
-            </resolutionType>
-        </resolutions>
+        <objects>
+            <additionTo>false</additionTo>
+            <removalOf>false</removalOf>
+            <alterationTo>true</alterationTo>
+        </objects>
     </corporateBody>
-    <general>
-        <resolutionDate>2016-01-01</resolutionDate>
-    </general>
 </form>

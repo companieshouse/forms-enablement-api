@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:annotation>
-        <xs:documentation>For type=SH16, type id=5479, template id=5035</xs:documentation>
+        <xs:documentation>For type=CC04, type id=5016, template id=5016</xs:documentation>
     </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">
@@ -12,11 +12,26 @@
                     <xs:choice maxOccurs="unbounded">
                         <xs:element name="incorporationNumber" type="xs:string"/>
                         <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="objects" minOccurs="1"/>
                     </xs:choice>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:redefine>
+
+    <xs:element name="objects">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="additionTo" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="removalOf" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="alterationTo" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="additionTo" type="xs:boolean"/>
+    <xs:element name="removalOf" type="xs:boolean"/>
+    <xs:element name="alterationTo" type="xs:boolean"/>
 
     <xs:element name="form" type="coreForm"/>
 

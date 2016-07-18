@@ -35,6 +35,8 @@ log4jConfiguration:
   # Valid values are DAYS HOURS MICROSECONDS MILLISECONDS MINUTES NANOSECONDS SECONDS
   timeUnit: "HOURS"
 
+testMode: true
+
 logging:
   level: ${env.LOGGING_LEVEL!"DEBUG"}
 
