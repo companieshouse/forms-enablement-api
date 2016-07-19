@@ -278,12 +278,15 @@
     </xs:element>
     <xs:element name="birthDate" type="xs:date"/>
     <xs:element name="signDate" type="xs:date"/>
+
     <xs:element name="officer">
         <xs:complexType>
             <xs:all>
                 <xs:element ref="personName" minOccurs="0"/>
                 <xs:element ref="birthDate" minOccurs="0"/>
                 <xs:element ref="signDate" minOccurs="0"/>
+                <xs:element ref="actionDate" minOccurs="0"/>
+                <xs:element ref="corporateOfficer" minOccurs="0"/>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -482,4 +485,7 @@
             </xs:restriction>
         </xs:simpleType>
     </xs:element>
+    <xs:element name="actionDate" type="xs:date" />
+    <xs:element name="corporateOfficer" type="xs:boolean"/>
+
 </xs:schema>

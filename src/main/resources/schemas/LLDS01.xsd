@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:include schemaLocation="CORE.xsd"/>
+
     <xs:annotation>
         <xs:documentation>For type=LLDS01, type id=5682, template id=491</xs:documentation>
     </xs:annotation>
