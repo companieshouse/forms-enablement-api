@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:annotation>
+        <xs:documentation>For type=SH04, type id=5600, template id=5029</xs:documentation>
+    </xs:annotation>
+
+    <xs:redefine schemaLocation="CORE.xsd">
+        <xs:complexType name="corporateBodyType">
+            <xs:complexContent>
+                <xs:extension base="corporateBodyType">
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="incorporationNumber" type="xs:string"/>
+                        <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="shares" minOccurs="1"/>
+                    </xs:choice>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:redefine>
+
+    <xs:element name="shares">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="treasuryShares" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="treasuryShares">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="treasuryShare" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1"/>
+                            <xs:element ref="cancelOrSellDate" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="value" type="xs:decimal"/>
+    <xs:element name="number" type="xs:decimal"/>
+
+    <xs:element name="cancelOrSellDate" type="xs:date"/>
+
+
+    <xs:element name="form" type="coreForm"/>
+
+</xs:schema>

@@ -1,4 +1,4 @@
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="RESOLUTIONS" xsi:noNamespaceSchemaLocation="../schemas/RESOLUTIONS.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SH04" xsi:noNamespaceSchemaLocation="../schemas/SH04.xsd">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
@@ -24,14 +24,21 @@
     <corporateBody>
         <incorporationNumber>02667726</incorporationNumber>
         <corporateBodyName>SOLDATA LIMITED</corporateBodyName>
-        <resolutions>
-            <resolutionType>
-                <resolutionFormType>13</resolutionFormType>
-                <freeFormatText>FREE TEXT</freeFormatText>
-            </resolutionType>
-        </resolutions>
+        <shares>
+            <treasuryShares>
+                <treasuryShare>
+                    <value>10</value>
+                    <number>1</number>
+                    <currencyCode>GBP</currencyCode>
+                    <cancelOrSellDate>2016-01-01</cancelOrSellDate>
+                </treasuryShare>
+                <treasuryShare>
+                    <value>20</value>
+                    <number>2</number>
+                    <currencyCode>CHF</currencyCode>
+                    <cancelOrSellDate>2016-02-01</cancelOrSellDate>
+                </treasuryShare>
+            </treasuryShares>
+        </shares>
     </corporateBody>
-    <general>
-        <resolutionDate>2016-01-01</resolutionDate>
-    </general>
 </form>

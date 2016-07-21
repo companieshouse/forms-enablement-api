@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:annotation>
-        <xs:documentation>For type=SH16, type id=5479, template id=5035</xs:documentation>
+        <xs:documentation>For type=OSTM01, type id=5606, template id=5595</xs:documentation>
     </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">
@@ -12,6 +12,7 @@
                     <xs:choice maxOccurs="unbounded">
                         <xs:element name="incorporationNumber" type="xs:string"/>
                         <xs:element name="corporateBodyName" type="xs:string"/>
+                        <xs:element ref="resignations" minOccurs="0"/>
                     </xs:choice>
                 </xs:extension>
             </xs:complexContent>
@@ -19,5 +20,14 @@
     </xs:redefine>
 
     <xs:element name="form" type="coreForm"/>
+
+    <xs:element name="resignations">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="officers" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
 
 </xs:schema>

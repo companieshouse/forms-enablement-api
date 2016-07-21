@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:annotation>
-        <xs:documentation>For type=SH16, type id=5479, template id=5035</xs:documentation>
+        <xs:documentation>For type=MA, type id=241, template id=102</xs:documentation>
     </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">
