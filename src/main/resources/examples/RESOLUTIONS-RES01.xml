@@ -1,18 +1,15 @@
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:/mapforce/mappings/chips_schemas/DS01schema.xsd" type="${FORMTYPE}" id="
--1">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="RESOLUTIONS" xsi:noNamespaceSchemaLocation="../schemas/RESOLUTIONS.xsd">
     <filingDetails>
         <method>enablement</method>
         <authoriser>director</authoriser>
-        <authentication>
-            <code>222222</code>
-            <status>authenticated</status>
-        </authentication>
-        <eFileValidated>false</eFileValidated>
-        <contactDetails />
+        <contactDetails/>
         <signDate>2013-04-04</signDate>
-        <receiptDate>2016-04-10</receiptDate>
+        <receiptDate>2013-04-10</receiptDate>
         <presenterDocumentReference>DS0009</presenterDocumentReference>
+        <submissionReference>8c199ac6-369a-462d-8cfc-0f4b6d13fa7a</submissionReference>
         <barcode>J53W9DA1</barcode>
+        <packageIdentifier>12345</packageIdentifier>
+        <packageCount>1</packageCount>
         <presenterDetails>
             <presenterName>Steve Bowen</presenterName>
             <presenterAccountNumber>12345678901</presenterAccountNumber>

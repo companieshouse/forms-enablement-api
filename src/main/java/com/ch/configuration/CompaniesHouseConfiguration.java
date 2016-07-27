@@ -24,6 +24,14 @@ public class CompaniesHouseConfiguration {
   @NotEmpty
   private String barcodeServiceUrl;
 
+  @JsonProperty
+  @NotEmpty
+  private String jsonGatewayName;
+
+  @JsonProperty
+  @NotEmpty
+  private String jsonGatewayPassword;
+
   public String getName() {
     return name;
   }
@@ -38,5 +46,13 @@ public class CompaniesHouseConfiguration {
 
   public String getChipsApiUrl() {
     return chipsApiUrl;
+  }
+
+  public String getJsonGatewayName() {
+    return jsonGatewayName;
+  }
+
+  public String getJsonGatewayPassword() {
+    return jsonGatewayPassword;
   }
 }

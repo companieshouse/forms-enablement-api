@@ -21,7 +21,7 @@
             <presenterAddressPostCode>CF3 4UZ</presenterAddressPostCode>
         </presenterDetails>
         <payment>
-            <paymentMethod>ACCOUNT</paymentMethod>
+            <paymentMethod>account</paymentMethod>
             <accountNumber>00599998000</accountNumber>
         </payment>
     </filingDetails>

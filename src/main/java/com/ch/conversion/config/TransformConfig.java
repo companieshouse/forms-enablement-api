@@ -1,5 +1,8 @@
 package com.ch.conversion.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by elliott.jenkins on 31/03/2016.
  */
@@ -91,5 +94,21 @@ public class TransformConfig implements ITransformConfig {
 
   public String getSchemasLocation() {
     return "schemas";
+  }
+  
+  /**
+   * Return a list of JSON paths that should not be made uppercase.
+   *
+   * @return List
+   */
+  public List<String> getCaseTransformExceptions() {
+    List<String> exceptions = new ArrayList<String>();
+      
+    exceptions.add("/filingDetails/payment/paymentMethod");
+    exceptions.add("/filingDetails/presenterDocumentReference");
+    exceptions.add("/filingDetails/presenterDetails/presenterEmailIn");
+    exceptions.add("/filingDetails/presenterDetails/presenterEmailOut");
+      
+    return exceptions;
   }
 }

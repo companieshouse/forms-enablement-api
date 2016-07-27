@@ -22,6 +22,15 @@
       }
     }
   },
+  "nested_exception": {
+    "level_1": {
+      "level_2": {
+        "level_3": {
+          "nested_string": "hello nested exception"
+        }
+      }
+    }
+  },
   "array_nested": [
     {
       "nested": {

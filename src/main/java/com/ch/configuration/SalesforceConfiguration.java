@@ -28,7 +28,6 @@ public class SalesforceConfiguration {
   @NotEmpty
   private String authUrl;
 
-
   @JsonProperty
   @NotEmpty
   private String authGrantType;
@@ -37,7 +36,6 @@ public class SalesforceConfiguration {
   @NotEmpty
   private String clientUrl;
 
-
   @JsonProperty
   @NotEmpty
   private String apiUrl;
@@ -45,6 +43,19 @@ public class SalesforceConfiguration {
   @JsonProperty
   @NotEmpty
   private String apiKey;
+  
+  @JsonProperty
+  @NotEmpty
+  private boolean apiUseProxy;
+  
+  @JsonProperty
+  @NotEmpty
+  private String apiProxyHost;
+  
+  @JsonProperty
+  @NotEmpty
+  private int apiProxyPort;
+  
   @JsonProperty
   @NotEmpty
   private String name;
@@ -87,5 +98,17 @@ public class SalesforceConfiguration {
 
   public String getClientUrl() {
     return clientUrl;
+  }
+
+  public boolean isApiUseProxy() {
+    return apiUseProxy;
+  }
+
+  public String getApiProxyHost() {
+    return apiProxyHost;
+  }
+
+  public int getApiProxyPort() {
+    return apiProxyPort;
   }
 }

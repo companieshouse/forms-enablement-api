@@ -44,7 +44,7 @@ public class FormXmlBuilder {
    */
   public String getXML() {
     // 1. convert form data strings to upper case in the json
-    UpperCaseTransform.getInstance().parentUpperCase(form);
+    UpperCaseTransform.getInstance().parentUpperCase(form, config.getCaseTransformExceptions());
 
     // 2. convert the form json straight to xml
     String xml = toXml();

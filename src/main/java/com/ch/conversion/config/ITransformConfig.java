@@ -1,5 +1,7 @@
 package com.ch.conversion.config;
 
+import java.util.List;
+
 /**
  * Created by elliott.jenkins on 31/03/2016.
  */
@@ -51,4 +53,6 @@ public interface ITransformConfig {
   String getFormVersionAttributeNameOut();
 
   String getSchemasLocation();
+  
+  List<String> getCaseTransformExceptions();
 }

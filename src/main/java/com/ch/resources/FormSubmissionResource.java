@@ -56,7 +56,13 @@ public class FormSubmissionResource {
         FormSubmissionResource.class);
 
       // post to CHIPS
-      Response response = client.postJson(configuration.getChipsApiUrl(), forms);
+      Response response;
+      String username = configuration.getJsonGatewayName();
+      if (username != null && username.length() > 0) {
+        response = client.postJson(configuration.getChipsApiUrl(), forms, username, configuration.getJsonGatewayPassword());
+      } else {
+        response = client.postJson(configuration.getChipsApiUrl(), forms);
+      }
       LoggingService.log(tag, INFO, "Response from CHIPS: " + response.toString(),
         FormSubmissionResource.class);
 

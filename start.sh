@@ -32,4 +32,4 @@ source $APP_DIR/private_env
 source $APP_DIR/global_env
 source $APP_DIR/app_env
 
-java -jar $APP_JAR server configuration.yml > forms-enablement-api.log 2>&1
+java -Xmx800m -jar $APP_JAR server configuration.yml > forms-enablement-api.log 2>&1

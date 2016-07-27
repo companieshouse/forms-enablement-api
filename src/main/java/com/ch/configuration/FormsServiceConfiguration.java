@@ -33,6 +33,9 @@ public class FormsServiceConfiguration extends Configuration {
   @JsonProperty
   private Log4jConfiguration log4jConfiguration;
 
+  @JsonProperty
+  private boolean testMode;
+
   public int getRateLimit() {
     return rateLimit;
   }
@@ -56,5 +59,9 @@ public class FormsServiceConfiguration extends Configuration {
 
   public Log4jConfiguration getLog4jConfiguration() {
     return log4jConfiguration;
+  }
+
+  public boolean isTestMode() {
+    return testMode;
   }
 }

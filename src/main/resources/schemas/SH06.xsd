@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xs:annotation>
-        <xs:documentation>For type=SH02, type id=5602, template id=5038</xs:documentation>
+        <xs:documentation>For type=SH06, type id=5477, template id=5032</xs:documentation>
     </xs:annotation>
 
     <xs:redefine schemaLocation="CORE.xsd">
@@ -14,10 +14,6 @@
                         <xs:element name="corporateBodyName" type="xs:string"/>
                         <xs:element ref="statementOfCapital" minOccurs="1"/>
                         <xs:element ref="shares" minOccurs="1"/>
-                        <xs:element ref="consolidatedClasses" minOccurs="0"/>
-                        <xs:element ref="subdividedClasses" minOccurs="0"/>
-                        <xs:element ref="redeemedClasses" minOccurs="0"/>
-                        <xs:element ref="reconvertedClasses" minOccurs="0"/>
                     </xs:choice>
                 </xs:extension>
             </xs:complexContent>
@@ -37,12 +33,9 @@
 
     <xs:element name="shares">
         <xs:complexType>
-            <xs:all>
-                <xs:element ref="redemptionSelected" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="subDivision" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="consolidation" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="reconversion" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
+            <xs:sequence>
+                <xs:element ref="cancelledShareClass" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
 
@@ -73,6 +66,17 @@
             </xs:all>
         </xs:complexType>
     </xs:element>
+    
+    <xs:element name="cancelledShareClass">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="currencyCode" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="suppliedClass" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="shareValue">
         <xs:complexType>
@@ -80,97 +84,6 @@
                 <xs:element ref="currencyCode" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="totalNumberOfShares" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="totalAmountUnpaid" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="consolidatedClasses">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="consolidatedClass" minOccurs="1" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="subdividedClasses">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="subdividedClass" minOccurs="1" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="redeemedClasses">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="redeemedClass" minOccurs="1" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="reconvertedClasses">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="reconvertedClass" minOccurs="1" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="consolidatedClass">
-        <xs:complexType>
-            <xs:all>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="subdividedClass">
-        <xs:complexType>
-            <xs:all>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="previousStructure" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="newStructure" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="previousStructure">
-        <xs:complexType>
-            <xs:all>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="newStructure">
-        <xs:complexType>
-            <xs:all>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="redeemedClass">
-        <xs:complexType>
-            <xs:all>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
-            </xs:all>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="reconvertedClass">
-        <xs:complexType>
-            <xs:all>
-                <xs:element name="stockValue" type="xs:decimal" minOccurs="1" maxOccurs="1"/>
-                <xs:element name="class" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                <xs:element ref="number" minOccurs="1" maxOccurs="1"/>
                 <xs:element ref="value" minOccurs="1" maxOccurs="1"/>
             </xs:all>
         </xs:complexType>
@@ -210,10 +123,6 @@
     <xs:element name="totalAmountUnpaid" type="xs:decimal"/>
     <xs:element name="shareNumberGrandTotal" type="xs:decimal"/>
     <xs:element name="value" type="xs:decimal"/>
-    <xs:element name="redemptionSelected" type="xs:boolean"/>
-    <xs:element name="subDivision" type="xs:boolean"/>
-    <xs:element name="consolidation" type="xs:boolean"/>
-    <xs:element name="reconversion" type="xs:boolean"/>
     <xs:element name="latestSOCInd" type="xs:string"/>
 
     <xs:element name="form" type="coreForm"/>
