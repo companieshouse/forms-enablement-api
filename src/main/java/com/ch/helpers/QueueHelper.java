@@ -132,6 +132,7 @@ public class QueueHelper {
   public void processResponse(Response response, String packageId) {
 
     int responseStatus = response.getStatus();
+    response.bufferEntity();
 
     if (responseStatus == 202 || responseStatus == 200) {
       updateCompletePackageById(packageId, FormStatus.SUCCESS.toString().toUpperCase());
