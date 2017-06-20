@@ -22,7 +22,6 @@ import javax.ws.rs.core.Response;
  */
 @Path("/barcode")
 public class BarcodeResource {
-  public static final int SLEEP_MILLIS = 1000;
   private static final Timer timer = FormsServiceApplication.registry.timer("BarcodeResource");
 
   private final ClientHelper client;
@@ -43,7 +42,7 @@ public class BarcodeResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response getBarcode(@Auth
-                             String dateReceived) throws InterruptedException {
+                             String dateReceived) {
     final Timer.Context context = timer.time();
     try {
       LoggingService.log(tag, INFO, "Barcode request from Salesforce: " + dateReceived,
@@ -53,13 +52,10 @@ public class BarcodeResource {
       Response response = client.postJson(configuration.getBarcodeServiceUrl(), dateReceived);
       LoggingService.log(tag, INFO, "Response from Barcode Service " + response,
         BarcodeResource.class);
-      Thread.sleep(SLEEP_MILLIS);
       return response;
 
-  
     } finally {
       context.stop();
-      
     }
   }
 }
