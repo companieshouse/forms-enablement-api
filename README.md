@@ -50,3 +50,42 @@ Then you can now visit [http://localhost:8080/](http://localhost:8080/) in your 
 
 We are using the [Google Java Style](https://google.github.io/styleguide/javaguide.html) enforced by the Maven
 [checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/) plugin
+
+Configuration
+-------------
+
+
+ Variable                 | Default                 |Description
+ -------------------------|-------------------------|--------------
+ SALESFORCE_API_KEY       |                         |API key to access SalesForce APIs
+ SALESFORCE_AUTH_URL      |                         |URL for SalesForce authorisation
+ SALESFORCE_AUTH_USERNAME |                         |SalesForce user name
+ SALESFORCE_AUTH_PASSWORD |                         |SalesForce password
+ SALESFORCE_AUTH_ID       |                         |SalesForce authentication id 
+ SALESFORCE_AUTH_SECRET   |                         |SalesForce authentication secret
+ SALESFORCE_CLIENT_URL    |                         |URL for SalesForce
+ CHIPS_API_KEY            |                         |API key to access CHIPS
+ CHIPS_API_URL            |                         |URL of CHIPS API
+ CHIPS_BARCODE_SERVICE_URL|                         |URL of Barcode Service
+ CHIPS_PRESENTER_AUTH_URL |                         |URL of Presenter Service
+ 
+ Manual Tests
+ ------------
+ 
+ The following curl command will test the facility to retrieve a barcode via the service. Replace <authorisation> with
+ the  word CHIPS and the value of CHIPS_API_KEY separated by a colon which has been Base64 encoded. Replace <serviceuri> withe 
+ the ip 
+ address
+ and port the service is listening on.
+ ```
+ curl -X -H post "Authorization: Basic <authorisation>" http://<serviceuri>/barcode
+ ```
+ For example:
+ 
+ ```
+ curl -X -H post "Authorization: Basic Q0hJUFM6RFVNTVk=" http://172.19.70.120:8080/barcode
+ ```
+ 
+ 
+
+  
