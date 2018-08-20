@@ -10,14 +10,11 @@ import com.ch.conversion.config.TransformConfig;
 import com.ch.exception.MissingRequiredDataException;
 import com.ch.helpers.TestHelper;
 import com.ch.model.PresenterAuthResponse;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 /**
  * Created by elliott.jenkins on 31/03/2016.
@@ -49,6 +46,14 @@ public class FormJsonBuilderTest extends TestHelper {
         FormJsonBuilder builder = new FormJsonBuilder(config, valid, valid, TEST_PRESENTER_ACCOUNT);
         builder.getJson();
     }
+    
+    @Test(expected = MissingRequiredDataException.class)
+    public void throwsMissingRequiredDataExceptionWithValidJsonMissingAttachemnts() throws Exception {
+        String validPackage = getStringFromFile(PACKAGE_JSON_PATH);
+        String validForm = getStringFromFile(FORM_ALL_JSON_MISSING_ATTACHMENT);
+        FormJsonBuilder builder = new FormJsonBuilder(config, validPackage, validForm, TEST_PRESENTER_ACCOUNT);
+        builder.getJson();
+    }
 
     @Test
     public void createJSONObjectForValidJson() throws Exception {
@@ -66,7 +71,6 @@ public class FormJsonBuilderTest extends TestHelper {
           .get("accountNumber")));
     }
 
-
     private FormJsonBuilder getValidFormJsonBuilder() throws Exception {
         // valid package data
         String package_string = getStringFromFile(PACKAGE_JSON_PATH);
@@ -75,6 +79,4 @@ public class FormJsonBuilderTest extends TestHelper {
         // builder
         return new FormJsonBuilder(config, package_string, form_string, TEST_PRESENTER_ACCOUNT);
     }
-
-
 }
