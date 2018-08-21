@@ -1,10 +1,10 @@
 package com.ch.conversion.builders;
 
-
 import com.ch.application.FormServiceConstants;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.helpers.JsonHelper;
 import com.ch.conversion.validation.XmlValidatorImpl;
+import com.ch.exception.MissingRequiredDataException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +41,10 @@ public class FormJsonBuilder {
     this.form = helper.getObjectFromJson(form, "parent json object (form body part)", config.getFormPropertyNameIn());
     this.attachments = helper.getArrayFromJson(form, "parent json object (form body part)",
       config.getAttachmentsPropertyNameIn());
+    
+    if (attachments.length() == 0) {
+      throw new MissingRequiredDataException(config.getAttachmentsPropertyNameIn() + " length is 0", "(form body part)");
+    }
 
     if (presenterAccountNumber != null) {
       addAccountNumber(presenterAccountNumber);
