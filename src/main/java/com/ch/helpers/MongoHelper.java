@@ -206,6 +206,18 @@ public final class MongoHelper {
     }
     return false;
   }
+  
+  /**
+   * Find packages by identifier and status
+   *
+   * @return MongoCollection
+   */
+  public FindIterable<Document> getPackagesCollectionByPackageIdAndStatus(String packageId, String status) {
+    MongoDatabase database = getDatabase();
+    return database.getCollection(configuration.getMongoDbPackagesCollectionName())
+      .find(new Document(config.getFormStatusPropertyNameOut(), status.toUpperCase(Locale.ENGLISH))
+        .append(config.getPackageIdentifierElementNameOut(), packageId));
+  }
 
   /**
    * Get the forms collection.
