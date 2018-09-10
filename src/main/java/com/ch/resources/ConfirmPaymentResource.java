@@ -46,11 +46,6 @@ public class ConfirmPaymentResource {
     try {
       LoggingService.log(tag, INFO, "ConfirmPaymentRequest from Salesforce: " + confirmPaymentRequest,
         ConfirmPaymentResource.class);
-
-      // POST to Barcode Service
-      //Response response = client.postJson(configuration.getBarcodeServiceUrl(), dateReceived);
-      //LoggingService.log(tag, INFO, "Response from Barcode Service " + response,
-        //ConfirmPaymentResource.class);
       
       // Try to find an existing package with the supplied identifier and status of PENDING
       ArrayList<Document> packages = MongoHelper.getInstance().getPackagesCollectionByPackageIdAndStatus(

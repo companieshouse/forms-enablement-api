@@ -141,7 +141,7 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
     // Resources
     environment.jersey().register(new FormResponseResource(salesforceClientHelper, salesForceConfiguration));
-    environment.jersey().register(new FormSubmissionResource(presenterHelper));
+    environment.jersey().register(new FormSubmissionResource());
     environment.jersey().register(new FormResponseResource(salesforceClientHelper, salesForceConfiguration));
     environment.jersey().register(new HomeResource());
     environment.jersey().register(new HealthcheckResource());

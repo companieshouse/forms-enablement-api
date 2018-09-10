@@ -70,7 +70,7 @@ public class QueueHelperTest extends TestHelper {
       valid_forms.add(valid);
     }
     // builder
-    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
     helper.storeFormsPackage(formsPackage);
 
@@ -97,7 +97,7 @@ public class QueueHelperTest extends TestHelper {
       valid_forms.add(valid);
     }
     // builder
-    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
     helper.storeFormsPackage(formsPackage);
 

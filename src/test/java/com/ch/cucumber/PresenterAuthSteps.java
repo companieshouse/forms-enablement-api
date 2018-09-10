@@ -1,6 +1,5 @@
 package com.ch.cucumber;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,14 +22,12 @@ import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.internal.util.Base64;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.json.JSONObject;
 import org.junit.Assert;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -125,7 +122,7 @@ public class PresenterAuthSteps extends TestHelper{
     multi.field("form2", form2, MediaType.APPLICATION_JSON_TYPE);
 
 
-    FormSubmissionResource resource = new FormSubmissionResource(presenterHelper);
+    FormSubmissionResource resource = new FormSubmissionResource();
     resource.postForms(multi);
   }
 
@@ -164,7 +161,7 @@ public class PresenterAuthSteps extends TestHelper{
 
   @Then("^An exception should be thrown and no submision should take place$")
   public void an_exception_should_be_thrown_and_no_submision_should_take_place() throws Throwable {
-    FormSubmissionResource resource = new FormSubmissionResource(presenterHelper);
+    FormSubmissionResource resource = new FormSubmissionResource();
 
     try{
       resource.postForms(multi);
@@ -195,7 +192,7 @@ public class PresenterAuthSteps extends TestHelper{
     String form3 = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
     multi.field("form3", form3, MediaType.APPLICATION_JSON_TYPE);
 
-    FormSubmissionResource resource = new FormSubmissionResource(presenterHelper);
+    FormSubmissionResource resource = new FormSubmissionResource();
     resource.postForms(multi);
   }
 

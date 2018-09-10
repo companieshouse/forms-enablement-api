@@ -5,6 +5,7 @@ public class Payment {
   private String referenceNumber;
   private String paymentMethod;
   private String accountNumber;
+  private String accountAuthCode;
 
   /**
    * Constructs an empty confirm payment request.
@@ -16,10 +17,11 @@ public class Payment {
   /**
    * Constructs an empty confirm payment request.
    */
-  public Payment(String referenceNumber, String paymentMethod, String accountNumber) {
+  public Payment(String referenceNumber, String paymentMethod, String accountNumber, String accountAuthCode) {
     this.referenceNumber = referenceNumber;
     this.paymentMethod = paymentMethod;
     this.accountNumber = accountNumber;
+    this.accountAuthCode = accountAuthCode;
   }
 
   public String getReferenceNumber() {
@@ -32,5 +34,9 @@ public class Payment {
 
   public String getAccountNumber() {
     return accountNumber;
+  }
+  
+  public String getAccountAuthCode() {
+    return accountAuthCode;
   }
 }

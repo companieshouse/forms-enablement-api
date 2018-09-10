@@ -36,14 +36,14 @@ public class FormJsonBuilderTest extends TestHelper {
     @Test(expected = JSONException.class)
     public void throwsJSONExceptionWithInvalidJson() throws Exception {
         String invalid = getStringFromFile(INVALID_JSON_PATH);
-        FormJsonBuilder builder = new FormJsonBuilder(config, invalid, invalid,TEST_PRESENTER_ACCOUNT);
+        FormJsonBuilder builder = new FormJsonBuilder(config, invalid, invalid);
         builder.getJson();
     }
 
     @Test(expected = MissingRequiredDataException.class)
     public void throwsMissingRequiredDataExceptionWithValidJsonMissingRequiredData() throws Exception {
         String valid = getStringFromFile(VALID_JSON_PATH);
-        FormJsonBuilder builder = new FormJsonBuilder(config, valid, valid, TEST_PRESENTER_ACCOUNT);
+        FormJsonBuilder builder = new FormJsonBuilder(config, valid, valid);
         builder.getJson();
     }
     
@@ -51,7 +51,7 @@ public class FormJsonBuilderTest extends TestHelper {
     public void throwsMissingRequiredDataExceptionWithValidJsonMissingAttachemnts() throws Exception {
         String validPackage = getStringFromFile(PACKAGE_JSON_PATH);
         String validForm = getStringFromFile(FORM_ALL_JSON_MISSING_ATTACHMENT);
-        FormJsonBuilder builder = new FormJsonBuilder(config, validPackage, validForm, TEST_PRESENTER_ACCOUNT);
+        FormJsonBuilder builder = new FormJsonBuilder(config, validPackage, validForm);
         builder.getJson();
     }
 
@@ -62,21 +62,12 @@ public class FormJsonBuilderTest extends TestHelper {
         Assert.assertNotNull(json);
     }
 
-    @Test
-    public void shouldAddAccountNumber() throws Exception {
-        FormJsonBuilder builder = getValidFormJsonBuilder();
-        JSONObject formJson = builder.getForm();
-        Assert.assertTrue(TEST_PRESENTER_ACCOUNT.equals(formJson.getJSONObject(config.getFilingDetailsPropertyNameIn())
-          .getJSONObject("payment")
-          .get("accountNumber")));
-    }
-
     private FormJsonBuilder getValidFormJsonBuilder() throws Exception {
         // valid package data
         String package_string = getStringFromFile(PACKAGE_JSON_PATH);
         // valid form data
         String form_string = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
         // builder
-        return new FormJsonBuilder(config, package_string, form_string, TEST_PRESENTER_ACCOUNT);
+        return new FormJsonBuilder(config, package_string, form_string);
     }
 }

@@ -208,7 +208,7 @@ public final class MongoHelper {
   }
   
   /**
-   * Find packages by identifier and status
+   * Find packages by identifier and status.
    *
    * @return MongoCollection
    */
