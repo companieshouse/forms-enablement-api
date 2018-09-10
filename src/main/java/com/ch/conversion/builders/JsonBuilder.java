@@ -55,18 +55,18 @@ public class JsonBuilder {
    * @return forms package
    */
   public FormsPackage getTransformedPackage() {
-    // 1. create list of transformed forms
+    // Create list of transformed forms
     List<JSONObject> forms = new ArrayList<>();
 
-    // 2. Get the submission reference for addition to all parts of the entity
+    // Get the submission reference for addition to all parts of the entity
     String packageIdentifier = formsPackage.getPackageMetaDataJson().getString(config.getPackageIdentifierElementNameOut());
 
-    // 3. transform package meta data
+    // Transform package meta data
     JSONObject packageMetaData = getTransformedPackageMetaData();
  
     //TODO: This old presenter auth check needs to move to the payment confirm endpoint
     /**
-    // n. if there are credentials make call to presenter auth api
+    // If there are credentials make call to presenter auth api
     if (presenterAuthRequest != null) {
 
       //a. Get the presenters account number
@@ -85,29 +85,29 @@ public class JsonBuilder {
     }
     **/
     
-    // 4. loop forms and transform
+    // Loop forms and transform
     for (String formJson : formsPackage.getForms()) {
       forms.add(getBuilderJson(formJson, packageIdentifier));
     }
 
-    // 5. check the number of forms matches those prescribed in the package, if not throw an exception
+    // Check the number of forms matches those prescribed in the package, if not throw an exception
     int packageFormCount = (Integer) formsPackage.getPackageMetaDataJson().get(config.getPackageCountPropertyNameIn());
 
     if (forms.size() != packageFormCount) {
       throw new PackageContentsException(config.getPackageCountPropertyNameIn());
     }
 
-    // 6. return transformed package
+    // Return transformed package
     return new FormsPackage(packageMetaData.toString(), getFormsAsString(forms));
   }
 
   private JSONObject getTransformedPackageMetaData() {
     JSONObject packageMetaData = new JSONObject(formsPackage.getPackageMetaData());
 
-    // 1. add datetime to package meta data
+    // Add datetime to package meta data
     packageMetaData.put(config.getPackageDatePropertyNameOut(), getDateTime());
 
-    // 2. add default status
+    // Add default status
     Object status = getDefaultStatus();
     packageMetaData.put(config.getFormStatusPropertyNameOut(), status);
 
