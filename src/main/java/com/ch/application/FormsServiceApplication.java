@@ -25,6 +25,7 @@ import com.ch.helpers.ClientHelper;
 import com.ch.helpers.MongoHelper;
 import com.ch.model.FormsApiUser;
 import com.ch.resources.BarcodeResource;
+import com.ch.resources.ConfirmPaymentResource;
 import com.ch.resources.FormResponseResource;
 import com.ch.resources.FormSubmissionResource;
 import com.ch.resources.HealthcheckResource;
@@ -35,6 +36,7 @@ import com.ch.resources.TestResource;
 import com.ch.service.LoggingService;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
+
 import de.thomaskrille.dropwizard_template_config.TemplateConfigBundle;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
@@ -45,6 +47,7 @@ import io.dropwizard.client.proxy.ProxyConfiguration;
 import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.slf4j.LoggerFactory;
 
@@ -138,13 +141,14 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
     // Resources
     environment.jersey().register(new FormResponseResource(salesforceClientHelper, salesForceConfiguration));
-    environment.jersey().register(new FormSubmissionResource(presenterHelper));
+    environment.jersey().register(new FormSubmissionResource());
     environment.jersey().register(new FormResponseResource(salesforceClientHelper, salesForceConfiguration));
     environment.jersey().register(new HomeResource());
     environment.jersey().register(new HealthcheckResource());
     environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
     environment.jersey().register(new QueueResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
     environment.jersey().register(new PresenterAuthResource(presenterHelper));
+    environment.jersey().register(new ConfirmPaymentResource());
 
     if (configuration.isTestMode()) {
       environment.jersey().register(new TestResource());

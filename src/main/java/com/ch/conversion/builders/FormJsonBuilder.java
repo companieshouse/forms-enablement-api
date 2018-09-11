@@ -30,7 +30,7 @@ public class FormJsonBuilder {
    * @param packageJson package data json
    * @param formJson    form data json
    */
-  public FormJsonBuilder(ITransformConfig config, String packageJson, String formJson, String presenterAccountNumber) {
+  public FormJsonBuilder(ITransformConfig config, String packageJson, String formJson) {
     this.config = config;
     this.helper = JsonHelper.getInstance();
     this.pack = new JSONObject(packageJson);
@@ -45,11 +45,6 @@ public class FormJsonBuilder {
     if (attachments.length() == 0) {
       throw new MissingRequiredDataException(config.getAttachmentsPropertyNameIn() + " length is 0", "(form body part)");
     }
-
-    if (presenterAccountNumber != null) {
-      addAccountNumber(presenterAccountNumber);
-    }
-    
   }
 
   /**
@@ -112,30 +107,6 @@ public class FormJsonBuilder {
     return FormServiceConstants.PACKAGE_STATUS_DEFAULT;
   }
 
-  /**
-   * Adds account number to json object if payment number is account.
-   *
-   * @param accountNumber account number as string.
-   * @return Form as string.
-   */
-  protected JSONObject addAccountNumber(String accountNumber) {
-
-    try {
-
-      JSONObject paymentProperty = form.getJSONObject(config.getFilingDetailsPropertyNameIn())
-        .getJSONObject(config.getPaymentPropertyNameIn());
-
-      if ("account".equals(paymentProperty.get(config.getPaymentMethodPropertyNameIn()))) {
-        paymentProperty.put(config.getAccountNumberPropertyNameIn(), accountNumber);
-
-        return form;
-      }
-    } catch (JSONException ex) {
-      return form;
-    }
-    return form;
-  }
-  
   /**
    * Adds submission reference to json object
    *

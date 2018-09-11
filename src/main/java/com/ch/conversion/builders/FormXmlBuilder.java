@@ -1,7 +1,7 @@
 package com.ch.conversion.builders;
 
-
 import com.ch.conversion.config.ITransformConfig;
+
 import com.ch.conversion.transformations.FilingDetailsTransform;
 import com.ch.conversion.transformations.ManualElementsTransform;
 import com.ch.conversion.transformations.MetaDataTransform;

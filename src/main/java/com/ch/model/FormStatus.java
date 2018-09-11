@@ -5,6 +5,7 @@ package com.ch.model;
  */
 public enum FormStatus {
   PENDING,
+  PAID,
   SUCCESS,
   FAILED
 }
