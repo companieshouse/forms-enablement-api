@@ -104,7 +104,23 @@ public class TransformConfig implements ITransformConfig {
   public String getAccountNumberElementNameOut() {
     return "accountNumber";
   }
+  
+  public String getReferenceNumberPropertyNameIn() {
+    return "referenceNumber";
+  }
 
+  public String getReferenceNumberPlaceholderValueOut() {
+    return ":placeholderReferenceNumber:";
+  }
+  
+  public String getPaymentMethodPlaceholderValueOut() {
+    return ":placeholderPaymentMethod:";
+  }
+
+  public String getAccountNumberPlaceholderValueOut() {
+    return ":placeholderAccountNumber:";
+  }
+  
   public String getRootElementNameOut() {
     return "form";
   }
@@ -152,5 +168,17 @@ public class TransformConfig implements ITransformConfig {
     exceptions.add("/filingDetails/presenterDetails/presenterEmailOut");
 
     return exceptions;
+  }
+  
+  /**
+   * Return a list of forms that require payment.
+   *
+   * @return List
+   */
+  public List<String> getPaidFormList() {
+    List<String> paidFormTypes = new ArrayList<String>();
+    paidFormTypes.add("DS01");
+    paidFormTypes.add("LLDS01");
+    return paidFormTypes;
   }
 }

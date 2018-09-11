@@ -8,6 +8,7 @@ import com.ch.client.PresenterHelper;
 import com.ch.client.SalesforceClientHelper;
 import com.ch.configuration.FormsServiceConfiguration;
 import com.ch.configuration.SalesforceConfiguration;
+import com.ch.conversion.config.TransformConfig;
 import com.ch.exception.mapper.ConnectionExceptionMapper;
 import com.ch.exception.mapper.ContentTypeExceptionMapper;
 import com.ch.exception.mapper.DatabaseExceptionMapper;
@@ -22,6 +23,7 @@ import com.ch.filters.RateLimitFilter;
 import com.ch.health.AppHealthCheck;
 import com.ch.health.MongoHealthCheck;
 import com.ch.helpers.ClientHelper;
+import com.ch.helpers.ConfirmPaymentHelper;
 import com.ch.helpers.MongoHelper;
 import com.ch.model.FormsApiUser;
 import com.ch.resources.BarcodeResource;
@@ -117,6 +119,7 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
 
     final ClientHelper clientHelper = new ClientHelper(client);
     final PresenterHelper presenterHelper = new PresenterHelper(client, configuration.getCompaniesHouseConfiguration());
+    final ConfirmPaymentHelper confirmPaymentHelper = new ConfirmPaymentHelper(new TransformConfig(), presenterHelper);
 
     SalesforceConfiguration salesForceConfiguration = configuration.getSalesforceConfiguration();
     final SalesforceClientHelper salesforceClientHelper;
@@ -148,7 +151,7 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
     environment.jersey().register(new BarcodeResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
     environment.jersey().register(new QueueResource(clientHelper, configuration.getCompaniesHouseConfiguration()));
     environment.jersey().register(new PresenterAuthResource(presenterHelper));
-    environment.jersey().register(new ConfirmPaymentResource());
+    environment.jersey().register(new ConfirmPaymentResource(confirmPaymentHelper));
 
     if (configuration.isTestMode()) {
       environment.jersey().register(new TestResource());

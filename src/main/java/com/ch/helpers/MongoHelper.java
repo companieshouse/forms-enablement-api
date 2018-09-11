@@ -292,16 +292,34 @@ public final class MongoHelper {
   }
 
   /**
-   * update matching form status by package Id.
+   * update matching form status by object Id.
    *
    * @return MongoCollection
    */
-  public boolean updateFormStatusByPackageId(ObjectId formId, String formStatus) {
+  public boolean updateFormStatusByObjectId(ObjectId formId, String formStatus) {
     MongoDatabase database = getDatabase();
 
     long modifiedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
       FormServiceConstants.DATABASE_OBJECTID_KEY, formId), new Document("$set", new Document(config.getFormStatusPropertyNameOut(),
       formStatus))).getModifiedCount();
+
+    if (modifiedCount == 1) {
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * update matching form status by object Id.
+   *
+   * @return MongoCollection
+   */
+  public boolean updateFormXmlByObjectId(ObjectId formId, String xml) {
+    MongoDatabase database = getDatabase();
+
+    long modifiedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
+      FormServiceConstants.DATABASE_OBJECTID_KEY, formId), new Document("$set", new Document(config.getXmlPropertyNameOut(),
+      xml))).getModifiedCount();
 
     if (modifiedCount == 1) {
       return true;

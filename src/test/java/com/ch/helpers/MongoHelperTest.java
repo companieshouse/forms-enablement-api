@@ -84,7 +84,7 @@ public class MongoHelperTest extends TestHelper{
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 2).into(new ArrayList<Document>());
         
         String packageIdentifier = documents.get(0).getString(config.getPackageIdentifierPropertyNameIn());
@@ -123,7 +123,7 @@ public class MongoHelperTest extends TestHelper{
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 0).into(new ArrayList<Document>());
 
         Assert.assertTrue(documents.size() == 2);
@@ -158,7 +158,7 @@ public class MongoHelperTest extends TestHelper{
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 1).into(new ArrayList<Document>());
 
         Assert.assertTrue(documents.size() == 1);

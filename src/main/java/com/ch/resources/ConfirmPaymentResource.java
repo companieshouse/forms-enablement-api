@@ -3,17 +3,29 @@ package com.ch.resources;
 import static com.ch.service.LoggingService.LoggingLevel.INFO;
 import static com.ch.service.LoggingService.tag;
 
+import com.ch.application.FormServiceConstants;
 import com.ch.application.FormsServiceApplication;
+import com.ch.client.PresenterHelper;
+import com.ch.conversion.config.ITransformConfig;
+import com.ch.conversion.config.TransformConfig;
+import com.ch.exception.DatabaseException;
 import com.ch.exception.NoPackageFoundException;
+import com.ch.exception.PresenterAuthenticationException;
+import com.ch.helpers.ConfirmPaymentHelper;
 import com.ch.helpers.MongoHelper;
 import com.ch.model.ConfirmPaymentRequest;
 import com.ch.model.FormStatus;
+import com.ch.model.Payment;
+import com.ch.model.PresenterAuthResponse;
 import com.ch.service.LoggingService;
 import com.codahale.metrics.Timer;
 
 import io.dropwizard.auth.Auth;
 
+import org.apache.commons.codec.binary.Base64;
 import org.bson.Document;
+import org.json.JSONObject;
+import org.json.XML;
 
 import java.util.ArrayList;
 
@@ -30,7 +42,12 @@ import javax.ws.rs.core.Response;
 @Path("/confirmpaid")
 public class ConfirmPaymentResource {
   private static final Timer timer = FormsServiceApplication.registry.timer("ConfirmPaymentResource");
+  
+  private final ConfirmPaymentHelper confirmHelper;
 
+  public ConfirmPaymentResource(ConfirmPaymentHelper confirmHelper) {
+    this.confirmHelper = confirmHelper;
+  }
 
   /**
    * Checks for existing packageReference with a status of PENDING and updates the payment information
@@ -47,21 +64,11 @@ public class ConfirmPaymentResource {
       LoggingService.log(tag, INFO, "ConfirmPaymentRequest from Salesforce: " + confirmPaymentRequest,
         ConfirmPaymentResource.class);
       
-      // Try to find an existing package with the supplied identifier and status of PENDING
-      ArrayList<Document> packages = MongoHelper.getInstance().getPackagesCollectionByPackageIdAndStatus(
-        confirmPaymentRequest.getPackageIdentifier(), FormStatus.PENDING.toString()).into(new ArrayList<Document>());
-      if ( packages.size() == 1 ) {
-        return Response.ok("Payment confirmed for package " + confirmPaymentRequest.getPackageIdentifier()).build();
-      } else {
-        LoggingService.log(tag, INFO, "ConfirmPaymentRequest from Salesforce - no packages found: " + confirmPaymentRequest,
-          ConfirmPaymentResource.class);
-        throw new NoPackageFoundException(confirmPaymentRequest.getPackageIdentifier(), FormStatus.PENDING.toString());
-      }
-      
-      
+      confirmHelper.confirm(confirmPaymentRequest);
+      return Response.ok("Payment confirmed for package " + confirmPaymentRequest.getPackageIdentifier()).build();
 
     } finally {
       context.stop();
     }
-  }
+  } 
 }
