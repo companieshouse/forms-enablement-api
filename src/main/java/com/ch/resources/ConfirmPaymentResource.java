@@ -50,8 +50,8 @@ public class ConfirmPaymentResource {
   }
 
   /**
-   * Checks for existing packageReference with a status of PENDING and updates the payment information
-   * and the status to PAID.
+   * Checks for existing packageReference with a status of UNPAID and updates the payment information
+   * and the status to PENDING.
    *
    * @return response - 200 or 400
    */
