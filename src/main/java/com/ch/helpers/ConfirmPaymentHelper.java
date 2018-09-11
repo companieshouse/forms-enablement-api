@@ -60,7 +60,7 @@ public class ConfirmPaymentHelper {
         presenterAccountNumber = getPresenterAccountNumber(confirmPaymentRequest);
       }
       
-      //Find corresponding forms and update the payment information in each
+      //Find corresponding forms and update the payment information in each and the status
       ArrayList<Document> forms = helper.getFormsCollectionByPackageId(confirmPaymentRequest.getPackageIdentifier())
               .into(new ArrayList<Document>());
       for (Document form : forms) {
@@ -102,15 +102,10 @@ public class ConfirmPaymentHelper {
     JSONObject jsonForm = new JSONObject(form.toJson());
     String base64EncodedXml = jsonForm.getString(config.getXmlPropertyNameOut());
     String unEncodedXml = new String(Base64.decodeBase64(base64EncodedXml));
-    
-    System.out.println(unEncodedXml);
-    System.out.println(presenterAccountNumber);
-    
+
     unEncodedXml = unEncodedXml.replace(config.getReferenceNumberPlaceholderValueOut(), payment.getReferenceNumber());
     unEncodedXml = unEncodedXml.replace(config.getPaymentMethodPlaceholderValueOut(), payment.getPaymentMethod());
     unEncodedXml = unEncodedXml.replace(config.getAccountNumberPlaceholderValueOut(), payment.getAccountNumber());
-    
-    System.out.println(unEncodedXml);
     
     base64EncodedXml = new String(Base64.encodeBase64(unEncodedXml.getBytes()));
     
