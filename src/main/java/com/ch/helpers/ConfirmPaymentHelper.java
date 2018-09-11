@@ -105,7 +105,7 @@ public class ConfirmPaymentHelper {
 
     unEncodedXml = unEncodedXml.replace(config.getReferenceNumberPlaceholderValueOut(), payment.getReferenceNumber());
     unEncodedXml = unEncodedXml.replace(config.getPaymentMethodPlaceholderValueOut(), payment.getPaymentMethod());
-    unEncodedXml = unEncodedXml.replace(config.getAccountNumberPlaceholderValueOut(), payment.getAccountNumber());
+    unEncodedXml = unEncodedXml.replace(config.getAccountNumberPlaceholderValueOut(), presenterAccountNumber);
     
     base64EncodedXml = new String(Base64.encodeBase64(unEncodedXml.getBytes()));
     
