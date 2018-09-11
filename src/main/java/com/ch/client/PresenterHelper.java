@@ -28,7 +28,6 @@ public class PresenterHelper {
   public PresenterAuthResponse getPresenterResponse(String presenterId, String presenterAuth) {
     String authUrl = configuration.getPresenterAuthUrl() + "?id=" + presenterId + "&auth=" + presenterAuth;
     final WebTarget target = client.target(authUrl);
-//    String encode = Base64.encodeAsString(name + ":" + password);
     Response response = target.request().get();
     return response.readEntity(PresenterAuthResponse.class);
 

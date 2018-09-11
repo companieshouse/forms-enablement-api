@@ -199,8 +199,8 @@ public class ActivationSteps extends TestHelper {
     ObjectId formOneId = formOne.getObjectId(FormServiceConstants.DATABASE_OBJECTID_KEY);
     ObjectId formTwoId = formTwo.getObjectId(FormServiceConstants.DATABASE_OBJECTID_KEY);
 
-    helper.updateFormStatusByPackageId(formOneId, FormStatus.FAILED.toString().toUpperCase());
-    helper.updateFormStatusByPackageId(formTwoId, FormStatus.FAILED.toString().toUpperCase());
+    helper.updateFormStatusByObjectId(formOneId, FormStatus.FAILED.toString().toUpperCase());
+    helper.updateFormStatusByObjectId(formTwoId, FormStatus.FAILED.toString().toUpperCase());
 
 
     //check the db contains two failed forms is failed

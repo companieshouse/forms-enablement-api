@@ -14,6 +14,9 @@ public class FormServiceConstants {
 
   public static final String PACKAGE_METADATA_NAME = "package";
   public static final String PACKAGE_STATUS_DEFAULT = FormStatus.PENDING.toString().toUpperCase(Locale.ENGLISH);
+  public static final String PACKAGE_STATUS_NEEDS_PAYMENT = FormStatus.UNPAID.toString().toUpperCase(Locale.ENGLISH);
+  
+  public static final String PAYMENT_TYPE_ACCOUNT = "account";
 
   public static final String DATABASE_OBJECTID_KEY = "_id";
   public static final String DATABASE_FORMS_COLLECTION_NAME = "forms";

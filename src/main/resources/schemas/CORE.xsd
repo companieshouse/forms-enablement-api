@@ -76,6 +76,7 @@
                 <xs:enumeration value="account"/>
                 <xs:enumeration value="creditcard"/>
                 <xs:enumeration value="prepaid"/>
+                <xs:enumeration value=":placeholderPaymentMethod:"/>
             </xs:restriction>
         </xs:simpleType>
     </xs:element>

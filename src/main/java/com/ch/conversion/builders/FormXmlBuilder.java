@@ -45,25 +45,38 @@ public class FormXmlBuilder {
    * @return base64 encoded xml
    */
   public String getXML() {
-    // 1. convert form data strings to upper case in the json
+    // Convert form data strings to upper case in the json
     UpperCaseTransform.getInstance().parentUpperCase(form, config.getCaseTransformExceptions());
 
-    // 2. convert the form json straight to xml
+    //Overwrite any payment data with placeholder
+    JSONObject jsonXmlFilingDetails = form.optJSONObject(config.getFilingDetailsPropertyNameIn());
+    if ( jsonXmlFilingDetails != null ) {
+      
+      JSONObject jsonPayment = new JSONObject();
+      jsonPayment.put(config.getReferenceNumberPropertyNameIn(), config.getReferenceNumberPlaceholderValueOut());
+      jsonPayment.put(config.getPaymentMethodPropertyNameIn(), config.getPaymentMethodPlaceholderValueOut());
+      jsonPayment.put(config.getAccountNumberPropertyNameIn(), config.getAccountNumberPlaceholderValueOut());
+      
+      jsonXmlFilingDetails.put(config.getPaymentPropertyNameIn(), jsonPayment);
+      form.put(config.getFilingDetailsPropertyNameIn(), jsonXmlFilingDetails);
+    }
+    
+    // Convert the form json straight to xml
     String xml = toXml();
 
-    // 3. add root element and meta data attributes to the xml
+    // Add root element and meta data attributes to the xml
     String metaXml = addMetaData(xml);
 
-    // 4. add extra filing details
+    // Add extra filing details
     String filingDetailsXml = addFilingDetails(metaXml);
 
-    // 5. add any manual elements into the xml
+    // Add any manual elements into the xml
     String manualXml = addManualElements(filingDetailsXml);
 
-    // 6. validate xml against form xsd
+    // Validate xml against form xsd
     validateXml(manualXml);
 
-    // 7. base64 encode
+    // Base64 encode
     return encode(manualXml);
   }
 

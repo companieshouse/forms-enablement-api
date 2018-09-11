@@ -61,35 +61,23 @@ public class JsonBuilder {
     // Get the submission reference for addition to all parts of the entity
     String packageIdentifier = formsPackage.getPackageMetaDataJson().getString(config.getPackageIdentifierElementNameOut());
 
-    // Transform package meta data
-    JSONObject packageMetaData = getTransformedPackageMetaData();
- 
-    //TODO: This old presenter auth check needs to move to the payment confirm endpoint
-    /**
-    // If there are credentials make call to presenter auth api
-    if (presenterAuthRequest != null) {
-
-      //a. Get the presenters account number
-      PresenterAuthResponse presenterAuthResponse = presenterHelper.getPresenterResponse(
-        presenterAuthRequest.getPresenterId(),
-        presenterAuthRequest.getPresenterAuth());
-
-      //b. If no account number is returned from api, end submission with exception
-      presenterAccountNumber = presenterAuthResponse.getPresenterAccountNumber();
-      if (presenterAccountNumber == null) {
-        throw new PresenterAuthenticationException(presenterAuthRequest.getPresenterId(), presenterAuthRequest.getPresenterAuth());
-      }
-      
-      //c. Remove the presenterAuth from the package meta data
-      packageMetaData.remove(config.getPresenterAuthPropertyNameIn());
-    }
-    **/
-    
     // Loop forms and transform
+    boolean containsPaidForm = false;
     for (String formJson : formsPackage.getForms()) {
+      if ( !containsPaidForm ) {
+        JSONObject form = new JSONObject(formJson);
+        JSONObject formMetaData = form.optJSONObject(config.getMetaPropertyNameIn());
+        if ( formMetaData != null 
+                && config.getPaidFormList().contains(formMetaData.getString(config.getFormTypePropertyNameIn())) ) {
+          containsPaidForm = true;
+        }
+      }
       forms.add(getBuilderJson(formJson, packageIdentifier));
     }
 
+    // Transform package meta data
+    JSONObject packageMetaData = getTransformedPackageMetaData(containsPaidForm);
+    
     // Check the number of forms matches those prescribed in the package, if not throw an exception
     int packageFormCount = (Integer) formsPackage.getPackageMetaDataJson().get(config.getPackageCountPropertyNameIn());
 
@@ -101,7 +89,7 @@ public class JsonBuilder {
     return new FormsPackage(packageMetaData.toString(), getFormsAsString(forms));
   }
 
-  private JSONObject getTransformedPackageMetaData() {
+  private JSONObject getTransformedPackageMetaData(boolean containsPaidForm) {
     JSONObject packageMetaData = new JSONObject(formsPackage.getPackageMetaData());
 
     // Add datetime to package meta data
@@ -109,6 +97,9 @@ public class JsonBuilder {
 
     // Add default status
     Object status = getDefaultStatus();
+    if ( containsPaidForm ) {
+      status = FormServiceConstants.PACKAGE_STATUS_NEEDS_PAYMENT;
+    }
     packageMetaData.put(config.getFormStatusPropertyNameOut(), status);
 
     return packageMetaData;
