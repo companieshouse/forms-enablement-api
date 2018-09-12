@@ -52,13 +52,16 @@ public class FormXmlBuilder {
     JSONObject jsonXmlFilingDetails = form.optJSONObject(config.getFilingDetailsPropertyNameIn());
     if ( jsonXmlFilingDetails != null ) {
       
-      JSONObject jsonPayment = new JSONObject();
-      jsonPayment.put(config.getReferenceNumberPropertyNameIn(), config.getReferenceNumberPlaceholderValueOut());
-      jsonPayment.put(config.getPaymentMethodPropertyNameIn(), config.getPaymentMethodPlaceholderValueOut());
-      jsonPayment.put(config.getAccountNumberPropertyNameIn(), config.getAccountNumberPlaceholderValueOut());
+      JSONObject existingPayment = jsonXmlFilingDetails.optJSONObject(config.getPaymentPropertyNameIn());
+      if ( existingPayment != null ) {
+        JSONObject jsonPayment = new JSONObject();
+        jsonPayment.put(config.getReferenceNumberPropertyNameIn(), config.getReferenceNumberPlaceholderValueOut());
+        jsonPayment.put(config.getPaymentMethodPropertyNameIn(), config.getPaymentMethodPlaceholderValueOut());
+        jsonPayment.put(config.getAccountNumberPropertyNameIn(), config.getAccountNumberPlaceholderValueOut());
       
-      jsonXmlFilingDetails.put(config.getPaymentPropertyNameIn(), jsonPayment);
-      form.put(config.getFilingDetailsPropertyNameIn(), jsonXmlFilingDetails);
+        jsonXmlFilingDetails.put(config.getPaymentPropertyNameIn(), jsonPayment);
+        form.put(config.getFilingDetailsPropertyNameIn(), jsonXmlFilingDetails);
+      }
     }
     
     // Convert the form json straight to xml
