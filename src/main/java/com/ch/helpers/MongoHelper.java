@@ -317,11 +317,11 @@ public final class MongoHelper {
   public boolean updateFormXmlByObjectId(ObjectId formId, String xml) {
     MongoDatabase database = getDatabase();
 
-    long modifiedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
+    long matchedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
       FormServiceConstants.DATABASE_OBJECTID_KEY, formId), new Document("$set", new Document(config.getXmlPropertyNameOut(),
-      xml))).getModifiedCount();
+      xml))).getMatchedCount();
 
-    if (modifiedCount == 1) {
+    if (matchedCount == 1) {
       return true;
     }
     return false;

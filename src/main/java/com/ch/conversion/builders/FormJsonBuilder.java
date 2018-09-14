@@ -77,7 +77,6 @@ public class FormJsonBuilder {
     if ( config.getPaidFormList().contains(meta.getString(config.getFormTypePropertyNameIn())) ) {
       status = FormServiceConstants.PACKAGE_STATUS_NEEDS_PAYMENT;
     }
-    System.out.println(meta.getString(config.getFormTypePropertyNameIn()));
     
     output.put(config.getFormStatusPropertyNameOut(), status);
 

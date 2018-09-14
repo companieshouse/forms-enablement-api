@@ -13,6 +13,7 @@ import com.ch.exception.mapper.ConnectionExceptionMapper;
 import com.ch.exception.mapper.ContentTypeExceptionMapper;
 import com.ch.exception.mapper.DatabaseExceptionMapper;
 import com.ch.exception.mapper.MissingRequiredDataExceptionMapper;
+import com.ch.exception.mapper.NoPackageFoundExceptionMapper;
 import com.ch.exception.mapper.PackageContentsExceptionMapper;
 import com.ch.exception.mapper.PresenterAuthenticationExceptionMapper;
 import com.ch.exception.mapper.XmlExceptionMapper;
@@ -171,6 +172,7 @@ public class FormsServiceApplication extends Application<FormsServiceConfigurati
     environment.jersey().register(new ConnectionExceptionMapper());
     environment.jersey().register(new ContentTypeExceptionMapper());
     environment.jersey().register(new MissingRequiredDataExceptionMapper());
+    environment.jersey().register(new NoPackageFoundExceptionMapper());
     environment.jersey().register(new XmlExceptionMapper());
     environment.jersey().register(new XsdValidationExceptionMapper());
     environment.jersey().register(new PackageContentsExceptionMapper());

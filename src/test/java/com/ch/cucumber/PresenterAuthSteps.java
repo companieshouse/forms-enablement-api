@@ -104,73 +104,6 @@ public class PresenterAuthSteps extends TestHelper{
     Assert.assertTrue(responseTwo.getStatus() == 401);
   }
 
-  @Given("^I submit a package with valid presenter credentials$")
-  public void i_submit_a_package_with_valid_presenter_credentials() throws Throwable {
-    helper.dropCollection(FormServiceConstants.DATABASE_FORMS_COLLECTION_NAME);
-    helper.dropCollection(FormServiceConstants.DATABASE_PACKAGES_COLLECTION_NAME);
-
-    FormDataMultiPart multi = new FormDataMultiPart();
-    // forms package data
-    String pack = getStringFromFile(PACKAGE_JSON_PATH);
-    multi.field(transformConfig.getPackageMultiPartName(), pack, MediaType.APPLICATION_JSON_TYPE);
-    // form json
-    String form = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
-    multi.field("form1", form, MediaType.APPLICATION_JSON_TYPE);
-
-    // form json 2
-    String form2 = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
-    multi.field("form2", form2, MediaType.APPLICATION_JSON_TYPE);
-
-
-    FormSubmissionResource resource = new FormSubmissionResource();
-    resource.postForms(multi);
-  }
-
-
-
-  @Then("^The forms with account payment should be given an account number$")
-  public void the_forms_with_account_payment_should_be_given_an_account_number() throws Throwable {
-    TimeUnit.SECONDS.sleep(1);
-
-    JSONObject formPackage = queueHelper.getCompletePackageById(PACKAGE_JSON_ID);
-
-    String xml = formPackage.getJSONArray(config.getFormsPropertyNameOut()).getJSONObject(0).getString(config.getXmlPropertyNameOut());
-
-    String decodedXml = decode(xml);
-
-    Assert.assertTrue(decodedXml.contains("<accountNumber>1234567</accountNumber>"));
-  }
-
-  @Given("^I submit a package with invalid presenter credentials$")
-  public void i_submit_a_package_with_invalid_presenter_credentials() throws Throwable {
-    helper.dropCollection(FormServiceConstants.DATABASE_FORMS_COLLECTION_NAME);
-    helper.dropCollection(FormServiceConstants.DATABASE_PACKAGES_COLLECTION_NAME);
-
-    multi = new FormDataMultiPart();
-    // forms package data
-    String pack = getStringFromFile(PACKAGE_INVALID_CREDENTIALS_JSON_PATH);
-    multi.field(transformConfig.getPackageMultiPartName(), pack, MediaType.APPLICATION_JSON_TYPE);
-    // form json
-    String form = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
-    multi.field("form1", form, MediaType.APPLICATION_JSON_TYPE);
-
-    // form json 2
-    String form2 = getStringFromFile(FORM_ALL_JSON_NO_ACC_NUMBER_PATH);
-    multi.field("form2", form2, MediaType.APPLICATION_JSON_TYPE);
-  }
-
-  @Then("^An exception should be thrown and no submision should take place$")
-  public void an_exception_should_be_thrown_and_no_submision_should_take_place() throws Throwable {
-    FormSubmissionResource resource = new FormSubmissionResource();
-
-    try{
-      resource.postForms(multi);
-      Assert.fail("Exception was not thrown");
-    }catch (PresenterAuthenticationException ex){
-      Assert.assertTrue(ex != null);
-    }
-  }
-
   @Given("^I submit a package with no presenter credentials$")
   public void i_submit_a_package_with_no_presenter_credentials() throws Throwable {
     helper.dropCollection(FormServiceConstants.DATABASE_FORMS_COLLECTION_NAME);
@@ -196,7 +129,7 @@ public class PresenterAuthSteps extends TestHelper{
     resource.postForms(multi);
   }
 
-  @Then("^The forms should have no account numbers$")
+  @Then("^The forms should have placeholder account numbers$")
   public void the_forms_should_have_no_account_numbers() throws Throwable {
     TimeUnit.SECONDS.sleep(1);
 
@@ -212,9 +145,9 @@ public class PresenterAuthSteps extends TestHelper{
     String decodedXml2 = decode(xml2);
     String decodedXml3 = decode(xml3);
 
-    Assert.assertTrue(!decodedXml1.contains("<accountNumber>"));
-    Assert.assertTrue(!decodedXml2.contains("<accountNumber>"));
-    Assert.assertTrue(!decodedXml3.contains("<accountNumber>"));
+    Assert.assertTrue(decodedXml1.contains("<accountNumber>:placeholderAccountNumber:</accountNumber>"));
+    Assert.assertTrue(decodedXml2.contains("<accountNumber>:placeholderAccountNumber:</accountNumber>"));
+    Assert.assertTrue(decodedXml3.contains("<accountNumber>:placeholderAccountNumber:</accountNumber>"));
 
   }
 

@@ -140,6 +140,45 @@ public class JsonBuilderTest extends TestHelper {
         Assert.assertTrue(formOneXml.contains("<submissionReference>12345-J53W9DA1</submissionReference>"));
         Assert.assertTrue(formTwoXml.contains("<submissionReference>12345-J53W9DA2</submissionReference>"));
     }
+    
+    @Test
+    public void packageShouldHaveStausPendingIfNoFeeFormsArePresent() throws Exception {
+        //Given a valid package is submitted
+        // valid package data
+        String package_string = getStringFromFile(PACKAGE_JSON_PATH);
+        // valid forms
+        String valid = getStringFromFile(FORM_ALL_JSON_NON_PAID);
+        List<String> valid_forms = new ArrayList<>();
+        valid_forms.add(valid);
+        valid_forms.add(valid.replaceAll("J53W9DA1", "J53W9DA2"));
+
+        // when this package is transformed
+        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
+
+        //all elements should contain a correct status
+        Assert.assertEquals("PENDING", pack.getPackageMetaDataJson().getString("status"));
+        Assert.assertEquals("PENDING", pack.getFormsJSon().get(0).getString("status"));
+    }
+    
+    @Test
+    public void packageShouldHaveStausUnpaidIfFeeFormPresent() throws Exception {
+        //Given a valid package is submitted
+        // valid package data
+        String package_string = getStringFromFile(PACKAGE_JSON_PATH);
+        // valid forms
+        String valid = getStringFromFile(FORM_ALL_JSON_PATH);
+        List<String> valid_forms = new ArrayList<>();
+        valid_forms.add(valid);
+        valid_forms.add(valid.replaceAll("J53W9DA1", "J53W9DA2"));
+
+        // when this package is transformed
+        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
+
+        //all elements should contain a correct status
+        Assert.assertEquals("UNPAID", pack.getPackageMetaDataJson().getString("status"));
+        Assert.assertEquals("UNPAID", pack.getFormsJSon().get(0).getString("status"));
+
+    }
 
     private FormDataMultiPart getValidMultiPart() throws IOException {
         FormDataMultiPart multi = new FormDataMultiPart();

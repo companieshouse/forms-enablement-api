@@ -55,7 +55,7 @@ public class ConfirmPaymentHelper {
       // If account payment, then obtain the account number from the presenter auth service
       // The accountNumber submitted to here in confirmPaymentRequest is actually the presenter identifier 
       // and not the account number used to make a charge from CHIPS
-      String presenterAccountNumber = null;
+      String presenterAccountNumber = "";
       if ( isAccountPayment ) {
         presenterAccountNumber = getPresenterAccountNumber(confirmPaymentRequest);
       }
