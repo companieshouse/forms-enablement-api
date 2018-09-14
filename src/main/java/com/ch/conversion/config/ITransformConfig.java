@@ -54,10 +54,17 @@ public interface ITransformConfig {
   String getPaymentMethodElementNameOut();
 
   String getAccountNumberPropertyNameIn();
+  
+  String getReferenceNumberPropertyNameIn();
 
   String getAccountNumberElementNameOut();
 
+  String getPaymentMethodPlaceholderValueOut();
 
+  String getAccountNumberPlaceholderValueOut();
+  
+  String getReferenceNumberPlaceholderValueOut();
+  
   // meta data
   String getRootElementNameOut();
 
@@ -76,4 +83,6 @@ public interface ITransformConfig {
   String getSchemasLocation();
   
   List<String> getCaseTransformExceptions();
+  
+  List<String> getPaidFormList();
 }

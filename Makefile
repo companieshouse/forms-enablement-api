@@ -20,8 +20,8 @@ package:
 	mvn $(MVN_OPTIONS) package
 	@test -s ./target/formsapiservice*.jar || { echo "ERROR: Service JAR not found"; exit 1; }
 	$(eval commit := $(shell git rev-parse --short HEAD))
-	$(eval tag := $(shell git tag -l 'release/*' -l 'hotfix/*' --points-at HEAD))
-	$(eval VERSION := $(shell if [[ -n "$(tag)" ]]; then basename $(tag); else echo $(commit); fi))
+	$(eval tag := $(shell git tag -l 'v*-rc*' --points-at HEAD))
+	$(eval VERSION := $(shell if [[ -n "$(tag)" ]]; then echo $(tag) | sed 's/^v//'; else echo $(commit); fi))
 	$(eval tmpdir:=$(shell mktemp -d build-XXXXXXXXXX))
 	cp ./target/formsapiservice*.jar $(tmpdir)/forms-enablement-api.jar
 	cp ./configuration.yml $(tmpdir)

@@ -68,8 +68,8 @@ public class ActivationSteps extends TestHelper {
 
   }
 
-  @Given("^The queue contains (\\d+) packages all pending$")
-  public void the_queue_contains_packages_all_pending(int arg1) throws Throwable {
+  @Given("^The queue contains (\\d+) packages with one pending$")
+  public void the_queue_contains_packages_with_one_pending(int arg1) throws Throwable {
 
     // package one
     packageOneString = getStringFromFile(PACKAGE_JSON_PATH);
@@ -79,19 +79,18 @@ public class ActivationSteps extends TestHelper {
     for (int i = 0; i < 2; i++) {
       valid_forms.add(valid);
     }
-    FormsPackage formsPackage = new JsonBuilder(config, packageOneString, valid_forms,presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, packageOneString, valid_forms).getTransformedPackage();
     // insert package one into db
     helper.storeFormsPackage(formsPackage);
 
     // package two
     packageTwoString = getStringFromFile(SINGLE_PACKAGE_JSON_PATH);
     // valid forms
-    String valid2 = getStringFromFile(FORM_ALL_JSON_PATH);
+    String valid2 = getStringFromFile(FORM_ALL_JSON_NON_PAID);
     List<String> valid_forms2 = new ArrayList<>();
-    for (int i = 0; i < 1; i++) {
-      valid_forms2.add(valid2);
-    }
-    FormsPackage formsPackage2 = new JsonBuilder(config, packageTwoString, valid_forms2, presenterHelper).getTransformedPackage();
+    valid_forms2.add(valid2);
+
+    FormsPackage formsPackage2 = new JsonBuilder(config, packageTwoString, valid_forms2).getTransformedPackage();
     // insert package two into db
     TimeUnit.SECONDS.sleep(1);
     helper.storeFormsPackage(formsPackage2);
@@ -104,7 +103,7 @@ public class ActivationSteps extends TestHelper {
     for (int i = 0; i < 5; i++) {
       valid_forms3.add(valid3);
     }
-    FormsPackage formsPackage3 = new JsonBuilder(config, packageThreeString, valid_forms3, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage3 = new JsonBuilder(config, packageThreeString, valid_forms3).getTransformedPackage();
     // insert package three into db
     TimeUnit.SECONDS.sleep(1);
     helper.storeFormsPackage(formsPackage3);
@@ -125,21 +124,18 @@ public class ActivationSteps extends TestHelper {
       .post(Entity.entity(new QueueRequest(FormStatus.PENDING.toString().toUpperCase(), 2), MediaType.APPLICATION_JSON));
   }
 
-  @Then("^Two packages status should be changed$")
-  public void two_packages_status_should_be_changed() throws Throwable {
+  @Then("^One packages status should be changed$")
+  public void one_packages_status_should_be_changed() throws Throwable {
     List<JSONObject> packs = queueHelper.getCompletePackagesByStatus(FormStatus.SUCCESS.toString().toUpperCase(), 0);
-    Assert.assertTrue(packs.size() == 2);
+    System.out.println(packs.size());
+    Assert.assertTrue(packs.size() == 1);
 
     JSONObject packageOne = packs.get(0);
-    JSONObject packageTwo = packs.get(1);
-
-    Assert.assertTrue(packageOne.getInt(config.getPackageIdentifierElementNameOut()) == (new JSONObject(packageOneString)
+    
+    Assert.assertTrue(packageOne.getInt(config.getPackageIdentifierElementNameOut()) == (new JSONObject(packageTwoString)
       .getInt(config.getPackageIdentifierElementNameOut())));
 
-    Assert.assertTrue(packageTwo.getInt(config.getPackageIdentifierElementNameOut()) == (new JSONObject(packageTwoString)
-      .getInt(config.getPackageIdentifierElementNameOut())));
-
-    Assert.assertTrue(queueHelper.getCompletePackagesByStatus(FormStatus.PENDING.toString().toUpperCase(), 0).size() == 1);
+    Assert.assertTrue(queueHelper.getCompletePackagesByStatus(FormStatus.PENDING.toString().toUpperCase(), 0).size() == 0);
   }
 
   @Given("^The queue contains a failed package$")
@@ -150,12 +146,12 @@ public class ActivationSteps extends TestHelper {
     // package one
     packageFourString = getStringFromFile(PACKAGE_JSON_PATH);
     // valid forms
-    String valid4 = getStringFromFile(FORM_ALL_JSON_PATH);
+    String valid4 = getStringFromFile(FORM_ALL_JSON_NON_PAID);
     List<String> valid_forms4 = new ArrayList<>();
     for (int i = 0; i < 2; i++) {
       valid_forms4.add(valid4);
     }
-    FormsPackage formsPackage = new JsonBuilder(config, packageFourString, valid_forms4, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, packageFourString, valid_forms4).getTransformedPackage();
     // insert package one into db
     helper.storeFormsPackage(formsPackage);
 
@@ -199,8 +195,8 @@ public class ActivationSteps extends TestHelper {
     ObjectId formOneId = formOne.getObjectId(FormServiceConstants.DATABASE_OBJECTID_KEY);
     ObjectId formTwoId = formTwo.getObjectId(FormServiceConstants.DATABASE_OBJECTID_KEY);
 
-    helper.updateFormStatusByPackageId(formOneId, FormStatus.FAILED.toString().toUpperCase());
-    helper.updateFormStatusByPackageId(formTwoId, FormStatus.FAILED.toString().toUpperCase());
+    helper.updateFormStatusByObjectId(formOneId, FormStatus.FAILED.toString().toUpperCase());
+    helper.updateFormStatusByObjectId(formTwoId, FormStatus.FAILED.toString().toUpperCase());
 
 
     //check the db contains two failed forms is failed

@@ -1,10 +1,10 @@
 package com.ch.conversion.builders;
 
-
 import com.ch.application.FormServiceConstants;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.helpers.JsonHelper;
 import com.ch.conversion.validation.XmlValidatorImpl;
+import com.ch.exception.MissingRequiredDataException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +30,7 @@ public class FormJsonBuilder {
    * @param packageJson package data json
    * @param formJson    form data json
    */
-  public FormJsonBuilder(ITransformConfig config, String packageJson, String formJson, String presenterAccountNumber) {
+  public FormJsonBuilder(ITransformConfig config, String packageJson, String formJson) {
     this.config = config;
     this.helper = JsonHelper.getInstance();
     this.pack = new JSONObject(packageJson);
@@ -41,11 +41,10 @@ public class FormJsonBuilder {
     this.form = helper.getObjectFromJson(form, "parent json object (form body part)", config.getFormPropertyNameIn());
     this.attachments = helper.getArrayFromJson(form, "parent json object (form body part)",
       config.getAttachmentsPropertyNameIn());
-
-    if (presenterAccountNumber != null) {
-      addAccountNumber(presenterAccountNumber);
-    }
     
+    if (attachments.length() == 0) {
+      throw new MissingRequiredDataException(config.getAttachmentsPropertyNameIn() + " length is 0", "(form body part)");
+    }
   }
 
   /**
@@ -54,30 +53,34 @@ public class FormJsonBuilder {
    * @return transformed json
    */
   public JSONObject getJson() {
-    // 1. create empty json object
+    // Create empty json object
     JSONObject output = new JSONObject();
 
-    // 2. add attachments
+    // Add attachments
     output.put(config.getAttachmentsPropertyNameOut(), attachments);
 
-    // 3. add barcode
+    // Add barcode
     Object barcode = getFormBarcode();
     output.put(config.getBarcodePropertyNameOut(), barcode);
     
-    // 4. add package identifier
+    // Add package identifier
     Object packageIdentifier = getPackageIdentifier();
     output.put(config.getPackageIdentifierPropertyNameIn(), packageIdentifier);
     
-    // 5. add submissionReference
+    // Add submissionReference
     String submissionReference = getSubmissionReference(packageIdentifier.toString(), barcode.toString());
     addSubmissionReference(submissionReference);
     output.put(config.getSubmissionReferenceElementNameOut(), submissionReference);
 
-    // 6. add default status
+    // Add default status
     Object status = getDefaultStatus();
+    if ( config.getPaidFormList().contains(meta.getString(config.getFormTypePropertyNameIn())) ) {
+      status = FormServiceConstants.PACKAGE_STATUS_NEEDS_PAYMENT;
+    }
+    
     output.put(config.getFormStatusPropertyNameOut(), status);
 
-    // 7. transform package and form json into base64 xml
+    // Transform package and form json into base64 xml
     String xml = getFormXML();
     output.put(config.getXmlPropertyNameOut(), xml);
     return output;
@@ -108,30 +111,6 @@ public class FormJsonBuilder {
     return FormServiceConstants.PACKAGE_STATUS_DEFAULT;
   }
 
-  /**
-   * Adds account number to json object if payment number is account.
-   *
-   * @param accountNumber account number as string.
-   * @return Form as string.
-   */
-  protected JSONObject addAccountNumber(String accountNumber) {
-
-    try {
-
-      JSONObject paymentProperty = form.getJSONObject(config.getFilingDetailsPropertyNameIn())
-        .getJSONObject(config.getPaymentPropertyNameIn());
-
-      if ("account".equals(paymentProperty.get(config.getPaymentMethodPropertyNameIn()))) {
-        paymentProperty.put(config.getAccountNumberPropertyNameIn(), accountNumber);
-
-        return form;
-      }
-    } catch (JSONException ex) {
-      return form;
-    }
-    return form;
-  }
-  
   /**
    * Adds submission reference to json object
    *

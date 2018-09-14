@@ -206,6 +206,18 @@ public final class MongoHelper {
     }
     return false;
   }
+  
+  /**
+   * Find packages by identifier and status.
+   *
+   * @return MongoCollection
+   */
+  public FindIterable<Document> getPackagesCollectionByPackageIdAndStatus(String packageId, String status) {
+    MongoDatabase database = getDatabase();
+    return database.getCollection(configuration.getMongoDbPackagesCollectionName())
+      .find(new Document(config.getFormStatusPropertyNameOut(), status.toUpperCase(Locale.ENGLISH))
+        .append(config.getPackageIdentifierElementNameOut(), packageId));
+  }
 
   /**
    * Get the forms collection.
@@ -280,11 +292,11 @@ public final class MongoHelper {
   }
 
   /**
-   * update matching form status by package Id.
+   * update matching form status by object Id.
    *
    * @return MongoCollection
    */
-  public boolean updateFormStatusByPackageId(ObjectId formId, String formStatus) {
+  public boolean updateFormStatusByObjectId(ObjectId formId, String formStatus) {
     MongoDatabase database = getDatabase();
 
     long modifiedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
@@ -292,6 +304,24 @@ public final class MongoHelper {
       formStatus))).getModifiedCount();
 
     if (modifiedCount == 1) {
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * update matching form status by object Id.
+   *
+   * @return MongoCollection
+   */
+  public boolean updateFormXmlByObjectId(ObjectId formId, String xml) {
+    MongoDatabase database = getDatabase();
+
+    long matchedCount = database.getCollection(configuration.getMongoDbFormsCollectionName()).updateMany(new Document(
+      FormServiceConstants.DATABASE_OBJECTID_KEY, formId), new Document("$set", new Document(config.getXmlPropertyNameOut(),
+      xml))).getMatchedCount();
+
+    if (matchedCount == 1) {
       return true;
     }
     return false;

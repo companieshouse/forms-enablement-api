@@ -1,13 +1,11 @@
 package com.ch.conversion.builders;
 
-import com.ch.application.FormServiceConstants;
 import com.ch.client.PresenterHelper;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.config.TransformConfig;
 import com.ch.exception.MissingRequiredDataException;
 import com.ch.helpers.TestHelper;
 import com.ch.model.FormsPackage;
-import com.ch.model.PresenterAuthRequest;
 import com.ch.model.PresenterAuthResponse;
 
 import org.apache.commons.codec.binary.Base64;
@@ -19,12 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 import javax.ws.rs.core.MediaType;
 
@@ -57,7 +53,7 @@ public class JsonBuilderTest extends TestHelper {
         for (int i = 0; i < 2; i++) {
             invalid_forms.add(invalid);
         }
-        JsonBuilder builder = new JsonBuilder(config, invalid, invalid_forms, helper);
+        JsonBuilder builder = new JsonBuilder(config, invalid, invalid_forms);
         builder.getTransformedPackage();
     }
 
@@ -68,7 +64,7 @@ public class JsonBuilderTest extends TestHelper {
         for (int i = 0; i < 2; i++) {
             valid_json_forms.add(valid);
         }
-        JsonBuilder builder = new JsonBuilder(config, valid, valid_json_forms, helper);
+        JsonBuilder builder = new JsonBuilder(config, valid, valid_json_forms);
         builder.getTransformedPackage();
     }
 
@@ -82,43 +78,16 @@ public class JsonBuilderTest extends TestHelper {
     @Test(expected = Exception.class)
     public void throwsExceptionWithEmptyMultiPart() throws Exception {
         FormDataMultiPart multi = new FormDataMultiPart();
-        JsonBuilder builder = new JsonBuilder(config, multi,helper);
+        JsonBuilder builder = new JsonBuilder(config, multi);
         builder.getTransformedPackage();
     }
 
     @Test
     public void createStringForValidMultiPart() throws Exception {
         FormDataMultiPart multi = getValidMultiPart();
-        JsonBuilder builder = new JsonBuilder(config, multi, helper);
+        JsonBuilder builder = new JsonBuilder(config, multi);
         FormsPackage transformedPackage = builder.getTransformedPackage();
         Assert.assertNotNull(transformedPackage);
-    }
-
-    @Test
-    public void shouldReturnNullObject() throws IOException {
-        FormDataMultiPart multi = getValidMultiPart();
-        JsonBuilder builder = new JsonBuilder(config, multi, helper);
-        JSONObject object = new JSONObject();
-        Assert.assertFalse(builder.getAuthRequest(object) instanceof PresenterAuthRequest);
-    }
-
-    @Test
-    public void shouldReturnPresenterAuthRequest() throws IOException {
-        FormDataMultiPart multi = getValidMultiPart();
-        JsonBuilder builder = new JsonBuilder(config, multi, helper);
-        JSONObject object = new JSONObject();
-        object.put("presenterId", "1234567");
-        object.put("presenterAuth", "1234567");
-        Assert.assertTrue(builder.getAuthRequest(object) instanceof PresenterAuthRequest);
-    }
-
-    @Test(expected = JSONException.class)
-    public void shouldRemovePresenterAuth() throws IOException {
-        FormDataMultiPart multi = getValidMultiPart();
-        JsonBuilder builder = new JsonBuilder(config, multi, helper);
-        FormsPackage transformedPackage = builder.getTransformedPackage();
-        JSONObject packageMetadata = transformedPackage.getPackageMetaDataJson();
-        packageMetadata.getString(config.getPresenterAuthPropertyNameIn());
     }
 
     private JsonBuilder getValidJsonBuilder() throws Exception {
@@ -131,7 +100,7 @@ public class JsonBuilderTest extends TestHelper {
             valid_forms.add(valid);
         }
         // builder
-        return new JsonBuilder(config, package_string, valid_forms, helper);
+        return new JsonBuilder(config, package_string, valid_forms);
     }
 
     @Test
@@ -146,7 +115,7 @@ public class JsonBuilderTest extends TestHelper {
         valid_forms.add(valid.replaceAll("J53W9DA1", "J53W9DA2"));
 
         // when this package is transformed
-        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms, helper).getTransformedPackage();
+        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         //all elements should contain a unique submissionReference
         String formOneBarcode = pack.getFormsJSon().get(0).getString(config.getBarcodePropertyNameOut());
@@ -170,6 +139,45 @@ public class JsonBuilderTest extends TestHelper {
         
         Assert.assertTrue(formOneXml.contains("<submissionReference>12345-J53W9DA1</submissionReference>"));
         Assert.assertTrue(formTwoXml.contains("<submissionReference>12345-J53W9DA2</submissionReference>"));
+    }
+    
+    @Test
+    public void packageShouldHaveStausPendingIfNoFeeFormsArePresent() throws Exception {
+        //Given a valid package is submitted
+        // valid package data
+        String package_string = getStringFromFile(PACKAGE_JSON_PATH);
+        // valid forms
+        String valid = getStringFromFile(FORM_ALL_JSON_NON_PAID);
+        List<String> valid_forms = new ArrayList<>();
+        valid_forms.add(valid);
+        valid_forms.add(valid.replaceAll("J53W9DA1", "J53W9DA2"));
+
+        // when this package is transformed
+        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
+
+        //all elements should contain a correct status
+        Assert.assertEquals("PENDING", pack.getPackageMetaDataJson().getString("status"));
+        Assert.assertEquals("PENDING", pack.getFormsJSon().get(0).getString("status"));
+    }
+    
+    @Test
+    public void packageShouldHaveStausUnpaidIfFeeFormPresent() throws Exception {
+        //Given a valid package is submitted
+        // valid package data
+        String package_string = getStringFromFile(PACKAGE_JSON_PATH);
+        // valid forms
+        String valid = getStringFromFile(FORM_ALL_JSON_PATH);
+        List<String> valid_forms = new ArrayList<>();
+        valid_forms.add(valid);
+        valid_forms.add(valid.replaceAll("J53W9DA1", "J53W9DA2"));
+
+        // when this package is transformed
+        FormsPackage pack =  new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
+
+        //all elements should contain a correct status
+        Assert.assertEquals("UNPAID", pack.getPackageMetaDataJson().getString("status"));
+        Assert.assertEquals("UNPAID", pack.getFormsJSon().get(0).getString("status"));
+
     }
 
     private FormDataMultiPart getValidMultiPart() throws IOException {

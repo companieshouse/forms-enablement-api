@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by Aaron.Witter on 01/04/2016.
+ * Barcode Resource to make calls for barcodes to the CH Barcode Service.
  */
 @Path("/barcode")
 public class BarcodeResource {

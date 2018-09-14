@@ -11,17 +11,12 @@ import com.ch.configuration.FormsServiceConfiguration;
 import com.ch.conversion.builders.JsonBuilder;
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.config.TransformConfig;
-import com.ch.cucumber.FormServiceTestSuiteIT;
 import com.ch.model.FormStatus;
 import com.ch.model.FormsPackage;
 import com.ch.model.PresenterAuthResponse;
-import com.google.common.collect.Lists;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.bson.Document;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -31,7 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Aaron.Witter on 18/07/2016.
@@ -73,7 +67,7 @@ public class MongoHelperTest extends TestHelper{
             valid_forms.add(valid);
         }
         // builder
-        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage);
 
@@ -86,11 +80,11 @@ public class MongoHelperTest extends TestHelper{
             valid_forms2.add(valid2);
         }
         // builder
-        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 2).into(new ArrayList<Document>());
         
         String packageIdentifier = documents.get(0).getString(config.getPackageIdentifierPropertyNameIn());
@@ -112,7 +106,7 @@ public class MongoHelperTest extends TestHelper{
             valid_forms.add(valid);
         }
         // builder
-        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage);
 
@@ -125,11 +119,11 @@ public class MongoHelperTest extends TestHelper{
             valid_forms2.add(valid2);
         }
         // builder
-        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 0).into(new ArrayList<Document>());
 
         Assert.assertTrue(documents.size() == 2);
@@ -147,7 +141,7 @@ public class MongoHelperTest extends TestHelper{
             valid_forms.add(valid);
         }
         // builder
-        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage);
 
@@ -160,11 +154,11 @@ public class MongoHelperTest extends TestHelper{
             valid_forms2.add(valid2);
         }
         // builder
-        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage2 = new JsonBuilder(config, package_string2, valid_forms2).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage2);
 
-        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.PENDING.toString()
+        ArrayList<Document> documents = helper.getPackagesCollectionByStatus(FormStatus.UNPAID.toString()
           .toUpperCase(Locale.ENGLISH), 1).into(new ArrayList<Document>());
 
         Assert.assertTrue(documents.size() == 1);
@@ -182,7 +176,7 @@ public class MongoHelperTest extends TestHelper{
             valid_forms.add(valid);
         }
         // builder
-        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage);
 
@@ -206,7 +200,7 @@ public class MongoHelperTest extends TestHelper{
             valid_forms.add(valid);
         }
         // builder
-        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+        FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
         helper.storeFormsPackage(formsPackage);
 

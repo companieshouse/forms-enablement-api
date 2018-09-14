@@ -70,7 +70,7 @@ public class QueueHelperTest extends TestHelper {
       valid_forms.add(valid);
     }
     // builder
-    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
     helper.storeFormsPackage(formsPackage);
 
@@ -78,7 +78,7 @@ public class QueueHelperTest extends TestHelper {
 
     QueueHelper queueHelper = new QueueHelper(config);
 
-    List<JSONObject> forms = queueHelper.getCompletePackagesByStatus(FormStatus.PENDING.toString().toUpperCase(Locale.ENGLISH),1);
+    List<JSONObject> forms = queueHelper.getCompletePackagesByStatus(FormStatus.UNPAID.toString().toUpperCase(Locale.ENGLISH),1);
 
     Assert.assertTrue(forms.size() == 1);
     Assert.assertTrue(forms.get(0).getInt(config.getPackageCountPropertyNameIn()) == 5);
@@ -97,7 +97,7 @@ public class QueueHelperTest extends TestHelper {
       valid_forms.add(valid);
     }
     // builder
-    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms, presenterHelper).getTransformedPackage();
+    FormsPackage formsPackage = new JsonBuilder(config, package_string, valid_forms).getTransformedPackage();
 
     helper.storeFormsPackage(formsPackage);
 
