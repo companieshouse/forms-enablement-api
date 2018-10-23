@@ -39,12 +39,15 @@ To run the server type the following command in your terminal
 or on windows
 
 ```
-mvn clean package
+mvn -DembeddedMongoProxyHost=wsproxy.internal.ch clean package
 java -jar target/formsapiservice-1.0-SNAPSHOT.jar server configuration.yml
-
 ```
 Then you can now visit [http://localhost:8080/](http://localhost:8080/) in your browser
 
+Note on the maven build
+------------------------
+For the tests to run the system property *embeddedMongoProxyHost* needs to be set to *wsproxy.internal.ch* for the MongoDB 
+related test to be able to down load MongoDB packages via HTTP. 
 
 ### Code style
 
@@ -63,6 +66,7 @@ Configuration
  SALESFORCE_AUTH_PASSWORD |                         |SalesForce password
  SALESFORCE_AUTH_ID       |                         |SalesForce authentication id 
  SALESFORCE_AUTH_SECRET   |                         |SalesForce authentication secret
+ SALESFORCE_AUTH_TYPE     |                         |
  SALESFORCE_CLIENT_URL    |                         |URL for SalesForce
  CHIPS_API_KEY            |                         |API key to access CHIPS
  CHIPS_API_URL            |                         |URL of CHIPS API
