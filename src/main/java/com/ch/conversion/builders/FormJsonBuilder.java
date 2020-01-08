@@ -10,9 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by elliott.jenkins on 31/03/2016.
- */
 public class FormJsonBuilder {
 
   private final JsonHelper helper;
@@ -112,7 +109,7 @@ public class FormJsonBuilder {
   }
 
   /**
-   * Adds submission reference to json object
+   * Adds submission reference to json object.
    *
    * @param submissionReference as string.
    * @return Form as JSONObject.
