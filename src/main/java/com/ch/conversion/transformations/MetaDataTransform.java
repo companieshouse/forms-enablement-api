@@ -1,6 +1,5 @@
 package com.ch.conversion.transformations;
 
-
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.helpers.XmlHelper;
 import org.json.JSONObject;

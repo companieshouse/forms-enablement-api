@@ -5,9 +5,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.fluentd.logger.FluentLogger;
 
-/**
- * Created by elliott.jenkins on 19/05/2016.
- */
 @SuppressWarnings("PMD")
 public class LoggingService {
 
@@ -29,7 +26,7 @@ public class LoggingService {
 
   /**
    * Logs key/value pair as JSON into FluentD instance using the tag as a matcher, if FluentLogger is off the
-   * object value is logged via log4j
+   * object value is logged via log4j.
    *
    * @param tag   string which is used as matcher category in FluentD
    * @param level used as a JSON key in FluentD
