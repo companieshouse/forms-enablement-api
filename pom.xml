@@ -16,7 +16,7 @@
         <dropwizard.version>0.9.1</dropwizard.version>
         <metrics.version>3.1.0</metrics.version>
         <jersey.version>2.22.2</jersey.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mainClass>com.ch.application.FormsServiceApplication</mainClass>
     </properties>
 
