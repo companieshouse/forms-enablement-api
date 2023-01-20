@@ -1,34 +1,61 @@
-MVN_OPTIONS ?=
+artifact_name       := forms-enablement.api.ch.gov.uk
+version             := unversioned
 
-all: dist
-
+.PHONY: clean
 clean:
-	mvn $(MVN_OPTIONS) clean
+	mvn clean
+	rm -f ./$(artifact_name).jar
+	rm -f ./$(artifact_name)-*.zip
+	rm -rf ./build-*
+	rm -rf ./build.log-*
 
-test-unit:
-	mvn $(MVN_OPTIONS) test
+.PHONY: test-unit
+test-unit: clean
+	mvn test
 
-test-int:
-	mvn $(MVN_OPTIONS) verify
+.PHONY: test-integration
+test-integration: clean
+	mvn verify -Dskip.unit.tests=true -Dskip.integration.tests=false
 
-test: test-unit test-int
+.PHONY: coverage
+coverage:
+	mvn verify
 
-build:
-	mvn $(MVN_OPTIONS) build
+.PHONY: verify
+verify: test-unit test-integration
 
+.PHONY: package
 package:
-	mvn $(MVN_OPTIONS) package
-	@test -s ./target/formsapiservice*.jar || { echo "ERROR: Service JAR not found"; exit 1; }
-	$(eval commit := $(shell git rev-parse --short HEAD))
-	$(eval tag := $(shell git tag -l 'v*-rc*' --points-at HEAD))
-	$(eval VERSION := $(shell if [[ -n "$(tag)" ]]; then echo $(tag) | sed 's/^v//'; else echo $(commit); fi))
+ifndef version
+	$(error No version given. Aborting)
+endif
+	mvn versions:set -DnewVersion=$(version) -DgenerateBackupPoms=false
+	$(info Packaging version: $(version))
+	@test -s ./$(artifact_name).jar || { echo "ERROR: Service JAR not found"; exit 1; }
 	$(eval tmpdir:=$(shell mktemp -d build-XXXXXXXXXX))
-	cp ./target/formsapiservice*.jar $(tmpdir)/forms-enablement-api.jar
-	cp ./configuration.yml $(tmpdir)
 	cp ./start.sh $(tmpdir)
-	cd $(tmpdir); zip -r ../forms-enablement-api-$(VERSION).zip *
+	cp ./routes.yaml $(tmpdir)
+	cp ./$(artifact_name).jar $(tmpdir)/$(artifact_name).jar
+	cd $(tmpdir); zip -r ../$(artifact_name)-$(version).zip *
 	rm -rf $(tmpdir)
 
-dist: build package
+.PHONY: build
+build:
+	mvn versions:set -DnewVersion=$(version) -DgenerateBackupPoms=false
+	mvn package -Dmaven.test.skip=true
+	cp ./target/$(artifact_name)-$(version).jar ./$(artifact_name).jar
 
-.PHONY: all build clean package dist test test-unit test-int
+.PHONY: build-container
+build-container: build
+	docker build .
+
+.PHONY: dist
+dist: clean build package coverage
+
+.PHONY: sonar
+sonar:
+	mvn sonar:sonar
+
+.PHONY: sonar-pr-analysis
+sonar-pr-analysis:
+	mvn sonar:sonar -P sonar-pr-analysis
