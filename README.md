@@ -3,6 +3,9 @@
 Companies House Forms Enablement API Service
 =====================
 
+This service has been superseded by  **dissolution-web** and **dissolution-api** and will be shutdown in Live.
+
+
 The tool accepts forms posted from Salesforce, converts them to an agreed format and posts them to Companies House Information Processing System (CHIPS).
 This API is for internal use only and is not provided for development by third parties.
 
