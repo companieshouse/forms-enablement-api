@@ -20,6 +20,13 @@
         <mainClass>com.ch.application.FormsServiceApplication</mainClass>
     </properties>
 
+    <parent>
+        <groupId>uk.gov.companieshouse</groupId>
+        <artifactId>companies-house-parent</artifactId>
+        <version>1.3.0</version>
+        <relativePath />
+    </parent>
+
     <dependencies>
         <!-- Test -->
         <dependency>
