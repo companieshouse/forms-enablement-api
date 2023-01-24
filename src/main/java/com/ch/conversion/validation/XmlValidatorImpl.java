@@ -1,6 +1,5 @@
 package com.ch.conversion.validation;
 
-
 import com.ch.conversion.config.ITransformConfig;
 import com.ch.conversion.helpers.XmlHelper;
 import com.ch.exception.XsdValidationException;

@@ -1,6 +1,5 @@
 package com.ch.model;
 
-
 import org.json.JSONObject;
 
 import java.util.ArrayList;
